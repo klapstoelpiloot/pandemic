@@ -1,0 +1,166 @@
+// Compile with following command when nanopb is installed:
+// protoc --nanopb_out=. IOModule.proto
+syntax = "proto3";
+package IOModule;
+import "nanopb.proto";
+
+// This message encapsulates all possible messages going from the Raspberry Pi to the IO Module.
+// The rule here is that the member name is the same as the type name minus the "Msg" postfix.
+// This way the code can construct a message using reflection and a reference to one of the above.
+message PiMessage
+{
+	oneof Content
+	{
+		NormalModeMsg NormalMode = 100;
+		CalibrateModeMsg CalibrateMode = 101;
+		IndicateErrorMsg IndicateError = 102;
+		SettingsMsg Settings = 103;
+		RoundResetMsg RoundReset = 104;
+		SetButtonLightsMsg SetButtonLights = 105;
+		SetButtonRepeatMsg SetButtonRepeat = 106;
+	}
+}
+
+// This message encapsulates all possible messages going from the IO Module to the Raspberry Pi.
+// The rule here is that the member name is the same as the type name minus the "Msg" postfix.
+// This way the code can construct a message using reflection and a reference to one of the above.
+message IOMessage
+{
+	oneof Content
+	{
+		StartSlideMsg StartSlide = 100;
+		GateScoreMsg GateScore = 101;
+		PuckInGateMsg PuckInGate = 102;
+		SensorStateMsg SensorState = 103;
+		LeftButtonPressedMsg LeftButtonPressed = 104;
+		RightButtonPressedMsg RightButtonPressed = 105;
+		AcceptButtonPressedMsg AcceptButtonPressed = 106;
+		CancelButtonPressedMsg CancelButtonPressed = 107;
+		RemovePuckMsg RemovePuck = 108;
+		SensorBlockedMsg SensorBlocked = 109;
+		SensorClearedMsg SensorCleared = 110;
+	}
+}
+
+// Resets all states for a new round
+message RoundResetMsg
+{
+}
+
+// Turns button LEDs on/off
+message SetButtonLightsMsg
+{
+	bool LeftButton = 1;
+	bool RightButton = 2;
+	bool AcceptButton = 3;
+	bool CancelButton = 4;
+}
+
+// General settings for the behavior of the firmware
+message SettingsMsg
+{
+	uint32 SlideTimeoutMs = 1;
+	bool HardMode = 2;
+	uint32 ButtonRepeatTimeout = 3;
+	uint32 ButtonRepeatInterval = 4;
+	uint32 PuckLostTimeout = 5;
+	uint32 DebounceTimeout = 6;
+}
+
+// Commands the IO module to go into normal operating mode
+message NormalModeMsg
+{
+}
+
+// Commands the IO module to go into calibration (testing) mode
+message CalibrateModeMsg
+{
+}
+
+// Commands the IO module to turn on the Red LED (only in idle mode)
+message IndicateErrorMsg
+{
+}
+
+// A puck is detected under the bridge and sliding towards the gates
+message StartSlideMsg
+{
+	uint32 Speed = 1;
+}
+
+// A puck has landed near the bridge (at or before the second sensor) and must be removed
+message RemovePuckMsg
+{
+}
+
+// A puck is blocking the bridge sensor(s)
+message SensorBlockedMsg
+{
+}
+
+// Bridge sensors are fine
+message SensorClearedMsg
+{
+}
+
+// The Left button on the front panel is pressed
+message LeftButtonPressedMsg
+{
+}
+
+// The Right button on the front panel is pressed
+message RightButtonPressedMsg
+{
+}
+
+// The Accept button on the front panel is pressed
+message AcceptButtonPressedMsg
+{
+}
+
+// The Cancel button on the front panel is pressed
+message CancelButtonPressedMsg
+{
+}
+
+// A puck went into a gate
+message GateScoreMsg
+{
+	uint32 Gate = 1;
+}
+
+// A puck went almost into a gate, but not enough to score
+message PuckInGateMsg
+{
+	uint32 Gate = 1;
+}
+
+// Sensor state change in calibration mode
+message SensorStateMsg
+{
+	Sensor Sensor = 1;
+	bool High = 2;
+}
+
+message SetButtonRepeatMsg
+{
+	bool Enable = 1;
+}
+
+enum Sensor
+{
+	Gate1Front = 0;
+	Gate2Front = 1;
+	Gate3Front = 2;
+	Gate4Front = 3;
+	Gate1Back = 4;
+	Gate2Back = 5;
+	Gate3Back = 6;
+	Gate4Back = 7;
+	LeftButton = 8;
+	RightButton = 9;
+	AcceptButton = 10;
+	CancelButton = 11;
+	Bridge1Sensor = 12;
+	Bridge2Sensor = 13;
+}

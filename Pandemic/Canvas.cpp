@@ -1,0 +1,343 @@
+#include "Canvas.h"
+
+Canvas::Canvas()
+{
+}
+
+Canvas::~Canvas()
+{
+}
+
+void Canvas::Clear(Color color)
+{
+	for(int i = 0; i < (DISPLAY_WIDTH * DISPLAY_HEIGHT); i++)
+		renderbuffer[i] = color;
+}
+
+void Canvas::DrawRectangle(Point p1, Point p2, Color linecolor, Color fillcolor)
+{
+	// Make sure that p1 is at the left-top (lowest coordinates)
+	// and p2 at the right-bottom (highest coordinates)
+	if(p1.x > p2.x) std::swap(p1.x, p2.x);
+	if(p1.y > p2.y) std::swap(p1.y, p2.y);
+
+	// Completely outside view?
+	if((p1.x >= DISPLAY_WIDTH) || (p1.y >= DISPLAY_HEIGHT) || (p2.x < 0) || (p2.y < 0))
+		return;
+
+	Point cp1 = p1.Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	Point cp2 = p2.Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+
+	// Draw the border lines
+	if((p1.x >= 0) && (p1.x < DISPLAY_WIDTH))
+	{
+		for(int y = cp1.y; y <= cp2.y; y++)
+			renderbuffer[y * DISPLAY_WIDTH + p1.x] = linecolor;
+	}
+	if((p2.x >= 0) && (p2.x < DISPLAY_WIDTH))
+	{
+		for(int y = cp1.y; y <= cp2.y; y++)
+			renderbuffer[y * DISPLAY_WIDTH + p2.x] = linecolor;
+	}
+	if((p1.y >= 0) && (p1.y < DISPLAY_HEIGHT))
+	{
+		for(int x = cp1.x; x <= cp2.x; x++)
+			renderbuffer[p1.y * DISPLAY_WIDTH + x] = linecolor;
+	}
+	if((p2.y >= 0) && (p2.y < DISPLAY_HEIGHT))
+	{
+		for(int x = cp1.x; x <= cp2.x; x++)
+			renderbuffer[p2.y * DISPLAY_WIDTH + x] = linecolor;
+	}
+
+	// Shrink by 1 pixel on each side and fill this area
+	cp1 = p1.Offset(1, 1).Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	cp2 = p2.Offset(-1, -1).Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	for(int y = cp1.y; y <= cp2.y; y++)
+	{
+		for(int x = cp1.x; x <= cp2.x; x++)
+			renderbuffer[y * DISPLAY_WIDTH + x] = fillcolor;
+	}
+}
+
+void Canvas::DrawRectangleBlend(Point p1, Point p2, Color linecolor, Color fillcolor)
+{
+	// Make sure that p1 is at the left-top (lowest coordinates)
+	// and p2 at the right-bottom (highest coordinates)
+	if(p1.x > p2.x) std::swap(p1.x, p2.x);
+	if(p1.y > p2.y) std::swap(p1.y, p2.y);
+
+	// Completely outside view?
+	if((p1.x >= DISPLAY_WIDTH) || (p1.y >= DISPLAY_HEIGHT) || (p2.x < 0) || (p2.y < 0))
+		return;
+
+	Point cp1 = p1.Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	Point cp2 = p2.Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+
+	// Draw the border lines
+	if((p1.x >= 0) && (p1.x < DISPLAY_WIDTH))
+	{
+		for(int y = cp1.y; y <= cp2.y; y++)
+			renderbuffer[y * DISPLAY_WIDTH + p1.x].Blend(linecolor);
+	}
+	if((p2.x >= 0) && (p2.x < DISPLAY_WIDTH))
+	{
+		for(int y = cp1.y; y <= cp2.y; y++)
+			renderbuffer[y * DISPLAY_WIDTH + p2.x].Blend(linecolor);
+	}
+	if((p1.y >= 0) && (p1.y < DISPLAY_HEIGHT))
+	{
+		for(int x = cp1.x; x <= cp2.x; x++)
+			renderbuffer[p1.y * DISPLAY_WIDTH + x].Blend(linecolor);
+	}
+	if((p2.y >= 0) && (p2.y < DISPLAY_HEIGHT))
+	{
+		for(int x = cp1.x; x <= cp2.x; x++)
+			renderbuffer[p2.y * DISPLAY_WIDTH + x].Blend(linecolor);
+	}
+
+	// Shrink by 1 pixel on each side and fill this area
+	cp1 = p1.Offset(1, 1).Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	cp2 = p2.Offset(-1, -1).Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	for(int y = cp1.y; y <= cp2.y; y++)
+	{
+		for(int x = cp1.x; x <= cp2.x; x++)
+			renderbuffer[y * DISPLAY_WIDTH + x].Blend(fillcolor);
+	}
+}
+
+bool Canvas::PrepareImageDraw(Point pos, const Image& img, Rect& imgrect, Rect& drawrect)
+{
+	if((imgrect.width <= 0) || (imgrect.height <= 0))
+		return false;
+
+	// Determine right-bottom pixel on image
+	Point imgrightbottom = imgrect.RightBottom();
+
+	// Image rectangle valid?
+	REQUIRE(imgrect.x >= 0);
+	REQUIRE(imgrect.y >= 0);
+	REQUIRE(imgrect.x < img.Width());
+	REQUIRE(imgrect.y < img.Height());
+	REQUIRE(imgrightbottom.x < img.Width());
+	REQUIRE(imgrightbottom.y < img.Height());
+
+	// Determine right-bottom pixel on target
+	Point lastpos = pos.Offset(imgrect.GetSize()).Offset(-1, -1);
+
+	// Completely outside view?
+	if((pos.x >= DISPLAY_WIDTH) || (pos.y >= DISPLAY_HEIGHT) || (lastpos.x < 0) || (lastpos.y < 0))
+		return false;
+
+	// Determine clipped target area and image area
+	Point drawlefttop = pos.Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	imgrect.x += drawlefttop.x - pos.x;
+	imgrect.y += drawlefttop.y - pos.y;
+	Point drawrightbottom = lastpos.Clip(DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	drawrect = Rect(drawlefttop, Size(drawrightbottom.x - drawlefttop.x, drawrightbottom.y - drawlefttop.y));
+
+	// OK to draw this image
+	return true;
+}
+
+void Canvas::DrawColorImage(Point pos, const Image& img, Rect imgrect)
+{
+	REQUIRE(img.HasColors());
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+			SetPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+	}
+}
+
+void Canvas::DrawColorImageBlend(Point pos, const Image& img, Rect imgrect)
+{
+	REQUIRE(img.HasColors());
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+			BlendPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+	}
+}
+
+void Canvas::DrawColorImageAdd(Point pos, const Image& img, Rect imgrect)
+{
+	REQUIRE(img.HasColors());
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+			AddPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+	}
+}
+
+void Canvas::DrawColorImageMask(Point pos, const Image& img, Rect imgrect)
+{
+	REQUIRE(img.HasColors());
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+			MaskPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+	}
+}
+
+void Canvas::DrawMonoImage(Point pos, const Image& img, Color color, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			Color c = color;
+			c.Modulate(img.GetByte(imgrect.x + x, imgrect.y + y));
+			SetPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoImageBlend(Point pos, const Image& img, Color color, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	Color c = color;
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			uint imagealpha = static_cast<uint>(img.GetByte(imgrect.x + x, imgrect.y + y));
+			c.a = static_cast<byte>((static_cast<uint>(color.a) * imagealpha) / 255u);
+			BlendPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoImageAdd(Point pos, const Image& img, Color color, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	Color c = color;
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			uint imagealpha = static_cast<uint>(img.GetByte(imgrect.x + x, imgrect.y + y));
+			c.a = static_cast<byte>((static_cast<uint>(color.a) * imagealpha) / 255u);
+			AddPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoImageMask(Point pos, const Image& img, Color color, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Draw image
+	Color c = color;
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			c.a = img.GetByte(imgrect.x + x, imgrect.y + y);
+			MaskPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoTexturedMask(Point pos, const Image& img, const Image& tex, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = tex.GetColor(tx, ty);
+			c.a = img.GetByte(imgrect.x + x, imgrect.y + y);
+			MaskPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoTexturedAdd(Point pos, const Image& img, const Image& tex, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = tex.GetColor(tx, ty);
+			c.a = img.GetByte(imgrect.x + x, imgrect.y + y);
+			AddPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}

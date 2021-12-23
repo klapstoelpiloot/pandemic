@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{acffb6ec-bdeb-41c3-bb89-e9c646766398}</ProjectGuid>
+    <Keyword>Linux</Keyword>
+    <RootNamespace>Pandemic</RootNamespace>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <ApplicationType>Linux</ApplicationType>
+    <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
+    <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
+    <LinuxProjectType>{D51BCBC9-82E9-4017-911E-C93873C4EA2B}</LinuxProjectType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <TargetName>pandemic</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <IncludePath>~/rpi-rgb-led-matrix/include</IncludePath>
+    <LibraryPath>~/rpi-rgb-led-matrix/lib</LibraryPath>
+    <MultiProcNumber>6</MultiProcNumber>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <TargetName>pandemic</TargetName>
+    <TargetExt>
+    </TargetExt>
+    <MultiProcNumber>6</MultiProcNumber>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationRenderer.cpp" />
+    <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Assert.cpp" />
+    <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="ClassicGameRenderer.cpp" />
+    <ClCompile Include="ClassicSetRenderer.cpp" />
+    <ClCompile Include="CRC32.cpp" />
+    <ClCompile Include="EnterNameRenderer.cpp" />
+    <ClCompile Include="EnterNameState.cpp" />
+    <ClCompile Include="FinishedState.cpp" />
+    <ClCompile Include="FinishRenderer.cpp" />
+    <ClCompile Include="GameBackgroundRenderer.cpp" />
+    <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="GameStateMachine.cpp" />
+    <ClCompile Include="HighscoreManager.cpp" />
+    <ClCompile Include="HighscoreRenderer.cpp" />
+    <ClCompile Include="HighscoreState.cpp" />
+    <ClCompile Include="IntermissionRenderer.cpp" />
+    <ClCompile Include="IntermissionState.cpp" />
+    <ClCompile Include="IOModule.pb.c" />
+    <ClCompile Include="lodepng.cpp" />
+    <ClCompile Include="ParticleEffect.cpp" />
+    <ClCompile Include="pb_common.c" />
+    <ClCompile Include="pb_decode.c" />
+    <ClCompile Include="pb_encode.c" />
+    <ClCompile Include="PlayingState.cpp" />
+    <ClCompile Include="RemovePuckRenderer.cpp" />
+    <ClCompile Include="RemovePuckState.cpp" />
+    <ClCompile Include="RoundData.cpp" />
+    <ClCompile Include="ScoresTable.cpp" />
+    <ClCompile Include="ScreenDissolveRenderer.cpp" />
+    <ClCompile Include="ScreenMeltRenderer.cpp" />
+    <ClCompile Include="SystemTestState.cpp" />
+    <ClCompile Include="SystemTestRenderer.cpp" />
+    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="DDS.cpp" />
+    <ClCompile Include="File.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="GameDesc.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="HorizontalMenuRenderer.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="IntEditorRenderer.cpp" />
+    <ClCompile Include="IOModuleLink.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuStateMachine.cpp" />
+    <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="TextFlasher.cpp" />
+    <ClCompile Include="TopMenuState.cpp" />
+    <ClCompile Include="TitleState.cpp" />
+    <ClCompile Include="MenuItemRenderer.cpp" />
+    <ClCompile Include="OptionsMenuState.cpp" />
+    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="RTTI.cpp" />
+    <ClCompile Include="SelectGameState.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="TitleRenderer.cpp" />
+    <ClCompile Include="TomlParser.cpp" />
+    <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="VerticalMenuRenderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationRenderer.h" />
+    <ClInclude Include="Animator.h" />
+    <ClInclude Include="Assert.h" />
+    <ClInclude Include="Audio.h" />
+    <ClInclude Include="ClassicGameRenderer.h" />
+    <ClInclude Include="ClassicSetRenderer.h" />
+    <ClInclude Include="CRC32.h" />
+    <ClInclude Include="cxxopts.hpp" />
+    <ClInclude Include="EnterNameRenderer.h" />
+    <ClInclude Include="EnterNameState.h" />
+    <ClInclude Include="FinishedState.h" />
+    <ClInclude Include="FinishRenderer.h" />
+    <ClInclude Include="FrameData.h" />
+    <ClInclude Include="GameBackgroundRenderer.h" />
+    <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameDefines.h" />
+    <ClInclude Include="GameStateMachine.h" />
+    <ClInclude Include="HighscoreManager.h" />
+    <ClInclude Include="HighscoreRenderer.h" />
+    <ClInclude Include="HighscoreState.h" />
+    <ClInclude Include="IMessageHandler.h" />
+    <ClInclude Include="IntermissionRenderer.h" />
+    <ClInclude Include="IntermissionState.h" />
+    <ClInclude Include="IOModule.pb.h" />
+    <ClInclude Include="lodepng.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleEffect.h" />
+    <ClInclude Include="pb.h" />
+    <ClInclude Include="pb_common.h" />
+    <ClInclude Include="pb_decode.h" />
+    <ClInclude Include="pb_encode.h" />
+    <ClInclude Include="PlayingState.h" />
+    <ClInclude Include="RemovePuckRenderer.h" />
+    <ClInclude Include="RemovePuckState.h" />
+    <ClInclude Include="RoundData.h" />
+    <ClInclude Include="ScoreRecord.h" />
+    <ClInclude Include="ScoresTable.h" />
+    <ClInclude Include="ScreenDissolveRenderer.h" />
+    <ClInclude Include="ScreenMeltRenderer.h" />
+    <ClInclude Include="SystemTestState.h" />
+    <ClInclude Include="SystemTestRenderer.h" />
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="cpptoml.h" />
+    <ClInclude Include="cpptoml_tools.h" />
+    <ClInclude Include="DDS.h" />
+    <ClInclude Include="Defines.h" />
+    <ClInclude Include="File.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="FontChar.h" />
+    <ClInclude Include="GameDesc.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="GraphicsConstants.h" />
+    <ClInclude Include="HorizontalMenuRenderer.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="IntEditorRenderer.h" />
+    <ClInclude Include="IOModuleLink.h" />
+    <ClInclude Include="IPositionalRenderer.h" />
+    <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="MenuStateMachine.h" />
+    <ClInclude Include="ProgressBar.h" />
+    <ClInclude Include="TextFlasher.h" />
+    <ClInclude Include="TopMenuState.h" />
+    <ClInclude Include="TitleState.h" />
+    <ClInclude Include="MenuItemRenderer.h" />
+    <ClInclude Include="OptionsMenuState.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Rect.h" />
+    <ClInclude Include="Resources.h" />
+    <ClInclude Include="RTTI.h" />
+    <ClInclude Include="SelectGameState.h" />
+    <ClInclude Include="Size.h" />
+    <ClInclude Include="IState.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="TitleRenderer.h" />
+    <ClInclude Include="TomlParser.h" />
+    <ClInclude Include="Tools.h" />
+    <ClInclude Include="Vec2.h" />
+    <ClInclude Include="Vec3.h" />
+    <ClInclude Include="VerticalMenuRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="String.natvis">
+      <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</RemoteCopyFile>
+      <RemoteCopyFile Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</RemoteCopyFile>
+      <RemoteCopyToOutputDir Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</RemoteCopyToOutputDir>
+    </Natvis>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pandemic.toml">
+      <RemoteCopyToOutputDir Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</RemoteCopyToOutputDir>
+      <RemoteCopyToOutputDir Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</RemoteCopyToOutputDir>
+    </None>
+  </ItemGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>-pthread -Wno-psabi %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>.;../../rpi-rgb-led-matrix/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>-pthread %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>../../rpi-rgb-led-matrix/lib;%(Link.AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LibraryDependencies>rgbmatrix;fmod;stdc++fs</LibraryDependencies>
+      <SharedLibrarySearchPath>../../rpi-rgb-led-matrix/lib;%(Link.SharedLibrarySearchPath)</SharedLibrarySearchPath>
+    </Link>
+    <RemotePostBuildEvent>
+      <Command>cp ../../rpi-rgb-led-matrix/lib/librgbmatrix.so.1 $(RemoteOutDir) &amp;&amp; sudo chmod ug+s $(RemoteOutDir)pandemic &amp;&amp; sudo setcap 'cap_sys_nice=eip' $(RemoteOutDir)pandemic</Command>
+    </RemotePostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+      <AdditionalOptions>-pthread -Wno-psabi %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>.;../../rpi-rgb-led-matrix/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>-pthread %(AdditionalOptions)</AdditionalOptions>
+      <LibraryDependencies>rgbmatrix;fmod;stdc++fs</LibraryDependencies>
+      <SharedLibrarySearchPath>../../rpi-rgb-led-matrix/lib;%(Link.SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories>../../rpi-rgb-led-matrix/lib;%(Link.AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

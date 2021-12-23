@@ -1,0 +1,4 @@
+# IOModule build property overrides
+
+# recipe.hooks.sketch.prebuild.1.pattern={sketch_path}\CompileProtobuf.bat "{sketch_path}"
+

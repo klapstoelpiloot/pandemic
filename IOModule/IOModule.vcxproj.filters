@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Protobuf">
+      <UniqueIdentifier>{26ca879e-f017-4d52-bbbd-d1cfc0e5bf80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{22dab0de-0498-4bdf-a30b-d7ff3e14c86d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors">
+      <UniqueIdentifier>{58e95231-86d4-4c54-9e9d-fb59d2780a9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{e8c21ad9-8c20-4c74-be06-0e0128b6ef78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IOModule.ino" />
+    <None Include="src\IOModule.proto">
+      <Filter>Protobuf</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CalibrationState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IdleState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NormalState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StateMachine.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOMode.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PollMonitor.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LEDButton.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LED.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GateWatcher.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DigitalTrigger.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Defines.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.IOModule.vsarduino.h" />
+    <ClInclude Include="src\SerialLink.h">
+      <Filter>Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IOModule.pb.h">
+      <Filter>Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pb.h">
+      <Filter>Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pb_common.h">
+      <Filter>Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pb_decode.h">
+      <Filter>Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pb_encode.h">
+      <Filter>Protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CRC32.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BridgeWatcher.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CalibrationState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IdleState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateMachine.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NormalState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IOMode.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DigitalTrigger.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GateWatcher.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LED.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LEDButton.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PollMonitor.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SerialLink.cpp">
+      <Filter>Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IOModule.pb.c">
+      <Filter>Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pb_common.c">
+      <Filter>Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pb_decode.c">
+      <Filter>Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pb_encode.c">
+      <Filter>Protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CRC32.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BridgeWatcher.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="board.txt" />
+  </ItemGroup>
+</Project>

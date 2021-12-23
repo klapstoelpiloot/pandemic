@@ -1,0 +1,58 @@
+
+[General]
+DataPath = "/usr/local/games/data/"
+HighscoresPath = "/usr/local/games/scores/"
+RecordingPath = "/usr/local/games/record/"
+MaxHighscores = 10
+MaxDayscores = 10
+AlternateTitleHighscores = true
+RepeatTitleMusic = true
+
+[Graphics]
+PWM_LSB_Nanoseconds = 300
+PWM_Bits = 11
+PWM_Dither_Bits = 0
+GPIO_Slowdown = 4
+Luminance_Correct = true
+Brightness = 80
+RecordRate = 60
+
+[Audio]
+Mixer = 9				# 9 = FMOD_OUTPUTTYPE_ALSA
+Frequency = 0			# 0 = System default
+Buffers = 2				# Using 2 for low latency, default is 4
+BufferSize = 512		# Using 512 for low latency, default is 1024
+MaxChannels = 256
+Volume = 10
+
+[IO]
+SerialPort = "/dev/ttyACM0"
+ButtonDebounceTimeout = 80
+ButtonRepeatTimeout = 500
+ButtonRepeatInterval = 100
+
+[Game]
+SlideTimeoutMs = 1000
+RoundTimeoutMs = 1500
+PuckLostCheckTimeoutMs = 1000
+
+[Resources]
+title.mp3.Volume = 40
+confirm.wav.Volume = 40
+change.wav.Volume = 40
+cancel.wav.Volume = 40
+select.wav.Volume = 30
+woosh1.wav.Volume = 50
+score.wav.Volume = 100
+shot1.wav.Volume = 100
+shot2.wav.Volume = 100
+shot3.wav.Volume = 100
+error.wav.Volume = 80
+inter_short.mp3.Volume = 50
+inter_long.mp3.Volume = 50
+round1.wav.Volume = 80
+round2.wav.Volume = 80
+round3.wav.Volume = 80
+go.wav.Volume = 80
+goodluck.wav.Volume = 80
+bang.wav.Volume = 100

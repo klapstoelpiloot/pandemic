@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{ac407256-1e25-4b5e-a70f-96c94218ee59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{23608e58-0fd0-4714-9bf1-9c759e06e881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{3e920655-7391-4533-9579-643f4c66f7fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Configuration">
+      <UniqueIdentifier>{4326ea63-6576-4921-8ddf-e90cecdba337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{371e6889-5b39-4a95-bdd3-a711b0d6c5a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{ac8824c4-bc49-47a5-913d-77a5a6686665}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers">
+      <UniqueIdentifier>{6f440a74-2ddf-4a4e-adff-e0cf27b2dda9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{67811637-033c-480a-8aa1-3d36fd033f95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{ad2bc62a-91fe-4fe5-9575-cabebfb4b20f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{78c5b622-5fd2-4532-bbd0-3ac880ca8cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Highscores">
+      <UniqueIdentifier>{d0938760-2cda-442d-b3e3-219abe508d88}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DDS.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Assert.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="String.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Configuration.cpp">
+      <Filter>Configuration</Filter>
+    </ClCompile>
+    <ClCompile Include="RTTI.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="IOModuleLink.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticalMenuRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="HorizontalMenuRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuItemRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="IntEditorRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGameState.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsMenuState.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="TopMenuState.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemTestRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuStateMachine.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateMachine.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayingState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemTestState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameDesc.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassicGameRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="RoundData.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CRC32.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="IOModule.pb.c">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="pb_common.c">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="pb_decode.c">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="pb_encode.c">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="FinishedState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameBackgroundRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="IntermissionState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="IntermissionRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenMeltRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="RemovePuckRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="RemovePuckState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenDissolveRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="FinishRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassicSetRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffect.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TomlParser.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoresTable.cpp">
+      <Filter>Highscores</Filter>
+    </ClCompile>
+    <ClCompile Include="HighscoreManager.cpp">
+      <Filter>Highscores</Filter>
+    </ClCompile>
+    <ClCompile Include="EnterNameState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="EnterNameRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="HighscoreState.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="HighscoreRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextFlasher.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="lodepng.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Graphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DDS.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Assert.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="String.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration.h">
+      <Filter>Configuration</Filter>
+    </ClInclude>
+    <ClInclude Include="RTTI.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="IOModuleLink.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="IState.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsConstants.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="FontChar.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="IPositionalRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticalMenuRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="HorizontalMenuRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuItemRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="IntEditorRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGameState.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsMenuState.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="TopMenuState.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemTestRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="RoundData.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefines.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessageHandler.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuStateMachine.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateMachine.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayingState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemTestState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDesc.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassicGameRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="CRC32.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="IOModule.pb.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="pb.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="pb_common.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="pb_decode.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="pb_encode.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="FinishedState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameBackgroundRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="IntermissionState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameData.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="IntermissionRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenMeltRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="RemovePuckRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="RemovePuckState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenDissolveRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="FinishRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassicSetRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffect.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TomlParser.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoresTable.h">
+      <Filter>Highscores</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreRecord.h">
+      <Filter>Highscores</Filter>
+    </ClInclude>
+    <ClInclude Include="HighscoreManager.h">
+      <Filter>Highscores</Filter>
+    </ClInclude>
+    <ClInclude Include="EnterNameState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="EnterNameRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="HighscoreState.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="HighscoreRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextFlasher.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="cxxopts.hpp">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="lodepng.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="cpptoml.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="cpptoml_tools.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="String.natvis">
+      <Filter>Tools</Filter>
+    </Natvis>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pandemic.toml">
+      <Filter>Configuration</Filter>
+    </None>
+  </ItemGroup>
+</Project>

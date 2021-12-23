@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.vs
+/IOModule/Debug
+/IOModule/Release
+*.user
+/Pandemic/obj
+/Pandemic/bin
