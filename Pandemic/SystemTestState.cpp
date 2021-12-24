@@ -23,8 +23,8 @@ void SystemTestState::Enter()
 	Main::GetGraphics().ClearRenderers();
 	Main::GetGraphics().AddRenderer(&renderer);
 
-	// Turn all button LEDs off
-	Main::GetIO().SetButtonLightsAllOff();
+	// Turn all button LEDs on
+	Main::GetButtons().SetAllGameLEDsOn();
 
 	// Set IO module in test mode
 	Main::GetIO().SetTestMode();
@@ -36,7 +36,7 @@ void SystemTestState::Leave()
 	Main::GetIO().SetNormalMode();
 
 	// Turn all button LEDs off
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllGameLEDsOff();
 }
 
 void SystemTestState::Update()

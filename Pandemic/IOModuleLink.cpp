@@ -78,7 +78,7 @@ IOModuleLink::IOModuleLink(const Configuration& cfg) :
 	// Send settings and set the firmware in normal state
 	SendSettings(false);
 	SetNormalMode();
-	SetButtonLightsAllOff();
+	SetButtonLights(false, false, false, false);
 }
 
 IOModuleLink::~IOModuleLink()

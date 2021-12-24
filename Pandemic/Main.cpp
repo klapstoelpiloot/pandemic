@@ -73,6 +73,7 @@ Main::Main(const cxxopts::ParseResult& cmdargs) :
 	graphics(config, (cmdargs.count("showfps") > 0)),
 	audio(config),
 	scores(config),
+	buttons(),
 	resources(nullptr),
 	menu(nullptr),
 	game(nullptr)

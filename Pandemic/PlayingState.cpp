@@ -39,7 +39,7 @@ void PlayingState::Enter()
 	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 	UpdateDisplay();
 
-	Main::GetIO().SetButtonLights(false, false, false, true);
+	Main::GetButtons().SetAllGameLEDs(false, false, false, true);
 }
 
 void PlayingState::Leave()

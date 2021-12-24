@@ -23,12 +23,12 @@ void RemovePuckState::Enter()
 	Main::GetGraphics().AddRenderer(&renderer);
 	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllGameLEDs(false, false, false, true);
 }
 
 void RemovePuckState::Leave()
 {
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllGameLEDsOff();
 }
 
 void RemovePuckState::Update()
@@ -38,9 +38,9 @@ void RemovePuckState::Update()
 	{
 		flashbuttonson = buttonson;
 		if(buttonson)
-			Main::GetIO().SetButtonLights(false, false, true, false);
+			Main::GetButtons().SetGameLED(Button::Accept, true);
 		else
-			Main::GetIO().SetButtonLightsAllOff();
+			Main::GetButtons().SetGameLED(Button::Accept, false);
 	}
 }
 
@@ -66,6 +66,10 @@ bool RemovePuckState::HandleMessage(const IOModule_IOMessage& msg)
 			{
 				Main::GetResources().GetSound("error.wav").Play();
 			}
+			return true;
+
+		case IOModule_IOMessage_CancelButtonPressed_tag:
+			Main::GetMenu().Show();
 			return true;
 	}
 

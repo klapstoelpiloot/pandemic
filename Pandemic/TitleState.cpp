@@ -41,7 +41,7 @@ void TitleState::Enter()
 
 void TitleState::Leave()
 {
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllGameLEDsOff();
 }
 
 void TitleState::Update()
@@ -54,12 +54,12 @@ void TitleState::Update()
 		if(flashbuttonson)
 		{
 			// Turn all button LEDs on
-			Main::GetIO().SetButtonLightsAllOn();
+			Main::GetButtons().SetAllGameLEDsOn();
 		}
 		else
 		{
 			// Turn all button LEDs off
-			Main::GetIO().SetButtonLightsAllOff();
+			Main::GetButtons().SetAllGameLEDsOff();
 		}
 	}
 }

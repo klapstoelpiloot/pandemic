@@ -51,13 +51,13 @@ void TopMenuState::Enter()
 	}
 
 	horizontalrenderer.ShowArrows(true);
-	Main::GetIO().SetButtonLightsAllOn();
+	Main::GetButtons().SetAllMenuLEDsOn();
 }
 
 void TopMenuState::Leave()
 {
 	horizontalrenderer.ShowArrows(false);
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllMenuLEDsOff();
 }
 
 void TopMenuState::Update()

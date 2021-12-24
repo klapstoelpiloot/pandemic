@@ -36,7 +36,7 @@ void SelectGameState::Enter()
 	statemachine->GetVerticalRenderer()->AddItem(&horizontalrenderer);
 
 	// Turn all button LEDs on
-	Main::GetIO().SetButtonLightsAllOn();
+	Main::GetButtons().SetAllMenuLEDsOn();
 }
 
 void SelectGameState::Leave()
@@ -45,7 +45,7 @@ void SelectGameState::Leave()
 	statemachine->GetVerticalRenderer()->RemoveItem(&horizontalrenderer);
 
 	// Turn all button LEDs off
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllMenuLEDsOff();
 }
 
 void SelectGameState::Update()

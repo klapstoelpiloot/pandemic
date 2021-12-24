@@ -42,7 +42,7 @@ void OptionsMenuState::Enter()
 
 	volumeitem.SetValue(Main::GetAudio().GetVolume());
 	brightnessitem.SetValue(Main::GetGraphics().GetBrightness());
-	Main::GetIO().SetButtonLightsAllOn();
+	Main::GetButtons().SetAllMenuLEDsOn();
 }
 
 void OptionsMenuState::Leave()
@@ -50,7 +50,7 @@ void OptionsMenuState::Leave()
 	statemachine->GetVerticalRenderer()->RemoveItem(&horizontalrenderer);
 
 	// Turn all button LEDs off
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllMenuLEDsOff();
 }
 
 void OptionsMenuState::Update()

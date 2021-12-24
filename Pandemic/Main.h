@@ -5,6 +5,7 @@
 #include "IOModuleLink.h"
 #include "Resources.h"
 #include "HighscoreManager.h"
+#include "ButtonLEDsController.h"
 
 class Main;
 class GameStateMachine;
@@ -29,6 +30,7 @@ private:
 	Graphics graphics;
 	Audio audio;
 	HighscoreManager scores;
+	ButtonLEDsController buttons;
 
 	// Resources
 	// This is dynamically initialized
@@ -52,6 +54,7 @@ public:
 	static inline GameStateMachine& GetGame() { return *(main_instance->game); }
 	static inline MenuStateMachine& GetMenu() { return *(main_instance->menu); }
 	static inline Resources& GetResources() { return *(main_instance->resources); }
+	static inline ButtonLEDsController& GetButtons() { return main_instance->buttons; }
 
 	// Initialization of dynamic parts
 	void Setup();

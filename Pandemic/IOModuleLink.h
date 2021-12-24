@@ -50,6 +50,4 @@ public:
 	void SendButtonRepeat(bool enablerepeat);
 	void SendRoundReset();
 	void SetButtonLights(bool left, bool right, bool accept, bool cancel);
-	void SetButtonLightsAllOn() { SetButtonLights(true, true, true, true); }
-	void SetButtonLightsAllOff() { SetButtonLights(false, false, false, false); }
 };

@@ -32,13 +32,13 @@ void EnterNameState::Enter()
 	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 
 	Main::GetIO().SendButtonRepeat(true);
-	Main::GetIO().SetButtonLightsAllOn();
+	Main::GetButtons().SetAllGameLEDsOn();
 }
 
 void EnterNameState::Leave()
 {
 	Main::GetIO().SendButtonRepeat(false);
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllGameLEDsOff();
 }
 
 void EnterNameState::Update()

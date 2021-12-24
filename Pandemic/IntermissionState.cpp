@@ -31,7 +31,7 @@ void IntermissionState::Enter()
 	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 	flashbuttonson = false;
 
-	Main::GetIO().SetButtonLights(false, false, false, true);
+	Main::GetButtons().SetAllGameLEDs(false, false, false, true);
 
 	// Begin showing the round is completed (or empty screen on first round)
 	// Always waits for at least the screen melt time
@@ -51,7 +51,7 @@ void IntermissionState::Enter()
 
 void IntermissionState::Leave()
 {
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllGameLEDsOff();
 }
 
 void IntermissionState::Update()
@@ -70,9 +70,9 @@ void IntermissionState::Update()
 			{
 				flashbuttonson = buttonson;
 				if(buttonson)
-					Main::GetIO().SetButtonLights(false, false, true, true);
+					Main::GetButtons().SetGameLED(Button::Accept, true);
 				else
-					Main::GetIO().SetButtonLights(false, false, false, true);
+					Main::GetButtons().SetGameLED(Button::Accept, false);
 			}
 			break;
 		}
@@ -124,7 +124,7 @@ void IntermissionState::BeginShowRound()
 	String soundfile = String("round") + gd.NumRounds() + String(".wav");
 	Main::GetResources().GetSound(soundfile).Play();
 	renderer.ShowRound(rd.index + 1);
-	Main::GetIO().SetButtonLights(false, false, false, true);
+	Main::GetButtons().SetAllGameLEDs(false, false, false, true);
 	Main::GetIO().SendRoundReset();
 
 	step = IntermissionStep::ShowRound;

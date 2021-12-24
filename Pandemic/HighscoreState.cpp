@@ -19,6 +19,8 @@ void HighscoreState::Enter()
 
 	statemachine->GetScreenMelt().Begin();
 
+	Main::GetButtons().SetAllGameLEDs(false, false, false, true);
+
 	Setup();
 
 	// Setup rendering
@@ -30,6 +32,7 @@ void HighscoreState::Enter()
 
 void HighscoreState::Leave()
 {
+	Main::GetButtons().SetAllGameLEDsOff();
 }
 
 void HighscoreState::Update()

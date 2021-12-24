@@ -31,7 +31,7 @@ void FinishedState::Enter()
 	Main::GetGraphics().AddRenderer(&screendissolve);
 	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 
-	Main::GetIO().SetButtonLights(false, false, false, true);
+	Main::GetButtons().SetAllGameLEDs(false, false, false, true);
 	flashbuttonson = false;
 
 	step = FinishedStep::GameOver;
@@ -58,7 +58,7 @@ void FinishedState::Enter()
 
 void FinishedState::Leave()
 {
-	Main::GetIO().SetButtonLightsAllOff();
+	Main::GetButtons().SetAllGameLEDsOff();
 }
 
 void FinishedState::Update()

@@ -42,10 +42,13 @@ void MenuStateMachine::Show()
 	// Begin with the top menu
 	topmenustate.SetBeginPosition(!ingamemenu);
 	ChangeState(&topmenustate);
+	Main::GetButtons().ShowMenuLEDs(true);
 }
 
 void MenuStateMachine::Hide()
 {
+	Main::GetButtons().ShowMenuLEDs(false);
+
 	// Remove the renderer
 	Main::GetGame().GetTitleState()->GetRenderer()->SetBackgroundMode(false);
 	Main::GetGraphics().RemoveRenderer(&verticalrenderer);

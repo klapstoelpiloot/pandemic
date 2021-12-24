@@ -34,6 +34,9 @@
     <Filter Include="Highscores">
       <UniqueIdentifier>{d0938760-2cda-442d-b3e3-219abe508d88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Buttons">
+      <UniqueIdentifier>{d0664791-2cf8-4f61-8ec8-713d60cfb1b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -233,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="lodepng.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonLEDsController.cpp">
+      <Filter>Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -496,6 +502,12 @@
     </ClInclude>
     <ClInclude Include="cpptoml_tools.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonLEDsController.h">
+      <Filter>Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
