@@ -115,16 +115,26 @@ bool PlayingState::HandleMessage(const IOModule_IOMessage& msg)
 			UpdateDisplay();
 
 			Main::GetResources().GetSound("error.wav").Play();
-			statemachine->GetRemovePuckState()->SetSensorBlocked(false);
-			statemachine->ChangeState(statemachine->GetRemovePuckState());
+
+			if(!ch::IsTimeSet(roundfinishtime))
+			{
+				statemachine->GetRemovePuckState()->SetSensorBlocked(false);
+				statemachine->ChangeState(statemachine->GetRemovePuckState());
+			}
+
 			return true;
 		}
 
 		case IOModule_IOMessage_SensorBlocked_tag:
 		{
 			Main::GetResources().GetSound("error.wav").Play();
-			statemachine->GetRemovePuckState()->SetSensorBlocked(true);
-			statemachine->ChangeState(statemachine->GetRemovePuckState());
+
+			if(!ch::IsTimeSet(roundfinishtime))
+			{
+				statemachine->GetRemovePuckState()->SetSensorBlocked(true);
+				statemachine->ChangeState(statemachine->GetRemovePuckState());
+			}
+
 			return true;
 		}
 
