@@ -36,6 +36,7 @@ void OptionsMenuState::Enter()
 
 	horizontalrenderer.SetAtIndex(0);
 	horizontalrenderer.ShowArrows(true);
+	currentitem = 0;
 
 	statemachine->GetVerticalRenderer()->AddItem(&horizontalrenderer);
 
