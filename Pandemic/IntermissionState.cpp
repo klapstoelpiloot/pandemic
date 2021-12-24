@@ -17,6 +17,7 @@ IntermissionState::IntermissionState(GameStateMachine* _statemachine) :
 void IntermissionState::Enter()
 {
 	GameData& gd = statemachine->GetData();
+	statemachine->StopTitleMusic();
 
 	// TODO: Temporary fix. Remove when renderers are fixed so that menu can stay open.
 	Main::GetMenu().Hide();

@@ -65,4 +65,5 @@ public:
 	inline ScreenMeltRenderer& GetScreenMelt() { return screenmelt; }
 	void AllowTitleMusicRestart();
 	void PlayOrRepeatTitleMusic();
+	void StopTitleMusic();
 };

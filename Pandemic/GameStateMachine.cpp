@@ -57,6 +57,11 @@ void GameStateMachine::PlayOrRepeatTitleMusic()
 	}
 }
 
+void GameStateMachine::StopTitleMusic()
+{
+	titlemusic.Stop();
+}
+
 bool GameStateMachine::HandleMessage(const IOModule_IOMessage& msg)
 {
 	// If the current state implements IMessageHandler, let it handle the message
