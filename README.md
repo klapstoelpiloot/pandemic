@@ -8,6 +8,13 @@ The IOModule is easiest to compile and upload with the Arduino IDE, or with Visu
 
 The Pandemic code is compiled on the Raspberry Pi using Visual Studio from a Windows machine connected to the same network. To make this work, you need to install the following packages on the Raspberry Pi:
 > sudo apt install zip rsync openssh-server build-essential gdbserver git
-Visual Studio automatically copies the changed files to the Raspberry Pi and remotely builds the project. The binaries are built in ~/projects/Pandemic/bin/ARM/ with a Debug or Release subdirectory depending on the chosen build configuration. There is a post-build action which should copy the required librgbmatrix.so library to the same output directory. This was previously built from Henner Zeller's [rpi-rgb-led-matrix library](http://www.github.com/hzeller/rpi-rgb-led-matrix/). Follow his instructions to build that library. Also the _pandemic.toml_ file is copied to the output directory as this must be read by the software on startup.
+
+Visual Studio automatically copies the changed files to the Raspberry Pi and remotely builds the project. The binaries are built in ~/projects/Pandemic/bin/ARM/ with a Debug or Release subdirectory depending on the chosen build configuration.
+
+There is a post-build action which should copy the required librgbmatrix.so library to the same output directory. This was previously built from Henner Zeller's [rpi-rgb-led-matrix library](http://www.github.com/hzeller/rpi-rgb-led-matrix/). Follow his instructions to build that library.
+
+I don't remember how I installed fmod, but I do have a directory named 'fmodstudioapi20106linux' and you can probably get it from the offical [fmod website](https://www.fmod.com/).
+
+Also the _pandemic.toml_ file is copied to the output directory as this must be read by the software on startup.
 
 The data files must be in the directory /usr/local/games/data/, however, this is configurable in _pandemic.toml_.
