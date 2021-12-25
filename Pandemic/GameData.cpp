@@ -3,7 +3,8 @@
 constexpr int GATE_VALUES[] = { 2, 3, 4, 1 };
 
 GameData::GameData(GameType type) :
-	type(type)
+	type(type),
+	cheated(false)
 {
 }
 

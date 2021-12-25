@@ -46,8 +46,9 @@ void FinishedState::Enter()
 
 	// Is this score highscore worthy?
 	ScoreRecord result = gd.GetResult();
-	ishighscore = Main::GetScores().IsWorthyHighscore(result.score) ||
-	              Main::GetScores().IsWorthyDayscore(result.score);
+	ishighscore = (Main::GetScores().IsWorthyHighscore(result.score) ||
+	               Main::GetScores().IsWorthyDayscore(result.score)) &&
+	              !gd.IsCheated();
 
 	// Play music that matches with the result
 	if(ishighscore)
@@ -119,25 +120,27 @@ void FinishedState::BeginHighScoreTextIfWorthy()
 {
 	GameData& gd = statemachine->GetData();
 	ScoreRecord result = gd.GetResult();
-	if(Main::GetScores().IsWorthyHighscore(result.score))
+	if(!gd.IsCheated())
 	{
-		step = FinishedStep::HighscoreText;
-		renderer.ShowHighscore(false);
-		nextsteptime = Clock::now() + ch::milliseconds(HIGHSCORE_TIME);
-	}
-	else if(Main::GetScores().IsWorthyDayscore(result.score))
-	{
-		step = FinishedStep::HighscoreText;
-		renderer.ShowHighscore(true);
-		nextsteptime = Clock::now() + ch::milliseconds(HIGHSCORE_TIME);
+		if(Main::GetScores().IsWorthyHighscore(result.score))
+		{
+			step = FinishedStep::HighscoreText;
+			renderer.ShowHighscore(false);
+			nextsteptime = Clock::now() + ch::milliseconds(HIGHSCORE_TIME);
+		}
+		else if(Main::GetScores().IsWorthyDayscore(result.score))
+		{
+			step = FinishedStep::HighscoreText;
+			renderer.ShowHighscore(true);
+			nextsteptime = Clock::now() + ch::milliseconds(HIGHSCORE_TIME);
+		}
+		else
+		{
+			step = FinishedStep::Finished;
+		}
 	}
 	else
 	{
-		BeginFinish();
+		step = FinishedStep::Finished;
 	}
-}
-
-void FinishedState::BeginFinish()
-{
-	step = FinishedStep::Finished;
 }

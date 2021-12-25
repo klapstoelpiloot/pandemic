@@ -18,6 +18,9 @@ private:
 	// When finished, this holds the achieved score.
 	ScoreRecord result;
 
+	// When cheating was detected, this is set to True
+	bool cheated;
+
 public:
 
 	// Constructorage
@@ -37,4 +40,6 @@ public:
 	int CalculateNextRoundPucks(bool* isbonus) const;
 	void Finish();
 	const ScoreRecord& GetResult() const { return result; }
+	bool IsCheated() const { return cheated; }
+	void SetIsCheated() { cheated = true; }
 };

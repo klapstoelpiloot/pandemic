@@ -7,8 +7,8 @@
 #define GAME_ROUNDS			3
 
 // Number of pucks a player can throw in a classic game
-#define GAME_PUCKS			30
-#define GAME_PUCK_BONUS1	2
+#define GAME_PUCKS			4
+#define GAME_PUCK_BONUS1	1
 #define GAME_PUCK_BONUS2	1
 
 // Scoring system

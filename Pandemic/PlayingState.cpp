@@ -185,6 +185,10 @@ bool PlayingState::HandleMessage(const IOModule_IOMessage& msg)
 				RoundData& rd = gd.CurrentRound();
 				rd.gatepucks[gateindex]++;
 
+				// Check if cheating
+				if(rd.PucksOnTable() < 0)
+					gd.SetIsCheated();
+
 				// Check result
 				int newsets = gd.CalculateSets();
 				KillShotSounds();

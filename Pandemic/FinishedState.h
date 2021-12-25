@@ -31,7 +31,6 @@ private:
 	// Methods
 	void BeginShowTotalScore();
 	void BeginHighScoreTextIfWorthy();
-	void BeginFinish();
 
 public:
 
