@@ -3,8 +3,8 @@
 
 // Constructor
 ButtonLEDsController::ButtonLEDsController() :
-	gameleds({ false, false, false, false }),
-	menuleds({ false, false, false, false }),
+	gameleds{ false, false, false, false },
+	menuleds{ false, false, false, false },
 	showmenuleds(false)
 {
 }

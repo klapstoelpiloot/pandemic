@@ -9,6 +9,10 @@
 #define BLUE Color(0, 0, 255)
 #define YELLOW Color(255, 255, 0)
 
+// This divides by 255 and is about 10% faster on the Raspberry Pi than what the compiler produces for / 255
+// See: https://www.reddit.com/r/C_Programming/comments/gudfyk/faster_divide_by_255/
+#define DIV_255_FAST(x)    (((x) + (((x) + 257) >> 8)) >> 8)
+
 struct Color
 {
 public:
@@ -24,20 +28,31 @@ public:
 	Color(byte _r, byte _g, byte _b) { r = _r; g = _g; b = _b; a = 255u; }
 	Color(byte _r, byte _g, byte _b, byte _a) { r = _r; g = _g; b = _b; a = _a; }
 
+	// TODO: I could probably squeeze some more performance out of the operations below with SIMD instructions
+
 	// Blends the given color with this color by the amount of alpha in the given color
 	inline void Blend(Color c)
 	{
-		r = static_cast<byte>((static_cast<uint>(c.r) * static_cast<uint>(c.a)) / 255u + (static_cast<uint>(r) * static_cast<uint>(255u - c.a)) / 255u);
-		g = static_cast<byte>((static_cast<uint>(c.g) * static_cast<uint>(c.a)) / 255u + (static_cast<uint>(g) * static_cast<uint>(255u - c.a)) / 255u);
-		b = static_cast<byte>((static_cast<uint>(c.b) * static_cast<uint>(c.a)) / 255u + (static_cast<uint>(b) * static_cast<uint>(255u - c.a)) / 255u);
+		uint cra = static_cast<uint>(c.r) * static_cast<uint>(c.a);
+		uint cga = static_cast<uint>(c.g) * static_cast<uint>(c.a);
+		uint cba = static_cast<uint>(c.b) * static_cast<uint>(c.a);
+		uint ria = static_cast<uint>(r) * (255u - static_cast<uint>(c.a));
+		uint gia = static_cast<uint>(g) * (255u - static_cast<uint>(c.a));
+		uint bia = static_cast<uint>(b) * (255u - static_cast<uint>(c.a));
+		r = static_cast<byte>(DIV_255_FAST(cra) + DIV_255_FAST(ria));
+		g = static_cast<byte>(DIV_255_FAST(cga) + DIV_255_FAST(gia));
+		b = static_cast<byte>(DIV_255_FAST(cba) + DIV_255_FAST(bia));
 	}
 
 	// Adds the given color to this color by the amount of alpha in the given color
 	inline void Add(Color c)
 	{
-		r = static_cast<byte>(std::clamp(static_cast<uint>(r) + (static_cast<uint>(c.r) * static_cast<uint>(c.a)) / 255u, 0u, 255u));
-		g = static_cast<byte>(std::clamp(static_cast<uint>(g) + (static_cast<uint>(c.g) * static_cast<uint>(c.a)) / 255u, 0u, 255u));
-		b = static_cast<byte>(std::clamp(static_cast<uint>(b) + (static_cast<uint>(c.b) * static_cast<uint>(c.a)) / 255u, 0u, 255u));
+		uint cra = static_cast<uint>(c.r) * static_cast<uint>(c.a);
+		uint cga = static_cast<uint>(c.g) * static_cast<uint>(c.a);
+		uint cba = static_cast<uint>(c.b) * static_cast<uint>(c.a);
+		r = static_cast<byte>(std::clamp(static_cast<uint>(r) + DIV_255_FAST(cra), 0u, 255u));
+		g = static_cast<byte>(std::clamp(static_cast<uint>(g) + DIV_255_FAST(cga), 0u, 255u));
+		b = static_cast<byte>(std::clamp(static_cast<uint>(b) + DIV_255_FAST(cba), 0u, 255u));
 	}
 
 	// Applies the given color to this color by using the alpha in the given color as a mask.
@@ -52,9 +67,12 @@ public:
 	// Modulates the brightness of this color by the amount specified (0-255)
 	inline void Modulate(byte m)
 	{
-		r = static_cast<byte>((static_cast<uint>(r) * static_cast<uint>(m)) / 255u);
-		g = static_cast<byte>((static_cast<uint>(g) * static_cast<uint>(m)) / 255u);
-		b = static_cast<byte>((static_cast<uint>(b) * static_cast<uint>(m)) / 255u);
+		uint rm = static_cast<uint>(r) * static_cast<uint>(m);
+		uint gm = static_cast<uint>(g) * static_cast<uint>(m);
+		uint bm = static_cast<uint>(b) * static_cast<uint>(m);
+		r = static_cast<byte>(DIV_255_FAST(rm));
+		g = static_cast<byte>(DIV_255_FAST(gm));
+		b = static_cast<byte>(DIV_255_FAST(bm));
 	}
 
 	inline static float ToFloat(byte b) { return static_cast<float>(b) * 0.00392156862745f; }

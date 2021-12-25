@@ -240,6 +240,9 @@
     <ClCompile Include="ButtonLEDsController.cpp">
       <Filter>Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="Benchmarks.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -508,6 +511,9 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Benchmarks.h">
+      <Filter>Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
