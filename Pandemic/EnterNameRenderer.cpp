@@ -35,8 +35,8 @@ void EnterNameRenderer::Render(Canvas& canvas)
 	greenbuttontext.DrawOutlineMask(canvas, GREEN_TEXT_POS, 1, BLACK);
 	redbuttontext.DrawOutlineMask(canvas, RED_TEXT_POS, 1, BLACK);
 
-	canvas.DrawColorImageMask(GREEN_IMAGE_POS, greenbutton);
-	canvas.DrawColorImageMask(RED_IMAGE_POS, redbutton);
+	canvas.DrawColorImageBlend(GREEN_IMAGE_POS, greenbutton);
+	canvas.DrawColorImageBlend(RED_IMAGE_POS, redbutton);
 
 	toptext.DrawMask(canvas, TOP_TEXT_POS, WHITE);
 	nametext.DrawTexturedMask(canvas, Point(NAME_TEXT_X, NAME_TEXT_Y), texture);
