@@ -146,7 +146,7 @@ bool PlayingState::HandleMessage(const IOModule_IOMessage& msg)
 			{
 				// Output the speed in the console for fun
 				uint32_t speed = msg.Content.StartSlide.Speed;
-				double kmh = static_cast<double>(speed) * 0.0036;
+				//double kmh = static_cast<double>(speed) * 0.0036;
 				//std::cout << "Speed: " << kmh << " km/h" << std::endl;
 
 				// Add the throw to the game data

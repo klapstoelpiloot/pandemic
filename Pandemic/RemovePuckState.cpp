@@ -71,6 +71,18 @@ bool RemovePuckState::HandleMessage(const IOModule_IOMessage& msg)
 		case IOModule_IOMessage_CancelButtonPressed_tag:
 			Main::GetMenu().Show();
 			return true;
+
+		case IOModule_IOMessage_StartSlide_tag:
+			if(!sensorblocked)
+			{
+				statemachine->ChangeState(statemachine->GetPlayingState());
+				return statemachine->GetPlayingState()->HandleMessage(msg);
+			}
+			else
+			{
+				Main::GetResources().GetSound("error.wav").Play();
+				return true;
+			}
 	}
 
 	return false;
