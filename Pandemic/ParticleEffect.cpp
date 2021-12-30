@@ -41,9 +41,9 @@ void ParticleEffect::Render(Canvas& canvas)
 		for(Particle& p : particles)
 		{
 			// Do the math for the next position/color
-			p.pos *= p.vel;
+			p.pos += p.vel;
 			p.vel *= deceleration;
-			p.vel *= gravity;
+			p.vel += gravity;
 
 			// Swing logic. This looks complicated, but is just a fast way of getting the sign of swingdelta into swingdeltasign as 1 or -1.
 			float swingdelta = p.meta.x - p.pos.x;
