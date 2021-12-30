@@ -62,5 +62,5 @@ void HighscoreState::Setup()
 {
 	HighscoreManager scores = Main::GetScores();
 	scores.Load(gametype);
-	renderer.Setup(scores.GetHighscores(), scores.GetDayscores(), gametype);
+	renderer.Setup(scores.GetHighscores(), scores.GetPeriodscores(), gametype, scores.GetPeriodScoresInterval());
 }

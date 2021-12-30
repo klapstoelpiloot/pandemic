@@ -3,8 +3,9 @@
 DataPath = "/usr/local/games/data/"
 HighscoresPath = "/usr/local/games/scores/"
 RecordingPath = "/usr/local/games/record/"
-MaxHighscores = 10
-MaxDayscores = 10
+MaxHighScores = 10
+MaxPeriodicScores = 10
+PeriodicScoresInterval = 1				# 0 = Daily, 1 = Monthly, 2 = Annually
 AlternateTitleHighscores = true
 RepeatTitleMusic = true
 

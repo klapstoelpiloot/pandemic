@@ -47,7 +47,7 @@ void FinishedState::Enter()
 	// Is this score highscore worthy?
 	ScoreRecord result = gd.GetResult();
 	ishighscore = (Main::GetScores().IsWorthyHighscore(result.score) ||
-	               Main::GetScores().IsWorthyDayscore(result.score)) &&
+	               Main::GetScores().IsWorthyPeriodscore(result.score)) &&
 	              !gd.IsCheated();
 
 	// Play music that matches with the result
@@ -128,7 +128,7 @@ void FinishedState::BeginHighScoreTextIfWorthy()
 			renderer.ShowHighscore(false);
 			nextsteptime = Clock::now() + ch::milliseconds(HIGHSCORE_TIME);
 		}
-		else if(Main::GetScores().IsWorthyDayscore(result.score))
+		else if(Main::GetScores().IsWorthyPeriodscore(result.score))
 		{
 			step = FinishedStep::HighscoreText;
 			renderer.ShowHighscore(true);

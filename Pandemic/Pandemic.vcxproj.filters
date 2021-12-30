@@ -1376,6 +1376,9 @@
     <ClInclude Include="glm\simd\vector_relational.h">
       <Filter>GLM\simd</Filter>
     </ClInclude>
+    <ClInclude Include="ScoresPeriod.h">
+      <Filter>Highscores</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="String.natvis">

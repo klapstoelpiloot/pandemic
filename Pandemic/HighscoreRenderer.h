@@ -4,16 +4,17 @@
 #include "Text.h"
 #include "ScoresTable.h"
 #include "GameDesc.h"
+#include "ScoresPeriod.h"
 
 class HighscoreRenderer final : public virtual IRenderer
 {
 private:
 
 	// Members
-	Text hiscopetext;
-	Text dayscopetext;
+	Text hiscoretext;
+	Text periodscoretext;
 	Text higametext;
-	Text daygametext;
+	Text periodgametext;
 	vector<Text*> postexts;
 	vector<Text*> nametexts;
 	vector<Text*> datetexts;
@@ -44,7 +45,7 @@ public:
 
 	// Methods
 	virtual void Render(Canvas& canvas) override;
-	void Setup(const ScoresTable& hightable, const ScoresTable& daytable, GameType type);
+	void Setup(const ScoresTable& hightable, const ScoresTable& daytable, GameType type, ScoresPeriod interval);
 	void SetContinuousLoop(bool loop) { continuousloop = loop; }
 	bool IsFinished();
 };

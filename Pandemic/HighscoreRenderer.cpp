@@ -20,10 +20,10 @@
 #define EMPTY_LIST_TEXT		"             NOBODY YET"
 
 HighscoreRenderer::HighscoreRenderer() :
-	hiscopetext("ALLTIME HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
-	dayscopetext("DAILY HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
+	hiscoretext("ALLTIME HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
+	periodscoretext("DAILY HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
 	higametext(Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
-	daygametext(Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
+	periodgametext(Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
 	yellowtexture(Main::GetResources().GetImage("yellow12.dds")),
 	graytexture(Main::GetResources().GetImage("gray12.dds")),
 	yellowtrophy(Main::GetResources().GetImage("yellow_trophy.dds")),
@@ -58,16 +58,16 @@ void HighscoreRenderer::Render(Canvas& canvas)
 
 	canvas.DrawColorImageMask(Point(CENTER_X - (higametext.GetTextSize().width / 2) - 18, hitrophyy), yellowtrophy);
 	canvas.DrawColorImageMask(Point(CENTER_X + (higametext.GetTextSize().width / 2) + 4, hitrophyy), yellowtrophy);
-	canvas.DrawColorImageMask(Point(CENTER_X - (daygametext.GetTextSize().width / 2) - 18, daytrophyy), graytrophy);
-	canvas.DrawColorImageMask(Point(CENTER_X + (daygametext.GetTextSize().width / 2) + 4, daytrophyy), graytrophy);
-	hiscopetext.DrawOutlineMask(canvas, Point(CENTER_X, hiscopetexty), 1, BLACK);
-	hiscopetext.DrawTexturedMask(canvas, Point(CENTER_X, hiscopetexty), yellowtexture);
+	canvas.DrawColorImageMask(Point(CENTER_X - (periodgametext.GetTextSize().width / 2) - 18, daytrophyy), graytrophy);
+	canvas.DrawColorImageMask(Point(CENTER_X + (periodgametext.GetTextSize().width / 2) + 4, daytrophyy), graytrophy);
+	hiscoretext.DrawOutlineMask(canvas, Point(CENTER_X, hiscopetexty), 1, BLACK);
+	hiscoretext.DrawTexturedMask(canvas, Point(CENTER_X, hiscopetexty), yellowtexture);
 	higametext.DrawOutlineMask(canvas, Point(CENTER_X, higametexty), 1, BLACK);
 	higametext.DrawTexturedMask(canvas, Point(CENTER_X, higametexty), yellowtexture);
-	dayscopetext.DrawOutlineMask(canvas, Point(CENTER_X, dayscopetexty), 1, BLACK);
-	dayscopetext.DrawTexturedMask(canvas, Point(CENTER_X, dayscopetexty), graytexture);
-	daygametext.DrawOutlineMask(canvas, Point(CENTER_X, daygametexty), 1, BLACK);
-	daygametext.DrawTexturedMask(canvas, Point(CENTER_X, daygametexty), graytexture);
+	periodscoretext.DrawOutlineMask(canvas, Point(CENTER_X, dayscopetexty), 1, BLACK);
+	periodscoretext.DrawTexturedMask(canvas, Point(CENTER_X, dayscopetexty), graytexture);
+	periodgametext.DrawOutlineMask(canvas, Point(CENTER_X, daygametexty), 1, BLACK);
+	periodgametext.DrawTexturedMask(canvas, Point(CENTER_X, daygametexty), graytexture);
 	for(size_t i = 0; i < postexts.size(); i++)
 	{
 		int offset;
@@ -88,14 +88,22 @@ void HighscoreRenderer::Render(Canvas& canvas)
 	}
 }
 
-void HighscoreRenderer::Setup(const ScoresTable& hightable, const ScoresTable& daytable, GameType type)
+void HighscoreRenderer::Setup(const ScoresTable& hightable, const ScoresTable& daytable, GameType type, ScoresPeriod interval)
 {
 	Cleanup();
 
 	// Describe the game type
 	const GameDesc& gamedesc = GameDesc::Find(type);
 	higametext.SetText(gamedesc.name);
-	daygametext.SetText(gamedesc.name);
+	periodgametext.SetText(gamedesc.name);
+
+	switch(interval)
+	{
+		case ScoresPeriod::Daily: periodscoretext.SetText("DAILY HIGHSCORE"); break;
+		case ScoresPeriod::Monthly: periodscoretext.SetText("MONTHLY HIGHSCORE"); break;
+		case ScoresPeriod::Annually: periodscoretext.SetText("ANNUAL HIGHSCORE"); break;
+		default: NOT_IMPLEMENTED;
+	}
 
 	// List the alltime highscores
 	if(hightable.size() > 0)

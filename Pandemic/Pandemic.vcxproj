@@ -440,6 +440,7 @@
     <ClInclude Include="RemovePuckState.h" />
     <ClInclude Include="RoundData.h" />
     <ClInclude Include="ScoreRecord.h" />
+    <ClInclude Include="ScoresPeriod.h" />
     <ClInclude Include="ScoresTable.h" />
     <ClInclude Include="ScreenDissolveRenderer.h" />
     <ClInclude Include="ScreenMeltRenderer.h" />
