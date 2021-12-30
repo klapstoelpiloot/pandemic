@@ -1,4 +1,7 @@
 #include "GameBackgroundRenderer.h"
+#include "glm/vec3.hpp"
+#include "glm/vec2.hpp"
+#include "glm/geometric.hpp"
 #include <math.h>
 
 vector<Color> COLORS { Color(120, 0, 0), Color(110, 50, 0), Color(0, 100, 0), Color(0, 110, 110), Color(0, 30, 160), Color(110, 50, 100) };
@@ -59,20 +62,19 @@ void GameBackgroundRenderer::Render(Canvas& canvas)
 	backbuffer.CopyTo(canvas);
 }
 
-Vec3 GameBackgroundRenderer::Hash33(Vec3 p)
+glm::vec3 Hash33(glm::vec3 p)
 {
-	Vec3 a = Vec3(7.0, 157.0, 113.0);
-	Vec3 b = Vec3(2097152.0, 262144.0, 32768.0);
-	float n = sin(Vec3::Dot(p, a));
-	Vec3 c = Vec3::Mul(b, n);
-	Vec3 g = Vec3::Trunc(c);
-	return Vec3::Sub(c, g);
+	glm::vec3 a = glm::vec3(7.0, 157.0, 113.0);
+	glm::vec3 b = glm::vec3(2097152.0, 262144.0, 32768.0);
+	float n = sin(glm::dot(p, a));
+	glm::vec3 c = b * n;
+	return glm::fract(c);
 }
 
-float GameBackgroundRenderer::Voronoi(Vec3 p)
+float Voronoi(glm::vec3 p)
 {
-	Vec3 g = Vec3::Trunc(p);
-	p = Vec3::Sub(p, g);
+	glm::vec3 g = glm::floor(p);
+	p = glm::fract(p);
 
 	float d = 1.0f;
 
@@ -80,32 +82,19 @@ float GameBackgroundRenderer::Voronoi(Vec3 p)
 	{
 		for(int i = -1; i <= 1; i++)
 		{
-			Vec3 gb, h, ph, r;
-			Vec3 b = Vec3(static_cast<float>(i), static_cast<float>(j), -1.0f);
-			float rr;
+			glm::vec3 gb, h, ph, r;
+			glm::vec3 b = glm::vec3(static_cast<float>(i), static_cast<float>(j), -1.0f);
 
-			gb = Vec3::Add(g, b);
-			h = Hash33(gb);
-			ph = Vec3::Add(p, h);
-			r = Vec3::Sub(b, ph);
-			rr = Vec3::Dot(r, r);
-			d = std::min(d, rr);
+			r = b - p + Hash33(g + b);
+			d = glm::min(d, glm::dot(r, r));
 
 			b.z = 0.0f;
-			gb = Vec3::Add(g, b);
-			h = Hash33(gb);
-			ph = Vec3::Add(p, h);
-			r = Vec3::Sub(b, ph);
-			rr = Vec3::Dot(r, r);
-			d = std::min(d, rr);
+			r = b - p + Hash33(g + b);
+			d = glm::min(d, glm::dot(r, r));
 
 			b.z = 1.0f;
-			gb = Vec3::Add(g, b);
-			h = Hash33(gb);
-			ph = Vec3::Add(p, h);
-			r = Vec3::Sub(b, ph);
-			rr = Vec3::Dot(r, r);
-			d = std::min(d, rr);
+			r = b - p + Hash33(g + b);
+			d = glm::min(d, glm::dot(r, r));
 		}
 	}
 
@@ -115,7 +104,7 @@ float GameBackgroundRenderer::Voronoi(Vec3 p)
 // Standard fBm function with some time dialation to give a parallax 
 // kind of effect. In other words, the position and time frequencies 
 // are changed at different rates from layer to layer.
-float GameBackgroundRenderer::NoiseLayers(Vec3 p)
+float NoiseLayers(glm::vec3 p, float timesec)
 {
 	constexpr int ITERATIONS = 2;
 	constexpr float SPEED = 1.0f;
@@ -124,14 +113,13 @@ float GameBackgroundRenderer::NoiseLayers(Vec3 p)
 	constexpr float LAYER_TIME_MUL = 0.5f;
 	constexpr float LAYER_INTENSITY_MUL = 0.5f;
 
-	Vec3 t = Vec3(0.0f, 0.0f, (p.z * CIRCULAR_STRETCH) + (timesec * SPEED));
+	glm::vec3 t = glm::vec3(0.0f, 0.0f, (p.z * CIRCULAR_STRETCH) + (timesec * SPEED));
 	float tot = 0.0f, sum = 0.0f, amp = 1.0f;
 	for(int i = 0; i < ITERATIONS; i++)
 	{
-		Vec3 pt = Vec3::Add(p, t);
-		tot += Voronoi(pt) * amp;
-		p = Vec3::Mul(p, LAYER_POS_MUL);
-		t = Vec3::Mul(t, LAYER_TIME_MUL);
+		tot += Voronoi(p + t) * amp;
+		p *= LAYER_POS_MUL;
+		t *= LAYER_TIME_MUL;
 		sum += amp;
 		amp *= LAYER_INTENSITY_MUL;
 	}
@@ -158,8 +146,8 @@ float GameBackgroundRenderer::PixelShader(float x, float y)
 	v += cos(timesec * SHIFT_SPEED) * SHIFT_DISTANCE_Y;
 
 	// Constructing the unit ray.
-	Vec3 r = Vec3(u, v, 3.1415926535898f / TUNNEL_DEPTH);
-	Vec3 rd = Vec3::Normalize(r);
+	glm::vec3 r = glm::vec3(u, v, 3.1415926535898f / TUNNEL_DEPTH);
+	glm::vec3 rd = glm::normalize(r);
 
 	// Rotating the ray about the XY plane, to simulate a rolling camera.
 	float cs = cos(timesec * ROTATE_SPEED) * ROTATE_DISTANCE;
@@ -169,8 +157,8 @@ float GameBackgroundRenderer::PixelShader(float x, float y)
 
 	// Passing a unit ray multiple into the Voronoi layer function, which 
 	// is nothing more than an fBm setup with some time dialation.
-	Vec3 rd2 = Vec3::Mul(rd, ZOOM);
-	float c = NoiseLayers(rd2);
+	glm::vec3 rd2 = rd * ZOOM;
+	float c = NoiseLayers(rd2, timesec);
 
 	// Monochrome output
 	return c * c;

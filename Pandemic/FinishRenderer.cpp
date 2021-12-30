@@ -1,3 +1,4 @@
+#include <math.h>
 #include "FinishRenderer.h"
 #include "Main.h"
 
@@ -24,7 +25,7 @@ FinishRenderer::FinishRenderer() :
 	particles.SetAdditive(false);
 	particles.SetDeceleration(0.97f);
 	particles.SetFadeAlpha(-0.5f);
-	particles.SetGravity(Vec2(0.0f, -0.1f));
+	particles.SetGravity(glm::vec2(0.0f, -0.1f));
 	particles.SetSwingStrength(-0.005f);
 	particles.SetLifetime(5000);
 	for(int i = 0; i < NUM_SMOKE_IMAGES; i++)
@@ -121,8 +122,8 @@ void FinishRenderer::Clear()
 void FinishRenderer::SpawnSmoke(int x, int y)
 {
 	int image = Random(0, NUM_SMOKE_IMAGES - 1);
-	Vec2 pos(static_cast<float>(x), static_cast<float>(y));
-	Vec2 vel(Random(-0.5f, 0.5f), Random(-0.5f, 0.8f));
+	glm::vec2 pos(static_cast<float>(x), static_cast<float>(y));
+	glm::vec2 vel(Random(-0.5f, 0.5f), Random(-0.5f, 0.8f));
 	byte gray = static_cast<byte>(Random(0, 150));
 	Color color(gray, gray, gray);
 	float alpha = Random(0.3f, 1.0f);
@@ -130,7 +131,7 @@ void FinishRenderer::SpawnSmoke(int x, int y)
 	// Meta is used for Swing effect
 	// X = x position to swing about
 	// Y = amount of swing factor
-	Vec2 meta(64.0f, Random(0.1f, 1.0f));
+	glm::vec2 meta(64.0f, Random(0.1f, 1.0f));
 
 	particles.Spawn(Particle(image, pos, vel, color, alpha, meta));
 }

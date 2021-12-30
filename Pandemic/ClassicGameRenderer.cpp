@@ -62,7 +62,7 @@ ClassicGameRenderer::ClassicGameRenderer() :
 	gateparticles.SetAdditive(true);
 	gateparticles.SetDeceleration(0.95f);
 	gateparticles.SetFadeAlpha(-3.0f);
-	gateparticles.SetGravity(Vec2(0.0f, -1.8f));
+	gateparticles.SetGravity(glm::vec2(0.0f, -1.8f));
 	gateparticles.SetSwingStrength(0.05f);
 	gateparticles.SetLifetime(3000);
 	gateparticles.Begin();
@@ -70,7 +70,7 @@ ClassicGameRenderer::ClassicGameRenderer() :
 	setparticles.SetAdditive(true);
 	setparticles.SetDeceleration(0.95f);
 	setparticles.SetFadeAlpha(-3.0f);
-	setparticles.SetGravity(Vec2(0.0f, -1.0f));
+	setparticles.SetGravity(glm::vec2(0.0f, -1.0f));
 	setparticles.SetSwingStrength(0.02f);
 	setparticles.SetLifetime(3000);
 	setparticles.Begin();
@@ -78,7 +78,7 @@ ClassicGameRenderer::ClassicGameRenderer() :
 	setsparks.SetAdditive(true);
 	setsparks.SetDeceleration(0.95f);
 	setsparks.SetFadeAlpha(-3.0f);
-	setsparks.SetGravity(Vec2(0.0f, -1.0f));
+	setsparks.SetGravity(glm::vec2(0.0f, -1.0f));
 	setsparks.SetSwingStrength(0.02f);
 	setsparks.SetLifetime(3000);
 	for(int i = 0; i < NUM_SPARK_IMAGES; i++)
@@ -243,10 +243,10 @@ void ClassicGameRenderer::SpawnGateEffectSmall(int startx, int endx)
 
 void ClassicGameRenderer::SpawnGateParticle(int x, int y, int centerx, Color color)
 {
-	Vec2 p(static_cast<float>(x), static_cast<float>(y));
+	glm::vec2 p(static_cast<float>(x), static_cast<float>(y));
 
 	// Random start velocity
-	Vec2 v(Random(-1.5f, 1.5f), Random(0.2f, -1.0f));
+	glm::vec2 v(Random(-1.5f, 1.5f), Random(0.2f, -1.0f));
 
 	// Random alpha
 	float a = Random(0.5f, 2.5f);
@@ -254,7 +254,7 @@ void ClassicGameRenderer::SpawnGateParticle(int x, int y, int centerx, Color col
 	// Meta is used for Swing effect
 	// X = x position to swing about
 	// Y = amount of swing factor
-	Vec2 meta(static_cast<float>(centerx), Random(0.1f, 1.0f));
+	glm::vec2 meta(static_cast<float>(centerx), Random(0.1f, 1.0f));
 
 	// Make the particle
 	gateparticles.Spawn(Particle(p, v, color, a, meta));

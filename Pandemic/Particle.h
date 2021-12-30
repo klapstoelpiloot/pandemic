@@ -1,5 +1,5 @@
 #pragma once
-#include "Vec2.h"
+#include "glm/vec2.hpp"
 #include "Color.h"
 
 struct Particle
@@ -7,14 +7,14 @@ struct Particle
 	// Members
 	int64 born;
 	int image;
-	Vec2 pos;
-	Vec2 vel;
+	glm::vec2 pos;
+	glm::vec2 vel;
 	Color color;
 	float alpha;
-	Vec2 meta;
+	glm::vec2 meta;
 
 	// Constructor
-	Particle(Vec2 position, Vec2 velocity, Color color, Vec2 meta) :
+	Particle(glm::vec2 position, glm::vec2 velocity, Color color, glm::vec2 meta) :
 		born(ch::ToMilliseconds(Clock::now())),
 		image(0),
 		pos(position),
@@ -26,7 +26,7 @@ struct Particle
 	}
 
 	// Constructor
-	Particle(Vec2 position, Vec2 velocity, Color color, float alpha, Vec2 meta) :
+	Particle(glm::vec2 position, glm::vec2 velocity, Color color, float alpha, glm::vec2 meta) :
 		born(ch::ToMilliseconds(Clock::now())),
 		image(0),
 		pos(position),
@@ -38,7 +38,7 @@ struct Particle
 	}
 
 	// Constructor
-	Particle(int imageindex, Vec2 position, Vec2 velocity, Color color, Vec2 meta) :
+	Particle(int imageindex, glm::vec2 position, glm::vec2 velocity, Color color, glm::vec2 meta) :
 		born(ch::ToMilliseconds(Clock::now())),
 		image(imageindex),
 		pos(position),
@@ -50,7 +50,7 @@ struct Particle
 	}
 
 	// Constructor
-	Particle(int imageindex, Vec2 position, Vec2 velocity, Color color, float alpha, Vec2 meta) :
+	Particle(int imageindex, glm::vec2 position, glm::vec2 velocity, Color color, float alpha, glm::vec2 meta) :
 		born(ch::ToMilliseconds(Clock::now())),
 		image(imageindex),
 		pos(position),

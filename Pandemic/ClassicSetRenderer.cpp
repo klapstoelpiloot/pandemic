@@ -1,3 +1,4 @@
+#include <math.h>
 #include "ClassicSetRenderer.h"
 #include "Main.h"
 
@@ -69,14 +70,14 @@ void ClassicSetRenderer::SpawnParticle(Color color, int yoffset)
 	// Spawn position
 	int x = TEXT_POS_X + (Random(0, size.width) - (size.width / 2));
 	int y = TEXT_START_Y + (Random(0, size.height) - (size.height / 2)) - yoffset;
-	Vec2 p(static_cast<float>(x), static_cast<float>(y));
+	glm::vec2 p(static_cast<float>(x), static_cast<float>(y));
 
 	// Random start velocity
-	Vec2 v;
+	glm::vec2 v;
 	if(yoffset == 0)
-		v = Vec2(Random(-3.0f, 3.0f), Random(0.0f, -2.0f));
+		v = glm::vec2(Random(-3.0f, 3.0f), Random(0.0f, -2.0f));
 	else
-		v = Vec2(Random(-0.5f, 0.5f), Random(1.0f, -0.5f));
+		v = glm::vec2(Random(-0.5f, 0.5f), Random(1.0f, -0.5f));
 
 	// Random alpha
 	float a = Random(1.0f, 2.5f);
@@ -84,7 +85,7 @@ void ClassicSetRenderer::SpawnParticle(Color color, int yoffset)
 	// Meta is used for Swing effect
 	// X = x position to swing about
 	// Y = amount of swing factor
-	Vec2 meta(64.0f, Random(0.1f, 1.0f));
+	glm::vec2 meta(64.0f, Random(0.1f, 1.0f));
 
 	// Pixel or spark?
 	if(Random(0, 10) == 0)

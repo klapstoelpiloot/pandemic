@@ -16,7 +16,7 @@ private:
 	bool additive;
 	int64 lasttime;
 	int64 lifetime;
-	Vec2 gravity;
+	glm::vec2 gravity;
 	float fadealpha;
 	float deceleration;
 	float swingstrength;
@@ -27,7 +27,7 @@ public:
 
 	// Properties
 	void SetAdditive(bool renderadditive) { additive = renderadditive; }
-	void SetGravity(Vec2 g) { gravity = Vec2::Mul(g, TIMESTEP_DT); }
+	void SetGravity(glm::vec2 g) { gravity = g * TIMESTEP_DT; }
 	void SetLifetime(int64 milliseconds) { lifetime = milliseconds; }
 	void SetFadeAlpha(float a) { fadealpha = a * TIMESTEP_DT; }
 	void SetDeceleration(float v) { deceleration = v; }
