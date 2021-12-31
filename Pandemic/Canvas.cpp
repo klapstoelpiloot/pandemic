@@ -106,7 +106,7 @@ void Canvas::DrawRectangleBlend(Point p1, Point p2, Color linecolor, Color fillc
 	}
 }
 
-bool Canvas::PrepareImageDraw(Point pos, const Image& img, Rect& imgrect, Rect& drawrect)
+bool Canvas::PrepareImageDraw(Point pos, const IImage& img, Rect& imgrect, Rect& drawrect)
 {
 	if((imgrect.width <= 0) || (imgrect.height <= 0))
 		return false;
@@ -140,7 +140,7 @@ bool Canvas::PrepareImageDraw(Point pos, const Image& img, Rect& imgrect, Rect& 
 	return true;
 }
 
-void Canvas::DrawColorImage(Point pos, const Image& img, Rect imgrect)
+void Canvas::DrawColorImage(Point pos, const IImage& img, Rect imgrect)
 {
 	REQUIRE(img.HasColors());
 
@@ -149,14 +149,15 @@ void Canvas::DrawColorImage(Point pos, const Image& img, Rect imgrect)
 		return;
 
 	// Draw image
+	ColorSampler sampler = img.GetColorSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
-			SetPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+			SetPixel(drawrect.x + x, drawrect.y + y, sampler(imgrect.x + x, imgrect.y + y));
 	}
 }
 
-void Canvas::DrawColorImageBlend(Point pos, const Image& img, Rect imgrect)
+void Canvas::DrawColorImageBlend(Point pos, const IImage& img, Rect imgrect)
 {
 	REQUIRE(img.HasColors());
 
@@ -165,14 +166,15 @@ void Canvas::DrawColorImageBlend(Point pos, const Image& img, Rect imgrect)
 		return;
 
 	// Draw image
+	ColorSampler sampler = img.GetColorSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
-			BlendPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+			BlendPixel(drawrect.x + x, drawrect.y + y, sampler(imgrect.x + x, imgrect.y + y));
 	}
 }
 
-void Canvas::DrawColorImageAdd(Point pos, const Image& img, Rect imgrect)
+void Canvas::DrawColorImageAdd(Point pos, const IImage& img, Rect imgrect)
 {
 	REQUIRE(img.HasColors());
 
@@ -181,14 +183,15 @@ void Canvas::DrawColorImageAdd(Point pos, const Image& img, Rect imgrect)
 		return;
 
 	// Draw image
+	ColorSampler sampler = img.GetColorSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
-			AddPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+			AddPixel(drawrect.x + x, drawrect.y + y, sampler(imgrect.x + x, imgrect.y + y));
 	}
 }
 
-void Canvas::DrawColorImageMask(Point pos, const Image& img, Rect imgrect)
+void Canvas::DrawColorImageMask(Point pos, const IImage& img, Rect imgrect)
 {
 	REQUIRE(img.HasColors());
 
@@ -197,14 +200,15 @@ void Canvas::DrawColorImageMask(Point pos, const Image& img, Rect imgrect)
 		return;
 
 	// Draw image
+	ColorSampler sampler = img.GetColorSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
-			MaskPixel(drawrect.x + x, drawrect.y + y, img.GetColor(imgrect.x + x, imgrect.y + y));
+			MaskPixel(drawrect.x + x, drawrect.y + y, sampler(imgrect.x + x, imgrect.y + y));
 	}
 }
 
-void Canvas::DrawMonoImage(Point pos, const Image& img, Color color, Rect imgrect)
+void Canvas::DrawMonoImage(Point pos, const IImage& img, Color color, Rect imgrect)
 {
 	REQUIRE(img.HasColors() == false);
 
@@ -213,18 +217,19 @@ void Canvas::DrawMonoImage(Point pos, const Image& img, Color color, Rect imgrec
 		return;
 
 	// Draw image
+	MonoSampler sampler = img.GetMonoSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
 		{
 			Color c = color;
-			c.Modulate(img.GetByte(imgrect.x + x, imgrect.y + y));
+			c.Modulate(sampler(imgrect.x + x, imgrect.y + y));
 			SetPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
 }
 
-void Canvas::DrawMonoImageBlend(Point pos, const Image& img, Color color, Rect imgrect)
+void Canvas::DrawMonoImageBlend(Point pos, const IImage& img, Color color, Rect imgrect)
 {
 	REQUIRE(img.HasColors() == false);
 
@@ -234,18 +239,19 @@ void Canvas::DrawMonoImageBlend(Point pos, const Image& img, Color color, Rect i
 
 	// Draw image
 	Color c = color;
+	MonoSampler sampler = img.GetMonoSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
 		{
-			uint imagealpha = static_cast<uint>(img.GetByte(imgrect.x + x, imgrect.y + y));
+			uint imagealpha = static_cast<uint>(sampler(imgrect.x + x, imgrect.y + y));
 			c.a = static_cast<byte>((static_cast<uint>(color.a) * imagealpha) / 255u);
 			BlendPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
 }
 
-void Canvas::DrawMonoImageAdd(Point pos, const Image& img, Color color, Rect imgrect)
+void Canvas::DrawMonoImageAdd(Point pos, const IImage& img, Color color, Rect imgrect)
 {
 	REQUIRE(img.HasColors() == false);
 
@@ -255,18 +261,19 @@ void Canvas::DrawMonoImageAdd(Point pos, const Image& img, Color color, Rect img
 
 	// Draw image
 	Color c = color;
+	MonoSampler sampler = img.GetMonoSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
 		{
-			uint imagealpha = static_cast<uint>(img.GetByte(imgrect.x + x, imgrect.y + y));
+			uint imagealpha = static_cast<uint>(sampler(imgrect.x + x, imgrect.y + y));
 			c.a = static_cast<byte>((static_cast<uint>(color.a) * imagealpha) / 255u);
 			AddPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
 }
 
-void Canvas::DrawMonoImageMask(Point pos, const Image& img, Color color, Rect imgrect)
+void Canvas::DrawMonoImageMask(Point pos, const IImage& img, Color color, Rect imgrect)
 {
 	REQUIRE(img.HasColors() == false);
 
@@ -276,17 +283,18 @@ void Canvas::DrawMonoImageMask(Point pos, const Image& img, Color color, Rect im
 
 	// Draw image
 	Color c = color;
+	MonoSampler sampler = img.GetMonoSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
 		{
-			c.a = img.GetByte(imgrect.x + x, imgrect.y + y);
+			c.a = sampler(imgrect.x + x, imgrect.y + y);
 			MaskPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
 }
 
-void Canvas::DrawMonoTexturedMask(Point pos, const Image& img, const Image& tex, Point texoffset, Rect imgrect)
+void Canvas::DrawMonoTexturedMask(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect)
 {
 	REQUIRE(img.HasColors() == false);
 	REQUIRE(tex.HasColors() == true);
@@ -301,20 +309,22 @@ void Canvas::DrawMonoTexturedMask(Point pos, const Image& img, const Image& tex,
 	texoffset.y += imgrect.y - origimgrect.y;
 
 	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
 		{
 			int tx = (texoffset.x + x) % tex.Width();
 			int ty = (texoffset.y + y) % tex.Height();
-			Color c = tex.GetColor(tx, ty);
-			c.a = img.GetByte(imgrect.x + x, imgrect.y + y);
+			Color c = texsampler(tx, ty);
+			c.a = imgsampler(imgrect.x + x, imgrect.y + y);
 			MaskPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
 }
 
-void Canvas::DrawMonoTexturedAdd(Point pos, const Image& img, const Image& tex, Point texoffset, Rect imgrect)
+void Canvas::DrawMonoTexturedAdd(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect)
 {
 	REQUIRE(img.HasColors() == false);
 	REQUIRE(tex.HasColors() == true);
@@ -329,14 +339,16 @@ void Canvas::DrawMonoTexturedAdd(Point pos, const Image& img, const Image& tex, 
 	texoffset.y += imgrect.y - origimgrect.y;
 
 	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
 	for(int y = 0; y <= drawrect.height; y++)
 	{
 		for(int x = 0; x <= drawrect.width; x++)
 		{
 			int tx = (texoffset.x + x) % tex.Width();
 			int ty = (texoffset.y + y) % tex.Height();
-			Color c = tex.GetColor(tx, ty);
-			c.a = img.GetByte(imgrect.x + x, imgrect.y + y);
+			Color c = texsampler(tx, ty);
+			c.a = imgsampler(imgrect.x + x, imgrect.y + y);
 			AddPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}

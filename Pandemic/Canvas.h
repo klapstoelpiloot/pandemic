@@ -3,7 +3,7 @@
 #include "Image.h"
 #include "Rect.h"
 
-class Canvas final
+class Canvas final : public IImage
 {
 private:
 
@@ -13,7 +13,7 @@ private:
 	// Helper method to prepare for image drawing. This clips input coordinates, modifies the image rect and
 	// determines the drawing rect. Returns false when the image is completely outside the display,
 	// otherwise returns true.
-	bool PrepareImageDraw(Point pos, const Image& img, Rect& imgrect, Rect& drawrect);
+	bool PrepareImageDraw(Point pos, const IImage& img, Rect& imgrect, Rect& drawrect);
 
 public:
 
@@ -23,6 +23,16 @@ public:
 
 	// Direct buffer access
 	inline const Color* GetBuffer() const { return renderbuffer; }
+
+	// IImage implementation
+	virtual bool HasColors() const override final { return true; }
+	virtual int Width() const override final { return DISPLAY_WIDTH; }
+	virtual int Height() const override final { return DISPLAY_HEIGHT; }
+	virtual Size GetSize() const override final { return Size(DISPLAY_WIDTH, DISPLAY_HEIGHT); }
+	virtual const byte* ByteData() const override final { return reinterpret_cast<const byte*>(renderbuffer); }
+	virtual const Color* ColorData() const override final { return renderbuffer; }
+	virtual MonoSampler GetMonoSampler() const override final { NOT_SUPPORTED; return MonoSampler(nullptr, 0); }
+	virtual ColorSampler GetColorSampler() const override final { return ColorSampler(renderbuffer, DISPLAY_WIDTH); }
 
 	// Rasterizing methods
 	void Clear(Color color);
@@ -34,24 +44,24 @@ public:
 	inline void MaskPixel(int x, int y, Color c) { renderbuffer[y * DISPLAY_WIDTH + x].Mask(c); }
 	void DrawRectangle(Point p1, Point p2, Color linecolor, Color fillcolor);
 	void DrawRectangleBlend(Point p1, Point p2, Color linecolor, Color fillcolor);
-	void DrawColorImage(Point pos, const Image& img) { DrawColorImage(pos, img, Rect(Point(0, 0), img.GetSize())); }
-	void DrawColorImage(Point pos, const Image& img, Rect imgrect);
-	void DrawColorImageBlend(Point pos, const Image& img) { DrawColorImageBlend(pos, img, Rect(Point(0, 0), img.GetSize())); }
-	void DrawColorImageBlend(Point pos, const Image& img, Rect imgrect);
-	void DrawColorImageAdd(Point pos, const Image& img) { DrawColorImageAdd(pos, img, Rect(Point(0, 0), img.GetSize())); }
-	void DrawColorImageAdd(Point pos, const Image& img, Rect imgrect);
-	void DrawColorImageMask(Point pos, const Image& img) { DrawColorImageMask(pos, img, Rect(Point(0, 0), img.GetSize())); }
-	void DrawColorImageMask(Point pos, const Image& img, Rect imgrect);
-	void DrawMonoImage(Point pos, const Image& img, Color color) { DrawMonoImage(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
-	void DrawMonoImage(Point pos, const Image& img, Color color, Rect imgrect);
-	void DrawMonoImageBlend(Point pos, const Image& img, Color color) { DrawMonoImageBlend(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
-	void DrawMonoImageBlend(Point pos, const Image& img, Color color, Rect imgrect);
-	void DrawMonoImageAdd(Point pos, const Image& img, Color color) { DrawMonoImageAdd(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
-	void DrawMonoImageAdd(Point pos, const Image& img, Color color, Rect imgrect);
-	void DrawMonoImageMask(Point pos, const Image& img, Color color) { DrawMonoImageMask(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
-	void DrawMonoImageMask(Point pos, const Image& img, Color color, Rect imgrect);
-	void DrawMonoTexturedMask(Point pos, const Image& img, const Image& tex, Point texoffset = Point()) { DrawMonoTexturedMask(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
-	void DrawMonoTexturedMask(Point pos, const Image& img, const Image& tex, Point texoffset, Rect imgrect);
-	void DrawMonoTexturedAdd(Point pos, const Image& img, const Image& tex, Point texoffset = Point()) { DrawMonoTexturedAdd(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
-	void DrawMonoTexturedAdd(Point pos, const Image& img, const Image& tex, Point texoffset, Rect imgrect);
+	void DrawColorImage(Point pos, const IImage& img) { DrawColorImage(pos, img, Rect(Point(0, 0), img.GetSize())); }
+	void DrawColorImage(Point pos, const IImage& img, Rect imgrect);
+	void DrawColorImageBlend(Point pos, const IImage& img) { DrawColorImageBlend(pos, img, Rect(Point(0, 0), img.GetSize())); }
+	void DrawColorImageBlend(Point pos, const IImage& img, Rect imgrect);
+	void DrawColorImageAdd(Point pos, const IImage& img) { DrawColorImageAdd(pos, img, Rect(Point(0, 0), img.GetSize())); }
+	void DrawColorImageAdd(Point pos, const IImage& img, Rect imgrect);
+	void DrawColorImageMask(Point pos, const IImage& img) { DrawColorImageMask(pos, img, Rect(Point(0, 0), img.GetSize())); }
+	void DrawColorImageMask(Point pos, const IImage& img, Rect imgrect);
+	void DrawMonoImage(Point pos, const IImage& img, Color color) { DrawMonoImage(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoImage(Point pos, const IImage& img, Color color, Rect imgrect);
+	void DrawMonoImageBlend(Point pos, const IImage& img, Color color) { DrawMonoImageBlend(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoImageBlend(Point pos, const IImage& img, Color color, Rect imgrect);
+	void DrawMonoImageAdd(Point pos, const IImage& img, Color color) { DrawMonoImageAdd(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoImageAdd(Point pos, const IImage& img, Color color, Rect imgrect);
+	void DrawMonoImageMask(Point pos, const IImage& img, Color color) { DrawMonoImageMask(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoImageMask(Point pos, const IImage& img, Color color, Rect imgrect);
+	void DrawMonoTexturedMask(Point pos, const IImage& img, const IImage& tex, Point texoffset = Point()) { DrawMonoTexturedMask(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoTexturedMask(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect);
+	void DrawMonoTexturedAdd(Point pos, const IImage& img, const IImage& tex, Point texoffset = Point()) { DrawMonoTexturedAdd(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoTexturedAdd(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect);
 };

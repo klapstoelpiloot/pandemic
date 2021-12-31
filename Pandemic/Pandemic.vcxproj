@@ -424,11 +424,13 @@
     <ClInclude Include="HighscoreManager.h" />
     <ClInclude Include="HighscoreRenderer.h" />
     <ClInclude Include="HighscoreState.h" />
+    <ClInclude Include="IImage.h" />
     <ClInclude Include="IMessageHandler.h" />
     <ClInclude Include="IntermissionRenderer.h" />
     <ClInclude Include="IntermissionState.h" />
     <ClInclude Include="IOModule.pb.h" />
     <ClInclude Include="lodepng.h" />
+    <ClInclude Include="Samplers.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleEffect.h" />
     <ClInclude Include="pb.h" />

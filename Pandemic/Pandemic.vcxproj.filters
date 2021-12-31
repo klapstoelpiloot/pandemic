@@ -1379,6 +1379,12 @@
     <ClInclude Include="ScoresPeriod.h">
       <Filter>Highscores</Filter>
     </ClInclude>
+    <ClInclude Include="IImage.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Samplers.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="String.natvis">
