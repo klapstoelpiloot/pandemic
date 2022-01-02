@@ -19,7 +19,7 @@
 #define KEY_FLASH_INTERVAL			400
 #define KEY_TEXT_COLOR				Color(200, 200, 200)
 #define TITLE_COLOR					Color(255, 25, 0)
-#define VORONOI_COLOR				Color(255, 255, 255)
+#define VORONOI_COLOR				Color(255, 25, 0)
 #define SPLASH_FADE_DISTANCE		3
 
 // List of credits to display below the title
