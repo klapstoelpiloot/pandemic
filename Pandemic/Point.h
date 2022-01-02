@@ -12,6 +12,7 @@ public:
 	// Constructors
 	Point() { x = 0; y = 0; }
 	Point(int _x, int _y) { x = _x; y = _y; }
+	Point(const std::array<int, 2U>& p) { x = p[0]; y = p[1]; }
 
 	// Methods
 	inline Point Offset(int movex, int movey) const

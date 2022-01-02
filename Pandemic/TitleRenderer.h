@@ -9,20 +9,26 @@ class TitleRenderer final : public virtual IRenderer
 private:
 
 	// Resources
-	const Image& titleimage;
+	const Image& mulimage;
+	const Image& addimage;
+	Canvas voronoi;
 	Text pressbuttontext;
 	Text creditstext;
+	TweenFloat splashdistance;
+	vector<Point> splashpoints;
 
 	// State
 	TimePoint titlestarttime;
 	TimePoint creditstarttime;
+	TimePoint laststeptime;
 	bool showkeyinfo;
 	bool asbackground;
 	uint creditindex;
 	std::function<void()> playtitlemusic;
+	int temporalditheroffset;
 
 	// Methods
-	void RenderTitleColumn(Canvas& canvas, int x, int img_y, int img_len, int canvas_y, int canvas_len, byte mod);
+	void SetupSplashes();
 
 public:
 

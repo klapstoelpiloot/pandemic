@@ -1,33 +1,59 @@
 #include <math.h>
-#include "ClassicSetRenderer.h"
+#include "SetAnimation.h"
 #include "Main.h"
 
 #define TEXT_POS_X			64
 #define TEXT_START_Y		30
 #define TEXT_MOVE_HEIGHT	33
-#define SHOW_DURATION		1600
+#define SHOW_DURATION		ch::milliseconds(1600)
 #define INITIAL_SPAWNS		400
 #define SPAWNS_PER_FRAME	2
 #define MOVE_TIME_DIV		500
 #define NUM_SPARK_IMAGES	3
 
-ClassicSetRenderer::ClassicSetRenderer(ParticleEffect& particleeffect, ParticleEffect& sparkseffect) :
-	particles(particleeffect),
-	sparks(sparkseffect),
+SetAnimation::SetAnimation(ParticleOverlayRenderer& particlesoverlay) :
+	particlesoverlay(particlesoverlay),
 	settext(Main::GetResources().BoldBitsLarge(), HorizontalAlign::Center, VerticalAlign::Top),
 	texture(Main::GetResources().GetImage("yellow22d.dds")),
-	visible(false)
+	index(0)
 {
+	particles.SetAdditive(true);
+	particles.SetDeceleration(0.95f);
+	particles.SetFadeAlpha(-3.0f);
+	particles.SetGravity(glm::vec2(0.0f, -1.0f));
+	particles.SetSwingStrength(0.02f);
+	particles.SetLifetime(3000);
+	particles.Begin();
+
+	sparks.SetAdditive(true);
+	sparks.SetDeceleration(0.95f);
+	sparks.SetFadeAlpha(-3.0f);
+	sparks.SetGravity(glm::vec2(0.0f, -1.0f));
+	sparks.SetSwingStrength(0.02f);
+	sparks.SetLifetime(3000);
+	for(int i = 0; i < NUM_SPARK_IMAGES; i++)
+		sparks.AddImage(&(Main::GetResources().GetImage("spark" + String::From(i + 1) + ".dds")));
+	sparks.Begin();
+
+	particlesoverlay.RegisterParticleEffect(&particles);
+	particlesoverlay.RegisterParticleEffect(&sparks);
 }
 
-void ClassicSetRenderer::Render(Canvas& canvas)
+SetAnimation::~SetAnimation()
+{
+	particlesoverlay.UnregisterParticleEffect(&particles);
+	particlesoverlay.UnregisterParticleEffect(&sparks);
+}
+
+void SetAnimation::Render(Canvas& canvas)
 {
 	TimePoint t = Clock::now();
-
-	// Update visibility
-	visible = (t < (starttime + ch::milliseconds(SHOW_DURATION)));
-	if(!visible)
+	if(!ch::IsTimeSet(starttime) || (t > (starttime + SHOW_DURATION)))
+	{
+		// Animation ended
+		starttime = TimePoint();
 		return;
+	}
 
 	float offset = std::sin(static_cast<float>(ch::ToMilliseconds(t - starttime)) / MOVE_TIME_DIV) * TEXT_MOVE_HEIGHT;
 	int offsetint = static_cast<int>(std::round(offset));
@@ -42,16 +68,15 @@ void ClassicSetRenderer::Render(Canvas& canvas)
 	// Draw set text
 	Point pos(TEXT_POS_X, TEXT_START_Y - offsetint);
 	settext.DrawOutlineMask(canvas, pos, 2, BLACK);
-	particles.Render(canvas);
 	settext.DrawTexturedMask(canvas, pos, texture);
-	sparks.Render(canvas);
 }
 
-void ClassicSetRenderer::ShowSet(int index)
+void SetAnimation::Start()
 {
+	Main::GetResources().GetSound("set.wav").Play();
+
 	settext.SetText("SET  " + String::From(index));
 	starttime = Clock::now();
-	visible = true;
 
 	// Spawn some particles
 	particles.Begin();
@@ -63,7 +88,7 @@ void ClassicSetRenderer::ShowSet(int index)
 	}
 }
 
-void ClassicSetRenderer::SpawnParticle(Color color, int yoffset)
+void SetAnimation::SpawnParticle(Color color, int yoffset)
 {
 	const Size& size = settext.GetTextSize();
 

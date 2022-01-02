@@ -48,14 +48,16 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Assert.cpp" />
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Benchmarks.cpp" />
     <ClCompile Include="ButtonLEDsController.cpp" />
-    <ClCompile Include="ClassicGameRenderer.cpp" />
-    <ClCompile Include="ClassicSetRenderer.cpp" />
+    <ClCompile Include="ClassicHUDRenderer.cpp" />
+    <ClCompile Include="GreatShotAnimation.cpp" />
+    <ClCompile Include="HotShotAnimation.cpp" />
+    <ClCompile Include="ParticleOverlayRenderer.cpp" />
+    <ClCompile Include="SetAnimation.cpp" />
     <ClCompile Include="CRC32.cpp" />
     <ClCompile Include="EnterNameRenderer.cpp" />
     <ClCompile Include="EnterNameState.cpp" />
@@ -116,18 +118,21 @@
     <ClCompile Include="TomlParser.cpp" />
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="VerticalMenuRenderer.cpp" />
+    <ClCompile Include="Voronoi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Assert.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Benchmarks.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonLEDsController.h" />
-    <ClInclude Include="ClassicGameRenderer.h" />
-    <ClInclude Include="ClassicSetRenderer.h" />
+    <ClInclude Include="ClassicHUDRenderer.h" />
+    <ClInclude Include="GreatShotAnimation.h" />
+    <ClInclude Include="HotShotAnimation.h" />
+    <ClInclude Include="ParticleOverlayRenderer.h" />
+    <ClInclude Include="SetAnimation.h" />
     <ClInclude Include="CRC32.h" />
     <ClInclude Include="cxxopts.hpp" />
     <ClInclude Include="EnterNameRenderer.h" />
@@ -424,6 +429,7 @@
     <ClInclude Include="HighscoreManager.h" />
     <ClInclude Include="HighscoreRenderer.h" />
     <ClInclude Include="HighscoreState.h" />
+    <ClInclude Include="IAnimationRenderer.h" />
     <ClInclude Include="IImage.h" />
     <ClInclude Include="IMessageHandler.h" />
     <ClInclude Include="IntermissionRenderer.h" />
@@ -490,7 +496,16 @@
     <ClInclude Include="TitleRenderer.h" />
     <ClInclude Include="TomlParser.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="tweeny\dispatcher.h" />
+    <ClInclude Include="tweeny\easing.h" />
+    <ClInclude Include="tweeny\easingresolve.h" />
+    <ClInclude Include="tweeny\int2type.h" />
+    <ClInclude Include="tweeny\tween.h" />
+    <ClInclude Include="tweeny\tweenpoint.h" />
+    <ClInclude Include="tweeny\tweentraits.h" />
+    <ClInclude Include="tweeny\tweeny.h" />
     <ClInclude Include="VerticalMenuRenderer.h" />
+    <ClInclude Include="Voronoi.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="String.natvis">
@@ -640,6 +655,12 @@
       <RemoteCopyToOutputDir Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</RemoteCopyToOutputDir>
       <RemoteCopyToOutputDir Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</RemoteCopyToOutputDir>
     </None>
+    <None Include="tweeny\tween.tcc">
+      <FileType>CppClass</FileType>
+    </None>
+    <None Include="tweeny\tweenone.tcc" />
+    <None Include="tweeny\tweenpoint.tcc" />
+    <None Include="tweeny\tweeny.tcc" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>

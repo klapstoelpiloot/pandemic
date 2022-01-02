@@ -37,7 +37,7 @@ void FinishRenderer::Render(Canvas& canvas)
 	if(ch::IsTimeSet(nextsteptime))
 	{
 		// Step time forward and scroll
-		if(Clock::now() >= nextsteptime)
+		while(Clock::now() >= nextsteptime)
 		{
 			scrollspeed += SCROLL_SPEED;
 			scrollpos += scrollspeed;

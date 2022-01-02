@@ -1,4 +1,4 @@
-#include "ClassicGameRenderer.h"
+#include "ClassicHUDRenderer.h"
 #include "Main.h"
 
 // Positions/colors/settings
@@ -29,10 +29,11 @@
 #define COUNTERS_COLOR		WHITE
 #define COUNTERS_OUTLINE	BLACK
 #define NUM_SPARK_IMAGES	3
+#define FADE_OUT_DURATION	ch::milliseconds(200)
 
 String GATE_NUMBERS[] = { "2", "3", "4", "1" };
 
-ClassicGameRenderer::ClassicGameRenderer() :
+ClassicHUDRenderer::ClassicHUDRenderer(ParticleOverlayRenderer& particlesoverlay) :
 	round(Main::GetResources().GetFont("pixel7.fnt"), HorizontalAlign::Left, VerticalAlign::Middle),
 	score(Main::GetResources().GetFont("pixel7.fnt"), HorizontalAlign::Right, VerticalAlign::Middle),
 	pucks(Main::GetResources().GetFont("pixel7.fnt"), HorizontalAlign::Center, VerticalAlign::Middle),
@@ -40,8 +41,7 @@ ClassicGameRenderer::ClassicGameRenderer() :
 	scorelabel(Main::GetResources().Smallest(), HorizontalAlign::Right, VerticalAlign::Top),
 	puckslabel(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Top),
 	texture(Main::GetResources().GetImage("yellow12.dds")),
-	gaterequired{ {false, false, false, false} },
-	setrenderer(setparticles, setsparks)
+	gaterequired{ {false, false, false, false} }
 {
 	for(uint i = 0; i < gatenumbers.size(); i++)
 	{
@@ -66,90 +66,73 @@ ClassicGameRenderer::ClassicGameRenderer() :
 	gateparticles.SetSwingStrength(0.05f);
 	gateparticles.SetLifetime(3000);
 	gateparticles.Begin();
-
-	setparticles.SetAdditive(true);
-	setparticles.SetDeceleration(0.95f);
-	setparticles.SetFadeAlpha(-3.0f);
-	setparticles.SetGravity(glm::vec2(0.0f, -1.0f));
-	setparticles.SetSwingStrength(0.02f);
-	setparticles.SetLifetime(3000);
-	setparticles.Begin();
-
-	setsparks.SetAdditive(true);
-	setsparks.SetDeceleration(0.95f);
-	setsparks.SetFadeAlpha(-3.0f);
-	setsparks.SetGravity(glm::vec2(0.0f, -1.0f));
-	setsparks.SetSwingStrength(0.02f);
-	setsparks.SetLifetime(3000);
-	for(int i = 0; i < NUM_SPARK_IMAGES; i++)
-		setsparks.AddImage(&(Main::GetResources().GetImage("spark" + String::From(i + 1) + ".dds")));
-	setsparks.Begin();
+	particlesoverlay.RegisterParticleEffect(&gateparticles);
 }
 
-void ClassicGameRenderer::Render(Canvas& canvas)
+void ClassicHUDRenderer::Render(Canvas& canvas)
 {
-	// If a set animation is being played, then render only that
-	setrenderer.Render(canvas);
-	if(setrenderer.IsVisible())
-		return;
+	TimePoint t = Clock::now();
+	if(!ch::IsTimeSet(fadeoutstart) || (t < (fadeoutstart + FADE_OUT_DURATION)))
+	{
+		byte alpha;
+		if(ch::IsTimeSet(fadeoutstart))
+		{
+			alpha = static_cast<byte>(255.0f - std::clamp((static_cast<float>(ch::ToMilliseconds(t - fadeoutstart)) / static_cast<float>(FADE_OUT_DURATION.count())) * 255.0f, 0.0f, 255.0f));
+		}
+		else
+		{
+			alpha = 255;
+		}
 
-	// Determine gate flash color
-	bool gateflashbright = (((ToMilliseconds(Clock::now()) / GATE_FLASH_INTERVAL) % 2) == 0);
-	Color gateflashcolor = gateflashbright ? GATE_FLASH_COLOR1 : GATE_FLASH_COLOR2;
-	Color gate1color = gaterequired[0] ? gateflashcolor : GATE_NORMAL_COLOR;
-	Color gate2color = gaterequired[1] ? gateflashcolor : GATE_NORMAL_COLOR;
-	Color gate3color = gaterequired[2] ? gateflashcolor : GATE_NORMAL_COLOR;
-	Color gate4color = gaterequired[3] ? gateflashcolor : GATE_NORMAL_COLOR;
+		// Determine gate flash color
+		bool gateflashbright = (((ToMilliseconds(Clock::now()) / GATE_FLASH_INTERVAL) % 2) == 0);
+		Color gateflashcolor = gateflashbright ? GATE_FLASH_COLOR1 : GATE_FLASH_COLOR2;
+		Color gate1color = gaterequired[0] ? gateflashcolor : GATE_NORMAL_COLOR;
+		Color gate2color = gaterequired[1] ? gateflashcolor : GATE_NORMAL_COLOR;
+		Color gate3color = gaterequired[2] ? gateflashcolor : GATE_NORMAL_COLOR;
+		Color gate4color = gaterequired[3] ? gateflashcolor : GATE_NORMAL_COLOR;
 
-	// Draw lines above the gates
-	DrawGateLine(canvas, GATE1_START, GATE1_END, gate1color);
-	DrawGateLine(canvas, GATE2_START, GATE2_END, gate2color);
-	DrawGateLine(canvas, GATE3_START, GATE3_END, gate3color);
-	DrawGateLine(canvas, GATE4_START, GATE4_END, gate4color);
+		// Draw lines above the gates
+		DrawGateLine(canvas, GATE1_START, GATE1_END, Color(gate1color, alpha));
+		DrawGateLine(canvas, GATE2_START, GATE2_END, Color(gate2color, alpha));
+		DrawGateLine(canvas, GATE3_START, GATE3_END, Color(gate3color, alpha));
+		DrawGateLine(canvas, GATE4_START, GATE4_END, Color(gate4color, alpha));
 
-	// Draw gate numbers
-	gatenumbers[0].DrawOutlineMask(canvas, Point((GATE1_START + GATE1_END) / 2, GATE_NUMBER_Y), 1, GATE_OUTLINE);
-	gatenumbers[1].DrawOutlineMask(canvas, Point((GATE2_START + GATE2_END) / 2, GATE_NUMBER_Y), 1, GATE_OUTLINE);
-	gatenumbers[2].DrawOutlineMask(canvas, Point((GATE3_START + GATE3_END) / 2, GATE_NUMBER_Y), 1, GATE_OUTLINE);
-	gatenumbers[3].DrawOutlineMask(canvas, Point((GATE4_START + GATE4_END) / 2, GATE_NUMBER_Y), 1, GATE_OUTLINE);
-	gatenumbers[0].DrawMask(canvas, Point((GATE1_START + GATE1_END) / 2, GATE_NUMBER_Y), gate1color);
-	gatenumbers[1].DrawMask(canvas, Point((GATE2_START + GATE2_END) / 2, GATE_NUMBER_Y), gate2color);
-	gatenumbers[2].DrawMask(canvas, Point((GATE3_START + GATE3_END) / 2, GATE_NUMBER_Y), gate3color);
-	gatenumbers[3].DrawMask(canvas, Point((GATE4_START + GATE4_END) / 2, GATE_NUMBER_Y), gate4color);
+		// Draw gate numbers
+		gatenumbers[0].DrawOutlineBlend(canvas, Point((GATE1_START + GATE1_END) / 2, GATE_NUMBER_Y), 1, Color(GATE_OUTLINE, alpha));
+		gatenumbers[1].DrawOutlineBlend(canvas, Point((GATE2_START + GATE2_END) / 2, GATE_NUMBER_Y), 1, Color(GATE_OUTLINE, alpha));
+		gatenumbers[2].DrawOutlineBlend(canvas, Point((GATE3_START + GATE3_END) / 2, GATE_NUMBER_Y), 1, Color(GATE_OUTLINE, alpha));
+		gatenumbers[3].DrawOutlineBlend(canvas, Point((GATE4_START + GATE4_END) / 2, GATE_NUMBER_Y), 1, Color(GATE_OUTLINE, alpha));
+		gatenumbers[0].DrawBlend(canvas, Point((GATE1_START + GATE1_END) / 2, GATE_NUMBER_Y), Color(gate1color, alpha));
+		gatenumbers[1].DrawBlend(canvas, Point((GATE2_START + GATE2_END) / 2, GATE_NUMBER_Y), Color(gate2color, alpha));
+		gatenumbers[2].DrawBlend(canvas, Point((GATE3_START + GATE3_END) / 2, GATE_NUMBER_Y), Color(gate3color, alpha));
+		gatenumbers[3].DrawBlend(canvas, Point((GATE4_START + GATE4_END) / 2, GATE_NUMBER_Y), Color(gate4color, alpha));
 
-	// Draw counters
-	round.DrawOutlineMask(canvas, Point(ROUND_X, COUNTERS_Y), 1, COUNTERS_OUTLINE);
-	score.DrawOutlineMask(canvas, Point(SCORE_X, COUNTERS_Y), 1, COUNTERS_OUTLINE);
-	pucks.DrawOutlineMask(canvas, Point(PUCKS_X, COUNTERS_Y), 1, COUNTERS_OUTLINE);
-	round.DrawTexturedMask(canvas, Point(ROUND_X, COUNTERS_Y), texture);
-	score.DrawTexturedMask(canvas, Point(SCORE_X, COUNTERS_Y), texture);
-	pucks.DrawTexturedMask(canvas, Point(PUCKS_X, COUNTERS_Y), texture);
+		// Draw counters
+		round.DrawOutlineBlend(canvas, Point(ROUND_X, COUNTERS_Y), 1, Color(COUNTERS_OUTLINE, alpha));
+		score.DrawOutlineBlend(canvas, Point(SCORE_X, COUNTERS_Y), 1, Color(COUNTERS_OUTLINE, alpha));
+		pucks.DrawOutlineBlend(canvas, Point(PUCKS_X, COUNTERS_Y), 1, Color(COUNTERS_OUTLINE, alpha));
+		round.DrawTexturedModBlend(canvas, Point(ROUND_X, COUNTERS_Y), texture, Color(255, 255, 255, alpha));
+		score.DrawTexturedModBlend(canvas, Point(SCORE_X, COUNTERS_Y), texture, Color(255, 255, 255, alpha));
+		pucks.DrawTexturedModBlend(canvas, Point(PUCKS_X, COUNTERS_Y), texture, Color(255, 255, 255, alpha));
 
-	// Draw counter labels
-	roundlabel.DrawOutlineMask(canvas, Point(ROUND_X, LABELS_Y), 1, LABELS_OUTLINE);
-	scorelabel.DrawOutlineMask(canvas, Point(SCORE_X, LABELS_Y), 1, LABELS_OUTLINE);
-	puckslabel.DrawOutlineMask(canvas, Point(PUCKS_X, LABELS_Y), 1, LABELS_OUTLINE);
-	roundlabel.DrawMask(canvas, Point(ROUND_X, LABELS_Y), LABELS_COLOR);
-	scorelabel.DrawMask(canvas, Point(SCORE_X, LABELS_Y), LABELS_COLOR);
-	puckslabel.DrawMask(canvas, Point(PUCKS_X, LABELS_Y), LABELS_COLOR);
-
-	setparticles.Render(canvas);
-	gateparticles.Render(canvas);
-	setsparks.Render(canvas);
+		// Draw counter labels
+		roundlabel.DrawOutlineBlend(canvas, Point(ROUND_X, LABELS_Y), 1, Color(LABELS_OUTLINE, alpha));
+		scorelabel.DrawOutlineBlend(canvas, Point(SCORE_X, LABELS_Y), 1, Color(LABELS_OUTLINE, alpha));
+		puckslabel.DrawOutlineBlend(canvas, Point(PUCKS_X, LABELS_Y), 1, Color(LABELS_OUTLINE, alpha));
+		roundlabel.DrawBlend(canvas, Point(ROUND_X, LABELS_Y), Color(LABELS_COLOR, alpha));
+		scorelabel.DrawBlend(canvas, Point(SCORE_X, LABELS_Y), Color(LABELS_COLOR, alpha));
+		puckslabel.DrawBlend(canvas, Point(PUCKS_X, LABELS_Y), Color(LABELS_COLOR, alpha));
+	}
 }
 
-void ClassicGameRenderer::SetRequiredGates(bool* gates)
+void ClassicHUDRenderer::SetRequiredGates(bool* gates)
 {
 	for(int g = 0; g < GAME_GATES; g++)
 		gaterequired[g] = gates[g];
 }
 
-void ClassicGameRenderer::ShowSetAnimation(int numset)
-{
-	setrenderer.ShowSet(numset);
-}
-
-void ClassicGameRenderer::ScoreRequiredGate(int gate)
+void ClassicHUDRenderer::ScoreRequiredGate(int gate)
 {
 	switch(gate)
 	{
@@ -160,7 +143,7 @@ void ClassicGameRenderer::ScoreRequiredGate(int gate)
 	}
 }
 
-void ClassicGameRenderer::ScoreGate(int gate)
+void ClassicHUDRenderer::ScoreGate(int gate)
 {
 	switch(gate)
 	{
@@ -171,28 +154,28 @@ void ClassicGameRenderer::ScoreGate(int gate)
 	}
 }
 
-void ClassicGameRenderer::DrawGateLine(Canvas& canvas, int startx, int endx, Color color)
+void ClassicHUDRenderer::DrawGateLine(Canvas& canvas, int startx, int endx, Color color)
 {
 	// Outline on the left
-	canvas.SetPixel(startx - 1, 29, GATE_OUTLINE);
+	canvas.BlendPixel(startx - 1, 29, Color(GATE_OUTLINE, color.a));
 	for(int y = 0; y < GATE_LINE_HEIGHT; y++)
-		canvas.SetPixel(startx - 1, 31 - y, GATE_OUTLINE);
+		canvas.BlendPixel(startx - 1, 31 - y, Color(GATE_OUTLINE, color.a));
 
 	// Horizontal lines
 	for(int x = startx; x <= endx; x++)
 	{
-		canvas.SetPixel(x, 29, GATE_OUTLINE);
+		canvas.BlendPixel(x, 29, Color(GATE_OUTLINE, color.a));
 		for(int y = 0; y < GATE_LINE_HEIGHT; y++)
-			canvas.SetPixel(x, 31 - y, color);
+			canvas.BlendPixel(x, 31 - y, color);
 	}
 
 	// Outline on the right
-	canvas.SetPixel(endx + 1, 29, GATE_OUTLINE);
+	canvas.BlendPixel(endx + 1, 29, Color(GATE_OUTLINE, color.a));
 	for(int y = 0; y < GATE_LINE_HEIGHT; y++)
-		canvas.SetPixel(endx + 1, 31 - y, GATE_OUTLINE);
+		canvas.BlendPixel(endx + 1, 31 - y, Color(GATE_OUTLINE, color.a));
 }
 
-void ClassicGameRenderer::SpawnGateEffectBig(int startx, int endx)
+void ClassicHUDRenderer::SpawnGateEffectBig(int startx, int endx)
 {
 	int center = (startx + endx) / 2;
 
@@ -213,7 +196,7 @@ void ClassicGameRenderer::SpawnGateEffectBig(int startx, int endx)
 	}
 }
 
-void ClassicGameRenderer::SpawnGateEffectSmall(int startx, int endx)
+void ClassicHUDRenderer::SpawnGateEffectSmall(int startx, int endx)
 {
 	int center = (startx + endx) / 2;
 	int offset = static_cast<int>(ch::ToMilliseconds(Clock::now()) % EFFECT_SMALL_DIV);
@@ -241,7 +224,7 @@ void ClassicGameRenderer::SpawnGateEffectSmall(int startx, int endx)
 	}
 }
 
-void ClassicGameRenderer::SpawnGateParticle(int x, int y, int centerx, Color color)
+void ClassicHUDRenderer::SpawnGateParticle(int x, int y, int centerx, Color color)
 {
 	glm::vec2 p(static_cast<float>(x), static_cast<float>(y));
 

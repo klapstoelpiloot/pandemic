@@ -12,6 +12,7 @@
 #include "ScreenMeltRenderer.h"
 #include "EnterNameState.h"
 #include "HighscoreState.h"
+#include "GameBackgroundRenderer.h"
 #include "Sound.h"
 
 class GameStateMachine final : public virtual StateMachine, virtual public IMessageHandler

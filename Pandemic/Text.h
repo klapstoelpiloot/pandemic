@@ -65,7 +65,11 @@ public:
 	void DrawAdd(Canvas& canvas, Point pos, Color c) const;
 	void DrawMask(Canvas& canvas, Point pos, Color c) const;
 	void DrawTexturedMask(Canvas& canvas, Point pos, const Image& tex, Point texoffset = Point()) const;
+	void DrawTexturedBlend(Canvas& canvas, Point pos, const Image& tex, Point texoffset = Point()) const;
 	void DrawTexturedAdd(Canvas& canvas, Point pos, const Image& tex, Point texoffset = Point()) const;
+	void DrawTexturedModMask(Canvas& canvas, Point pos, const Image& tex, Color mod, Point texoffset = Point()) const;
+	void DrawTexturedModBlend(Canvas& canvas, Point pos, const Image& tex, Color mod, Point texoffset = Point()) const;
+	void DrawTexturedModAdd(Canvas& canvas, Point pos, const Image& tex, Color mod, Point texoffset = Point()) const;
 
 	// More specialized drawing
 	void DrawShadowMask(Canvas& canvas, Point pos, int distance, Color c) const;

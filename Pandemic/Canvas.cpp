@@ -223,7 +223,7 @@ void Canvas::DrawMonoImage(Point pos, const IImage& img, Color color, Rect imgre
 		for(int x = 0; x <= drawrect.width; x++)
 		{
 			Color c = color;
-			c.Modulate(sampler(imgrect.x + x, imgrect.y + y));
+			c.ModulateRGBA(sampler(imgrect.x + x, imgrect.y + y));
 			SetPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
@@ -317,9 +317,37 @@ void Canvas::DrawMonoTexturedMask(Point pos, const IImage& img, const IImage& te
 		{
 			int tx = (texoffset.x + x) % tex.Width();
 			int ty = (texoffset.y + y) % tex.Height();
-			Color c = texsampler(tx, ty);
-			c.a = imgsampler(imgrect.x + x, imgrect.y + y);
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
 			MaskPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoTexturedBlend(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
+			BlendPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
 }
@@ -347,8 +375,97 @@ void Canvas::DrawMonoTexturedAdd(Point pos, const IImage& img, const IImage& tex
 		{
 			int tx = (texoffset.x + x) % tex.Width();
 			int ty = (texoffset.y + y) % tex.Height();
-			Color c = texsampler(tx, ty);
-			c.a = imgsampler(imgrect.x + x, imgrect.y + y);
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
+			AddPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoTexturedModMask(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
+			c.ModulateRGBA(mod);
+			MaskPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoTexturedModBlend(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
+			c.ModulateRGBA(mod);
+			BlendPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoTexturedModAdd(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
+			c.ModulateRGBA(mod);
 			AddPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}

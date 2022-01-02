@@ -4,7 +4,7 @@
 #include "Size.h"
 #include "IImage.h"
 
-class Image final : public IImage
+class Image final : public virtual IImage
 {
 private:
 

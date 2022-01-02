@@ -1,8 +1,12 @@
 #pragma once
 #include "IState.h"
 #include "IMessageHandler.h"
-#include "ClassicGameRenderer.h"
+#include "ParticleOverlayRenderer.h"
+#include "ClassicHUDRenderer.h"
 #include "RemovePuckRenderer.h"
+#include "SetAnimation.h"
+#include "GreatShotAnimation.h"
+#include "HotShotAnimation.h"
 
 class GameStateMachine;
 
@@ -13,12 +17,21 @@ private:
 
 	// Members
 	GameStateMachine* statemachine;
-	ClassicGameRenderer gamerenderer;
+	ParticleOverlayRenderer particlesoverlay;
+	ClassicHUDRenderer hud;
+	SetAnimation setanimation;
+	GreatShotAnimation greatshotanimation;
+	HotShotAnimation hotshotanimation;
+	vector<IAnimationRenderer*> comboanimations;
+	std::queue<IAnimationRenderer*> aniqueue;
 	TimePoint roundfinishtime;
 	TimePoint throwfinishtime;
-	TimePoint complimenttime;
+	TimePoint anistarttime;
+	bool showinganimations;
 	bool scoringenabled;
-	int complimentchance;
+	bool throwcomboscored;
+	bool easycombos;
+	int combocount;
 
 	// Timing
 	int slidetimeout;
@@ -28,6 +41,7 @@ private:
 	void UpdateDisplay();
 	void PlayShotSound();
 	void KillShotSounds();
+	void CheckComboAchievement();
 
 public:
 
