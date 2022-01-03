@@ -9,21 +9,18 @@
 
 #define TITLE_START_TIME			500
 #define TITLE_FADE_DURATION			4000
-#define TITLE_STRETCH_SPEED			20		// Milliseconds per pixel
-#define PROGRESSBAR_FADE_TIME		500		// From title start time
 #define CREDIT_START_TIME			2000	// From title start time
 #define CREDIT_FADE_IN_DURATION		500
 #define CREDIT_FADE_SHOW_DURATION	2000
 #define CREDIT_FADE_OUT_DURATION	500
 #define CREDIT_TEXT_COLOR			Color(120, 120, 120)
-#define KEY_FLASH_INTERVAL			400
 #define KEY_TEXT_COLOR				Color(200, 200, 200)
 #define TITLE_COLOR					Color(255, 25, 0)
 #define VORONOI_COLOR				Color(255, 25, 0)
 #define SPLASH_FADE_DISTANCE		3
 
 // List of credits to display below the title
-vector<String> CREDITS { "BY PASCAL VAN DER HEIDEN", "MUSIC BY JOHN S. WEEKLEY" };
+vector<String> CREDITS { "BY PASCAL VAN DER HEIDEN", "W W W . C O D E I M P . C O M", "MUSIC BY JOHN S. WEEKLEY" };
 
 TitleRenderer::TitleRenderer() :
 	mulimage(Main::GetResources().GetImage("title_mul.dds")),
@@ -32,7 +29,10 @@ TitleRenderer::TitleRenderer() :
 	creditstext(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
 	showkeyinfo(false),
 	asbackground(false),
-	creditindex(0)
+	creditindex(0),
+	playtitlemusic(nullptr),
+	temporalditheroffset(0),
+	keyflashstate(false)
 {
 	voronoi.Clear(BLACK);
 }
@@ -80,6 +80,10 @@ void TitleRenderer::Render(Canvas& canvas)
 	if(now < titlestarttime)
 		return;
 
+	// Play/repeat the title music
+	if(playtitlemusic)
+		playtitlemusic();
+
 	// Render the voronoi
 	float timesec = static_cast<float>(ch::ToMilliseconds(now - titlestarttime)) / 1000.0f;
 	temporalditheroffset++;
@@ -97,10 +101,6 @@ void TitleRenderer::Render(Canvas& canvas)
 			}
 		}
 	}
-
-	// Play/repeat the title music
-	if(playtitlemusic)
-		playtitlemusic();
 
 	// Time in milliseconds since the start of animation
 	uint64 t = ch::ToMilliseconds(now - titlestarttime);
@@ -192,7 +192,7 @@ void TitleRenderer::Render(Canvas& canvas)
 		else
 		{
 			// Flash info
-			if(((t / KEY_FLASH_INTERVAL) % 2) == 0)
+			if(keyflashstate)
 			{
 				pressbuttontext.DrawOutlineMask(canvas, Point(64, 34), 1, BLACK);
 				pressbuttontext.DrawMask(canvas, Point(64, 34), KEY_TEXT_COLOR);

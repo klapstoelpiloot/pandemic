@@ -26,6 +26,7 @@ private:
 	uint creditindex;
 	std::function<void()> playtitlemusic;
 	int temporalditheroffset;
+	bool keyflashstate;
 
 	// Methods
 	void SetupSplashes();
@@ -39,4 +40,5 @@ public:
 	virtual void Render(Canvas& canvas) override;
 	void SetBackgroundMode(bool asbackground) { this->asbackground = asbackground; }
 	void SetPlayTitleMusicFunction(std::function<void()> playtitlemusicfunc) { playtitlemusic = playtitlemusicfunc; }
+	void SetKeyFlashState(bool state) { keyflashstate = state; }
 };
