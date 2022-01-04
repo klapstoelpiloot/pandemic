@@ -279,6 +279,9 @@
     <ClCompile Include="Voronoi.cpp">
       <Filter>Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="TextShine.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1435,6 +1438,9 @@
     </ClInclude>
     <ClInclude Include="Voronoi.h">
       <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextShine.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

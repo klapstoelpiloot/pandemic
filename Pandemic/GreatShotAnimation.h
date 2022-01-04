@@ -4,6 +4,7 @@
 #include "ParticleEffect.h"
 #include "IAnimationRenderer.h"
 #include "ParticleOverlayRenderer.h"
+#include "TextShine.h"
 
 class GreatShotAnimation final : public virtual IAnimationRenderer
 {
@@ -14,12 +15,15 @@ private:
 	ParticleEffect particles;
 	Text text1;
 	Text text2;
+	TextShine shine1;
+	TextShine shine2;
 	TweenXY text1pos;
 	TweenXY text2pos;
 	const Image& texture;
 	TimePoint starttime;
 	TimePoint laststeptime;
 	TimePoint lastparticletime;
+	bool shinedone;
 
 public:
 

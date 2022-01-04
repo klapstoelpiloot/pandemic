@@ -59,7 +59,6 @@ void Text::Update()
 	textsize = Size(xpos, font->LineHeight());
 
 	// Adjust offsets for alignment
-	Size offsetadjust;
 	switch(alignh)
 	{
 		case HorizontalAlign::Left: offsetadjust.width = 0; break;
@@ -150,7 +149,7 @@ void Text::DrawMask(Canvas& canvas, Point pos, Color c) const
 	}
 }
 
-void Text::DrawTexturedMask(Canvas& canvas, Point pos, const Image& tex, Point texoffset) const
+void Text::DrawTexturedMask(Canvas& canvas, Point pos, const IImage& tex, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;
@@ -162,7 +161,7 @@ void Text::DrawTexturedMask(Canvas& canvas, Point pos, const Image& tex, Point t
 		canvas.DrawMonoTexturedMask(tc.position.Offset(pos.x, pos.y), img, tex, texoffset, tc.imgrect);
 }
 
-void Text::DrawTexturedBlend(Canvas& canvas, Point pos, const Image& tex, Point texoffset) const
+void Text::DrawTexturedBlend(Canvas& canvas, Point pos, const IImage& tex, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;
@@ -174,7 +173,7 @@ void Text::DrawTexturedBlend(Canvas& canvas, Point pos, const Image& tex, Point 
 		canvas.DrawMonoTexturedBlend(tc.position.Offset(pos.x, pos.y), img, tex, texoffset, tc.imgrect);
 }
 
-void Text::DrawTexturedAdd(Canvas& canvas, Point pos, const Image& tex, Point texoffset) const
+void Text::DrawTexturedAdd(Canvas& canvas, Point pos, const IImage& tex, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;
@@ -186,7 +185,7 @@ void Text::DrawTexturedAdd(Canvas& canvas, Point pos, const Image& tex, Point te
 		canvas.DrawMonoTexturedAdd(tc.position.Offset(pos.x, pos.y), img, tex, texoffset, tc.imgrect);
 }
 
-void Text::DrawTexturedModMask(Canvas& canvas, Point pos, const Image& tex, Color mod, Point texoffset) const
+void Text::DrawTexturedModMask(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;
@@ -198,7 +197,7 @@ void Text::DrawTexturedModMask(Canvas& canvas, Point pos, const Image& tex, Colo
 		canvas.DrawMonoTexturedModMask(tc.position.Offset(pos.x, pos.y), img, tex, mod, texoffset, tc.imgrect);
 }
 
-void Text::DrawTexturedModBlend(Canvas& canvas, Point pos, const Image& tex, Color mod, Point texoffset) const
+void Text::DrawTexturedModBlend(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;
@@ -210,7 +209,7 @@ void Text::DrawTexturedModBlend(Canvas& canvas, Point pos, const Image& tex, Col
 		canvas.DrawMonoTexturedModBlend(tc.position.Offset(pos.x, pos.y), img, tex, mod, texoffset, tc.imgrect);
 }
 
-void Text::DrawTexturedModAdd(Canvas& canvas, Point pos, const Image& tex, Color mod, Point texoffset) const
+void Text::DrawTexturedModAdd(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;

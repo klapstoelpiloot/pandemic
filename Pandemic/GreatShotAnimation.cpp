@@ -6,7 +6,8 @@ GreatShotAnimation::GreatShotAnimation(ParticleOverlayRenderer& particlesoverlay
 	particlesoverlay(particlesoverlay),
 	text1("GREAT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Middle),
 	text2("SHOT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Right, VerticalAlign::Middle),
-	texture(Main::GetResources().GetImage("gray22.dds"))
+	texture(Main::GetResources().GetImage("gray22d.dds")),
+	shinedone(false)
 {
 	particles.SetAdditive(true);
 	particles.SetDeceleration(1.0f);
@@ -27,16 +28,19 @@ void GreatShotAnimation::Start()
 	starttime = Clock::now();
 	laststeptime = Clock::now();
 	lastparticletime = Clock::now();
+	shinedone = false;
 
 	text1pos = tweeny::from(0, -16)
 		.to(0, 16).during(500).via(easing::cubicOut)
 		.wait(200)
-		.to(0, 48).during(500).via(easing::cubicIn);
+		.to(0, 48).during(500).via(easing::cubicIn)
+		.wait(100);
 
 	text2pos = tweeny::from(128, 48)
 		.to(128, 16).during(500).via(easing::cubicOut)
 		.wait(200)
-		.to(128, -16).during(500).via(easing::cubicIn);
+		.to(128, -16).during(500).via(easing::cubicIn)
+		.wait(100);
 }
 
 void GreatShotAnimation::Render(Canvas& canvas)
@@ -47,6 +51,13 @@ void GreatShotAnimation::Render(Canvas& canvas)
 		// Animation ended
 		starttime = TimePoint();
 		return;
+	}
+
+	if(!shinedone && (t > (starttime + ch::milliseconds(400))))
+	{
+		shine1.Begin(text1.GetTextSize());
+		shine2.Begin(text2.GetTextSize());
+		shinedone = true;
 	}
 
 	int dt = static_cast<int>(ch::ToMilliseconds(t - laststeptime));
@@ -61,7 +72,9 @@ void GreatShotAnimation::Render(Canvas& canvas)
 	text2.DrawOutlineMask(canvas, t2pos, 2, BLACK);
 	text1.DrawTexturedMask(canvas, t1pos, texture);
 	text2.DrawTexturedMask(canvas, t2pos, texture);
-
+	shine1.Draw(canvas, text1, t1pos);
+	shine2.Draw(canvas, text2, t2pos);
+	/*
 	while(lastparticletime < t)
 	{
 		// Spawn particles
@@ -75,4 +88,5 @@ void GreatShotAnimation::Render(Canvas& canvas)
 		
 		lastparticletime += ch::milliseconds(20);
 	}
+	*/
 }

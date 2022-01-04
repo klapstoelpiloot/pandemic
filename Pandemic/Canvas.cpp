@@ -111,16 +111,13 @@ bool Canvas::PrepareImageDraw(Point pos, const IImage& img, Rect& imgrect, Rect&
 	if((imgrect.width <= 0) || (imgrect.height <= 0))
 		return false;
 
-	// Determine right-bottom pixel on image
-	Point imgrightbottom = imgrect.RightBottom();
-
 	// Image rectangle valid?
 	REQUIRE(imgrect.x >= 0);
 	REQUIRE(imgrect.y >= 0);
 	REQUIRE(imgrect.x < img.Width());
 	REQUIRE(imgrect.y < img.Height());
-	REQUIRE(imgrightbottom.x < img.Width());
-	REQUIRE(imgrightbottom.y < img.Height());
+	REQUIRE(imgrect.Right() < img.Width());
+	REQUIRE(imgrect.Bottom() < img.Height());
 
 	// Determine right-bottom pixel on target
 	Point lastpos = pos.Offset(imgrect.GetSize()).Offset(-1, -1);

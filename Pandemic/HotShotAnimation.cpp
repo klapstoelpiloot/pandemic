@@ -15,8 +15,8 @@ HotShotAnimation::HotShotAnimation(ParticleOverlayRenderer& particlesoverlay) :
 	particles.SetAdditive(true);
 	particles.SetDeceleration(1.0f);
 	particles.SetFadeAlpha(-2.0f);
-	particles.SetGravity(glm::vec2(0.0f, -0.4f));
-	particles.SetSwingStrength(0.04f);
+	particles.SetGravity(glm::vec2(0.0f, -0.2f));
+	particles.SetSwingStrength(0.005f);
 	particles.SetLifetime(3000);
 	particlesoverlay.RegisterParticleEffect(&particles);
 }
@@ -34,13 +34,13 @@ void HotShotAnimation::Start()
 	lastparticletime = Clock::now();
 	particles.Begin();
 
-	text1pos = tweeny::from(-30, 16)
+	text1pos = tweeny::from(-text1.GetTextSize().width, 16)
 		.to(16, 16).during(300).via(easing::cubicIn);
 
-	text2pos = tweeny::from(200, 16)
-		.wait(300)
+	text2pos = tweeny::from(128 + text2.GetTextSize().width, 16)
+		.wait(200)
 		.to(116, 16).during(300).via(easing::cubicIn)
-		.wait(800);
+		.wait(1000);
 }
 
 void HotShotAnimation::Render(Canvas& canvas)
@@ -97,15 +97,15 @@ void HotShotAnimation::Render(Canvas& canvas)
 
 		int x = t1pos.x + Random(0, text1.GetTextSize().width);
 		int y = Random(6, 22);
-		glm::vec2 meta = glm::vec2(static_cast<float>(x), Random(0.1f, 1.0f));
+		glm::vec2 meta = glm::vec2(static_cast<float>(x) + Random(-2.0f, 2.0f), Random(1.0f, 2.0f));
 		particles.Spawn(Particle(glm::vec2(x, y), glm::vec2(Random(-0.2f, 0.2f), -0.1f), color, 1.0f, meta));
 
 		x = t2pos.x - Random(0, text2.GetTextSize().width);
 		y = Random(6, 22);
-		meta = glm::vec2(static_cast<float>(x), Random(0.1f, 1.0f));
+		meta = glm::vec2(static_cast<float>(x) + Random(-2.0f, 2.0f), Random(1.0f, 2.0f));
 		particles.Spawn(Particle(glm::vec2(x, y), glm::vec2(Random(-0.2f, 0.2f), -0.1f), color, 1.0f, meta));
 
-		lastparticletime += ch::milliseconds(50);
+		lastparticletime += ch::milliseconds(30);
 	}
 }
 

@@ -104,6 +104,7 @@
     <ClCompile Include="MenuStateMachine.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="TextFlasher.cpp" />
+    <ClCompile Include="TextShine.cpp" />
     <ClCompile Include="TopMenuState.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="MenuItemRenderer.cpp" />
@@ -479,6 +480,7 @@
     <ClInclude Include="MenuStateMachine.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="TextFlasher.h" />
+    <ClInclude Include="TextShine.h" />
     <ClInclude Include="TopMenuState.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="MenuItemRenderer.h" />
