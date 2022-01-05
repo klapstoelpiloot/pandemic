@@ -7,6 +7,7 @@
 #include "SetAnimation.h"
 #include "GreatShotAnimation.h"
 #include "HotShotAnimation.h"
+#include "MegaShotAnimation.h"
 
 class GameStateMachine;
 
@@ -22,6 +23,7 @@ private:
 	SetAnimation setanimation;
 	GreatShotAnimation greatshotanimation;
 	HotShotAnimation hotshotanimation;
+	MegaShotAnimation megashotanimation;
 	vector<IAnimationRenderer*> comboanimations;
 	std::queue<IAnimationRenderer*> aniqueue;
 	TimePoint roundfinishtime;

@@ -1,4 +1,6 @@
 #include "Canvas.h"
+#include "lodepng.h"
+#include "File.h"
 
 Canvas::Canvas()
 {
@@ -466,4 +468,11 @@ void Canvas::DrawMonoTexturedModAdd(Point pos, const IImage& img, const IImage& 
 			AddPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
+}
+
+void Canvas::WriteToFile(String filename) const
+{
+	vector<byte> recordbuffer;
+	lodepng::encode(recordbuffer, reinterpret_cast<const unsigned char*>(renderbuffer), DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	lodepng::save_file(recordbuffer, filename.stl());
 }

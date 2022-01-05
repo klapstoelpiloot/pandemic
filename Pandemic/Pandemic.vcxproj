@@ -56,6 +56,7 @@
     <ClCompile Include="ClassicHUDRenderer.cpp" />
     <ClCompile Include="GreatShotAnimation.cpp" />
     <ClCompile Include="HotShotAnimation.cpp" />
+    <ClCompile Include="MegaShotAnimation.cpp" />
     <ClCompile Include="ParticleOverlayRenderer.cpp" />
     <ClCompile Include="SetAnimation.cpp" />
     <ClCompile Include="CRC32.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="ClassicHUDRenderer.h" />
     <ClInclude Include="GreatShotAnimation.h" />
     <ClInclude Include="HotShotAnimation.h" />
+    <ClInclude Include="MegaShotAnimation.h" />
     <ClInclude Include="ParticleOverlayRenderer.h" />
     <ClInclude Include="SetAnimation.h" />
     <ClInclude Include="CRC32.h" />

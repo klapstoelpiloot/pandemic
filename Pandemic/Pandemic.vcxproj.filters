@@ -282,6 +282,9 @@
     <ClCompile Include="TextShine.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="MegaShotAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1441,6 +1444,9 @@
     </ClInclude>
     <ClInclude Include="TextShine.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MegaShotAnimation.h">
+      <Filter>Renderers\Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,7 @@ public:
 	// Rasterizing methods
 	void Clear(Color color);
 	void CopyTo(Canvas& canvas) const { memcpy(canvas.renderbuffer, renderbuffer, sizeof(renderbuffer)); }
+	void WriteToFile(String filename) const;
 	inline void SetPixel(int x, int y, Color c) { renderbuffer[y * DISPLAY_WIDTH + x] = c; }
 	inline Color GetPixel(int x, int y) const { return renderbuffer[y * DISPLAY_WIDTH + x]; }
 	inline void BlendPixel(int x, int y, Color c) { renderbuffer[y * DISPLAY_WIDTH + x].Blend(c); }

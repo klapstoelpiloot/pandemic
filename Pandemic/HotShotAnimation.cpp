@@ -34,12 +34,12 @@ void HotShotAnimation::Start()
 	lastparticletime = Clock::now();
 	particles.Begin();
 
-	text1pos = tweeny::from(-text1.GetTextSize().width, 16)
-		.to(16, 16).during(300).via(easing::cubicIn);
+	text1pos = tweeny::from(-text1.GetTextSize().width, 15)
+		.to(16, 15).during(300).via(easing::cubicIn);
 
-	text2pos = tweeny::from(128 + text2.GetTextSize().width, 16)
+	text2pos = tweeny::from(128 + text2.GetTextSize().width, 15)
 		.wait(200)
-		.to(116, 16).during(300).via(easing::cubicIn)
+		.to(116, 15).during(300).via(easing::cubicIn)
 		.wait(1000);
 }
 
@@ -56,11 +56,8 @@ void HotShotAnimation::Render(Canvas& canvas)
 	int dt = static_cast<int>(ch::ToMilliseconds(t - laststeptime));
 	laststeptime = t;
 
-	text1pos.step(dt);
-	text2pos.step(dt);
-
-	Point t1pos = text1pos.peek();
-	Point t2pos = text2pos.peek();
+	Point t1pos = text1pos.step(dt);
+	Point t2pos = text2pos.step(dt);
 
 	textmask.Clear(Color(0, 0, 0, 0));
 	text1.DrawOutlineMask(textmask, t1pos, 2, BLACK);

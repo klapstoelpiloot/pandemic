@@ -6,12 +6,14 @@ class TextFlasher
 private:
 	
 	TimePoint starttime;
+	TimePoint laststeptime;
+	TweenInt progress;
 
 public:
 
 	// Constructor
 	TextFlasher();
 
-	void Begin();
+	void Begin(int duration = 400, easing::enumerated easing = easing::enumerated::exponentialOut);
 	void Draw(Canvas& canvas, const Text& text, Point pos, int borderwidth);
 };

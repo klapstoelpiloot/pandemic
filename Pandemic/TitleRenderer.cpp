@@ -106,10 +106,9 @@ void TitleRenderer::Render(Canvas& canvas)
 	uint64 t = ch::ToMilliseconds(now - titlestarttime);
 	int dt = static_cast<int>(ch::ToMilliseconds(now - laststeptime));
 	laststeptime = now;
-	splashdistance.step(dt);
+	float splashdistancevalue = splashdistance.step(dt);
 
 	// Draw the title screen
-	float splashdistancevalue = splashdistance.peek();
 	MonoSampler mulsampler = mulimage.GetMonoSampler();
 	MonoSampler addsampler = addimage.GetMonoSampler();
 	for(int y = 0; y < DISPLAY_HEIGHT; y++)

@@ -4,29 +4,29 @@
 #include "ParticleEffect.h"
 #include "IAnimationRenderer.h"
 #include "ParticleOverlayRenderer.h"
-#include "TextShine.h"
+#include "TextFlasher.h"
 
-class GreatShotAnimation final : public virtual IAnimationRenderer
+class MegaShotAnimation final : public virtual IAnimationRenderer
 {
 private:
 
 	// Members
-	Text text1;
-	Text text2;
-	TextShine shine1;
-	TextShine shine2;
-	TweenXY text1pos;
-	TweenXY text2pos;
+	ParticleOverlayRenderer& particlesoverlay;
+	ParticleEffect particles;
+	Canvas tempcanvas;
+	Text text;
+	TweenInt textsize;
+	TextFlasher flasher;
 	const Image& texture;
 	TimePoint starttime;
 	TimePoint laststeptime;
-	TimePoint lastparticletime;
-	bool shinedone;
+	TimePoint nextflashtime;
+	int flashcount;
 
 public:
 
-	GreatShotAnimation(ParticleOverlayRenderer& particlesoverlay);
-	virtual ~GreatShotAnimation();
+	MegaShotAnimation(ParticleOverlayRenderer& particlesoverlay);
+	virtual ~MegaShotAnimation();
 
 	// Methods
 	virtual void Render(Canvas& canvas) override final;
