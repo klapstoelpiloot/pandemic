@@ -285,6 +285,9 @@
     <ClCompile Include="MegaShotAnimation.cpp">
       <Filter>Renderers\Animations</Filter>
     </ClCompile>
+    <ClCompile Include="ImpressiveAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1446,6 +1449,9 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="MegaShotAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpressiveAnimation.h">
       <Filter>Renderers\Animations</Filter>
     </ClInclude>
   </ItemGroup>

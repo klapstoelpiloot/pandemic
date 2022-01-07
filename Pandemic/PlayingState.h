@@ -8,6 +8,7 @@
 #include "GreatShotAnimation.h"
 #include "HotShotAnimation.h"
 #include "MegaShotAnimation.h"
+#include "ImpressiveAnimation.h"
 
 class GameStateMachine;
 
@@ -24,6 +25,7 @@ private:
 	GreatShotAnimation greatshotanimation;
 	HotShotAnimation hotshotanimation;
 	MegaShotAnimation megashotanimation;
+	ImpressiveAnimation impressiveanimation;
 	vector<IAnimationRenderer*> comboanimations;
 	std::queue<IAnimationRenderer*> aniqueue;
 	TimePoint roundfinishtime;

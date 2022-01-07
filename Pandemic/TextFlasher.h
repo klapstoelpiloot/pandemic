@@ -7,7 +7,7 @@ private:
 	
 	TimePoint starttime;
 	TimePoint laststeptime;
-	TweenInt progress;
+	TweenFloat progress;
 
 public:
 

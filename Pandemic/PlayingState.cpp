@@ -13,6 +13,7 @@ PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	greatshotanimation(particlesoverlay),
 	hotshotanimation(particlesoverlay),
 	megashotanimation(particlesoverlay),
+	impressiveanimation(particlesoverlay),
 	showinganimations(false),
 	scoringenabled(false),
 	throwcomboscored(false),
@@ -24,7 +25,8 @@ PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	// Make the list of combo animations in order of higher achievements
 	//comboanimations.push_back(&greatshotanimation);
 	//comboanimations.push_back(&hotshotanimation);
-	comboanimations.push_back(&megashotanimation);
+	//comboanimations.push_back(&megashotanimation);
+	comboanimations.push_back(&impressiveanimation);
 }
 
 void PlayingState::Enter()
