@@ -54,6 +54,8 @@
     <ClCompile Include="Benchmarks.cpp" />
     <ClCompile Include="ButtonLEDsController.cpp" />
     <ClCompile Include="ClassicHUDRenderer.cpp" />
+    <ClCompile Include="ExcellentAnimation.cpp" />
+    <ClCompile Include="Fire.cpp" />
     <ClCompile Include="GreatShotAnimation.cpp" />
     <ClCompile Include="HotShotAnimation.cpp" />
     <ClCompile Include="ImpressiveAnimation.cpp" />
@@ -132,6 +134,8 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonLEDsController.h" />
     <ClInclude Include="ClassicHUDRenderer.h" />
+    <ClInclude Include="ExcellentAnimation.h" />
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="GreatShotAnimation.h" />
     <ClInclude Include="HotShotAnimation.h" />
     <ClInclude Include="ImpressiveAnimation.h" />

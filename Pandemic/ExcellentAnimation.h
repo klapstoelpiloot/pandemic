@@ -4,27 +4,26 @@
 #include "ParticleEffect.h"
 #include "IAnimationRenderer.h"
 #include "ParticleOverlayRenderer.h"
+#include "TextFlasher.h"
 
-class HotShotAnimation final : public virtual IAnimationRenderer
+class ExcellentAnimation final : public virtual IAnimationRenderer
 {
 private:
 
 	// Members
-	Canvas textmask;
-	ParticleOverlayRenderer& particlesoverlay;
-	ParticleEffect particles;
-	Text text1;
-	Text text2;
-	TweenXY text1pos;
-	TweenXY text2pos;
+	Canvas tempcanvas;
+	Text text;
+	TweenFloat burnprogress;
+	const Image& burnmap;
+	const Image& burntex;
+	const Image& burncolors;
 	TimePoint starttime;
 	TimePoint laststeptime;
-	TimePoint lastparticletime;
 
 public:
 
-	HotShotAnimation(ParticleOverlayRenderer& particlesoverlay);
-	virtual ~HotShotAnimation();
+	ExcellentAnimation(ParticleOverlayRenderer& particlesoverlay);
+	virtual ~ExcellentAnimation();
 
 	// Methods
 	virtual void Render(Canvas& canvas) override final;

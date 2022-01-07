@@ -288,6 +288,12 @@
     <ClCompile Include="ImpressiveAnimation.cpp">
       <Filter>Renderers\Animations</Filter>
     </ClCompile>
+    <ClCompile Include="ExcellentAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1453,6 +1459,12 @@
     </ClInclude>
     <ClInclude Include="ImpressiveAnimation.h">
       <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcellentAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Renderers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

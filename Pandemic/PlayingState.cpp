@@ -14,6 +14,7 @@ PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	hotshotanimation(particlesoverlay),
 	megashotanimation(particlesoverlay),
 	impressiveanimation(particlesoverlay),
+	excellentanimation(particlesoverlay),
 	showinganimations(false),
 	scoringenabled(false),
 	throwcomboscored(false),
@@ -26,7 +27,8 @@ PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	//comboanimations.push_back(&greatshotanimation);
 	//comboanimations.push_back(&hotshotanimation);
 	//comboanimations.push_back(&megashotanimation);
-	comboanimations.push_back(&impressiveanimation);
+	//comboanimations.push_back(&impressiveanimation);
+	comboanimations.push_back(&excellentanimation);
 }
 
 void PlayingState::Enter()
