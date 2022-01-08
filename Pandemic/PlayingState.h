@@ -10,6 +10,8 @@
 #include "MegaShotAnimation.h"
 #include "ImpressiveAnimation.h"
 #include "ExcellentAnimation.h"
+#include "IncredibleAnimation.h"
+#include "UnstoppableAnimation.h"
 
 class GameStateMachine;
 
@@ -28,6 +30,8 @@ private:
 	MegaShotAnimation megashotanimation;
 	ImpressiveAnimation impressiveanimation;
 	ExcellentAnimation excellentanimation;
+	IncredibleAnimation incredibleanimation;
+	UnstoppableAnimation unstoppableanimation;
 	vector<IAnimationRenderer*> comboanimations;
 	std::queue<IAnimationRenderer*> aniqueue;
 	TimePoint roundfinishtime;

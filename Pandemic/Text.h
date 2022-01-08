@@ -38,6 +38,7 @@ private:
 
 	// The array of characters we should be drawing
 	vector<TextChar> chars;
+	int charspacing;
 	Size textsize;
 	Size offsetadjust;
 
@@ -48,8 +49,8 @@ public:
 
 	// Constructor/destructor
 	Text();
-	Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign);
-	Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign);
+	Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing = 0);
+	Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing = 0);
 	virtual ~Text();
 
 	// Properties
@@ -60,7 +61,7 @@ public:
 	inline void SetText(const String& text) { this->text = text; Update(); }
 	inline const Size& GetTextSize() const { return textsize; }
 	inline Rect GetTextRect(Point pos) const { return Rect(pos.Offset(offsetadjust), textsize); }
-
+	inline void SetCharSpacing(int pixels) { this->charspacing = pixels; Update(); }
 	// Drawing
 	void DrawOpaque(Canvas& canvas, Point pos, Color c) const;
 	void DrawBlend(Canvas& canvas, Point pos, Color c) const;

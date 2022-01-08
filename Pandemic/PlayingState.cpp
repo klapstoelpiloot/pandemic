@@ -15,6 +15,8 @@ PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	megashotanimation(particlesoverlay),
 	impressiveanimation(particlesoverlay),
 	excellentanimation(particlesoverlay),
+	incredibleanimation(particlesoverlay),
+	unstoppableanimation(particlesoverlay),
 	showinganimations(false),
 	scoringenabled(false),
 	throwcomboscored(false),
@@ -24,11 +26,13 @@ PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	roundtimeout(0)
 {
 	// Make the list of combo animations in order of higher achievements
-	//comboanimations.push_back(&greatshotanimation);
-	//comboanimations.push_back(&hotshotanimation);
-	//comboanimations.push_back(&megashotanimation);
-	//comboanimations.push_back(&impressiveanimation);
+	comboanimations.push_back(&greatshotanimation);
+	comboanimations.push_back(&hotshotanimation);
+	comboanimations.push_back(&megashotanimation);
+	comboanimations.push_back(&impressiveanimation);
 	comboanimations.push_back(&excellentanimation);
+	comboanimations.push_back(&incredibleanimation);
+	comboanimations.push_back(&unstoppableanimation);
 }
 
 void PlayingState::Enter()
@@ -312,6 +316,8 @@ void PlayingState::CheckComboAchievement()
 			aniqueue.push(comboanimations[comboindex]);
 		else
 			aniqueue.push(comboanimations.back());
-		anistarttime = Clock::now() + ANI_START_DELAY;
+
+		if(!showinganimations)
+			anistarttime = Clock::now() + ANI_START_DELAY;
 	}
 }

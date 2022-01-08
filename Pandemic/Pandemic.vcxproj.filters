@@ -294,6 +294,12 @@
     <ClCompile Include="Fire.cpp">
       <Filter>Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="IncredibleAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="UnstoppableAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1465,6 +1471,12 @@
     </ClInclude>
     <ClInclude Include="Fire.h">
       <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="IncredibleAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="UnstoppableAnimation.h">
+      <Filter>Renderers\Animations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

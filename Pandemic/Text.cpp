@@ -5,18 +5,20 @@ Text::Text() :
 {
 }
 
-Text::Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign) :
+Text::Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing) :
 	font(&font),
 	alignh(horizontalalign),
-	alignv(verticalalign)
+	alignv(verticalalign),
+	charspacing(charspacing)
 {
 }
 
-Text::Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign) :
+Text::Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing) :
 	text(text),
 	font(&font),
 	alignh(horizontalalign),
-	alignv(verticalalign)
+	alignv(verticalalign),
+	charspacing(charspacing)
 {
 	Update();
 }
@@ -50,7 +52,7 @@ void Text::Update()
 		TextChar tc;
 		tc.imgrect = fc.imgrect;
 		tc.position = Point(xpos + fc.offset.x, fc.offset.y);
-		xpos += fc.advance;
+		xpos += fc.advance + charspacing;
 		maxh = std::max(maxh, fc.imgrect.height);
 		chars.push_back(tc);
 	}

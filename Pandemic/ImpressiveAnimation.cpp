@@ -4,8 +4,8 @@
 #include "glm/vec2.hpp"
 #include "glm/geometric.hpp"
 
-#define FLASH_INTERVAL			ch::milliseconds(60)
-#define TOTAL_DURATION			2400
+#define FLASH_INTERVAL			ch::milliseconds(80)
+#define TOTAL_DURATION			2500
 #define PARTICLES_PER_CHAR		12
 
 ImpressiveAnimation::ImpressiveAnimation(ParticleOverlayRenderer& particlesoverlay) :
@@ -55,7 +55,7 @@ void ImpressiveAnimation::Start()
 	starttime = Clock::now();
 	laststeptime = Clock::now();
 	nextflashtime = Clock::now() + FLASH_INTERVAL;
-	offset = tweeny::from(70).to(-160).during(TOTAL_DURATION);
+	offset = tweeny::from(80).to(-160).during(TOTAL_DURATION);
 	flashcount = 0;
 }
 
@@ -89,13 +89,14 @@ void ImpressiveAnimation::Render(Canvas& canvas)
 		}
 	}
 
+	Point to = Point(static_cast<int>(ch::ToMilliseconds(t - starttime)) / 32, static_cast<int>(ch::ToMilliseconds(t - starttime)) / 32);
 	for(int i = 0; i < flashcount; i++)
 	{
 		Point p = charpos[i];
 		p.x += textoffset;
 		p.y += static_cast<int>(roundf(sin(static_cast<float>(p.x) / 4.0f) * 2.0f));
 		character[i].DrawOutlineMask(canvas, p, 2, BLACK);
-		character[i].DrawTexturedMask(canvas, p, texture);
+		character[i].DrawTexturedMask(canvas, p, texture, to);
 		flasher[i].Draw(canvas, character[i], p, 2);
 	}
 }

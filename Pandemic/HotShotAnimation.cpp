@@ -10,8 +10,8 @@
 
 HotShotAnimation::HotShotAnimation(ParticleOverlayRenderer& particlesoverlay) :
 	particlesoverlay(particlesoverlay),
-	text1("HOT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Middle),
-	text2("SHOT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Right, VerticalAlign::Middle)
+	text1("HOT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Middle, 1),
+	text2("SHOT!", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Right, VerticalAlign::Middle, 1)
 {
 	particles.SetAdditive(true);
 	particles.SetDeceleration(1.0f);
@@ -36,11 +36,11 @@ void HotShotAnimation::Start()
 	particles.Begin();
 
 	text1pos = tweeny::from(-text1.GetTextSize().width, 15)
-		.to(16, 15).during(300).via(easing::cubicIn);
+		.to(7, 15).during(300).via(easing::cubicIn);
 
 	text2pos = tweeny::from(128 + text2.GetTextSize().width, 15)
 		.wait(200)
-		.to(116, 15).during(300).via(easing::cubicIn)
+		.to(121, 15).during(300).via(easing::cubicIn)
 		.wait(1000);
 }
 

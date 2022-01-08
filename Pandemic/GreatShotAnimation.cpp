@@ -3,8 +3,8 @@
 #include "Main.h"
 
 GreatShotAnimation::GreatShotAnimation(ParticleOverlayRenderer& particlesoverlay) :
-	text1("GREAT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Middle),
-	text2("SHOT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Right, VerticalAlign::Middle),
+	text1("GREAT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Middle, -1),
+	text2("SHOT", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Right, VerticalAlign::Middle, -1),
 	texture(Main::GetResources().GetImage("gray22d.dds")),
 	shinedone(false)
 {
@@ -22,16 +22,16 @@ void GreatShotAnimation::Start()
 	lastparticletime = Clock::now();
 	shinedone = false;
 
-	text1pos = tweeny::from(0, -16)
-		.to(0, 15).during(500).via(easing::cubicOut)
+	text1pos = tweeny::from(2, -16)
+		.to(2, 15).during(500).via(easing::cubicOut)
 		.wait(200)
-		.to(0, 48).during(500).via(easing::cubicIn)
+		.to(2, 48).during(500).via(easing::cubicIn)
 		.wait(100);
 
-	text2pos = tweeny::from(128, 48)
-		.to(128, 15).during(500).via(easing::cubicOut)
+	text2pos = tweeny::from(127, 48)
+		.to(127, 15).during(500).via(easing::cubicOut)
 		.wait(200)
-		.to(128, -16).during(500).via(easing::cubicIn)
+		.to(127, -16).during(500).via(easing::cubicIn)
 		.wait(100);
 }
 

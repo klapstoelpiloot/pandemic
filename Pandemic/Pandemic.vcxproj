@@ -59,6 +59,7 @@
     <ClCompile Include="GreatShotAnimation.cpp" />
     <ClCompile Include="HotShotAnimation.cpp" />
     <ClCompile Include="ImpressiveAnimation.cpp" />
+    <ClCompile Include="IncredibleAnimation.cpp" />
     <ClCompile Include="MegaShotAnimation.cpp" />
     <ClCompile Include="ParticleOverlayRenderer.cpp" />
     <ClCompile Include="SetAnimation.cpp" />
@@ -122,6 +123,7 @@
     <ClCompile Include="TitleRenderer.cpp" />
     <ClCompile Include="TomlParser.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="UnstoppableAnimation.cpp" />
     <ClCompile Include="VerticalMenuRenderer.cpp" />
     <ClCompile Include="Voronoi.cpp" />
   </ItemGroup>
@@ -139,6 +141,7 @@
     <ClInclude Include="GreatShotAnimation.h" />
     <ClInclude Include="HotShotAnimation.h" />
     <ClInclude Include="ImpressiveAnimation.h" />
+    <ClInclude Include="IncredibleAnimation.h" />
     <ClInclude Include="MegaShotAnimation.h" />
     <ClInclude Include="ParticleOverlayRenderer.h" />
     <ClInclude Include="SetAnimation.h" />
@@ -514,6 +517,7 @@
     <ClInclude Include="tweeny\tweenpoint.h" />
     <ClInclude Include="tweeny\tweentraits.h" />
     <ClInclude Include="tweeny\tweeny.h" />
+    <ClInclude Include="UnstoppableAnimation.h" />
     <ClInclude Include="VerticalMenuRenderer.h" />
     <ClInclude Include="Voronoi.h" />
   </ItemGroup>
