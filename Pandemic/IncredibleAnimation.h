@@ -5,19 +5,21 @@
 #include "IAnimationRenderer.h"
 #include "ParticleOverlayRenderer.h"
 #include "TextFlasher.h"
+#include "TextShine.h"
 
 class IncredibleAnimation final : public virtual IAnimationRenderer
 {
 private:
 
 	// Members
-	Text character[10];
-	Point charpos[10];
+	Text text;
 	TextFlasher flasher;
+	TextShine shine;
 	TweenInt offset;
 	const Image& texture;
 	TimePoint starttime;
 	TimePoint flashtime;
+	TimePoint shinetime;
 	TimePoint laststeptime;
 
 public:

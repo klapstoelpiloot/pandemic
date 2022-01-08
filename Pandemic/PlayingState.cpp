@@ -26,13 +26,13 @@ PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	roundtimeout(0)
 {
 	// Make the list of combo animations in order of higher achievements
-	comboanimations.push_back(&greatshotanimation);
-	comboanimations.push_back(&hotshotanimation);
-	comboanimations.push_back(&megashotanimation);
-	comboanimations.push_back(&impressiveanimation);
-	comboanimations.push_back(&excellentanimation);
+	//comboanimations.push_back(&greatshotanimation);
+	//comboanimations.push_back(&hotshotanimation);
+	//comboanimations.push_back(&megashotanimation);
+	//comboanimations.push_back(&impressiveanimation);
+	//comboanimations.push_back(&excellentanimation);
 	comboanimations.push_back(&incredibleanimation);
-	comboanimations.push_back(&unstoppableanimation);
+	//comboanimations.push_back(&unstoppableanimation);
 }
 
 void PlayingState::Enter()

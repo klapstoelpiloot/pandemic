@@ -4,34 +4,14 @@
 #include "glm/vec2.hpp"
 #include "glm/geometric.hpp"
 
-#define FLASH_DELAY				ch::milliseconds(1000)
-#define MOVE_DURATION			2000
-#define WAIT_DURATION			400
+#define FLASH_DELAY				ch::milliseconds(300)
+#define BOUNCE_DURATION			1600
+#define OUT_DURATION			800
 
 IncredibleAnimation::IncredibleAnimation(ParticleOverlayRenderer& particlesoverlay) :
-	character
-	{
-		Text("I", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("N", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("C", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("R", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("E", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("D", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("I", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("B", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("L", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom),
-		Text("E", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Left, VerticalAlign::Bottom)
-	},
+	text("INCREDIBLE", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Center, VerticalAlign::Bottom, -1),
 	texture(Main::GetResources().GetImage("yellow12s.dds"))
 {
-	Text word("INCREDIBLE", Main::GetResources().BoldBitsLarge(), HorizontalAlign::Center, VerticalAlign::Middle);
-	Rect wordrect = word.GetTextRect(Point(68, 15));
-	int x = wordrect.x;
-	for(int i = 0; i < 10; i++)
-	{
-		charpos[i] = Point(x, wordrect.y);
-		x += character[i].GetTextSize().width - 1;
-	}
 }
 
 IncredibleAnimation::~IncredibleAnimation()
@@ -43,8 +23,10 @@ void IncredibleAnimation::Start()
 	Main::GetResources().GetSound("incredible.wav").Play();
 	starttime = Clock::now();
 	laststeptime = Clock::now();
-	flashtime = Clock::now() + FLASH_DELAY;
-	offset = tweeny::from(-6).to(38).during(MOVE_DURATION).via(easing::bounceOut).wait(WAIT_DURATION);
+	flashtime = TimePoint();
+	shinetime = TimePoint();
+	offset = tweeny::from(-5).to(32).during(BOUNCE_DURATION).via(easing::bounceOut).to(60).during(OUT_DURATION).via(easing::backIn);
+	offset.step(200);
 }
 
 void IncredibleAnimation::Render(Canvas& canvas)
@@ -61,18 +43,24 @@ void IncredibleAnimation::Render(Canvas& canvas)
 	int dt = static_cast<int>(ch::ToMilliseconds(t - laststeptime));
 	laststeptime = t;
 	int textoffset = offset.step(dt);
-	if(ch::IsTimeSet(flashtime) && (t >= flashtime))
+
+	if((textoffset == 20) && (!ch::IsTimeSet(shinetime) || (t > shinetime)))
 	{
-		flasher.Begin(500);
-		flashtime = TimePoint();
+		shine.Begin(text.GetTextSize());
+		shinetime = t + FLASH_DELAY;
+	}
+
+	if((textoffset == 31) && ((t - starttime < ch::milliseconds(BOUNCE_DURATION))) && (!ch::IsTimeSet(flashtime) || (t > flashtime)))
+	{
+		Main::GetResources().GetSound("bounce.wav").Play();
+		flasher.Begin();
+		flashtime = t + FLASH_DELAY;
 	}
 
 	Point to = Point(static_cast<int>(ch::ToMilliseconds(t - starttime)) / 32, static_cast<int>(ch::ToMilliseconds(t - starttime)) / 32);
 
-	for(int i = 0; i < 10; i++)
-		character[i].DrawOutlineMask(canvas, Point(charpos[i].x, textoffset), 2, BLACK);
-	for(int i = 0; i < 10; i++)
-		character[i].DrawTexturedMask(canvas, Point(charpos[i].x, textoffset), texture, to);
-	for(int i = 0; i < 10; i++)
-		flasher.Draw(canvas, character[i], Point(charpos[i].x, textoffset), 2);
+	text.DrawOutlineMask(canvas, Point(65, textoffset), 2, BLACK);
+	text.DrawTexturedMask(canvas, Point(65, textoffset), texture, to);
+	shine.Draw(canvas, text, Point(65, textoffset));
+	flasher.Draw(canvas, text, Point(65, textoffset), 2);
 }

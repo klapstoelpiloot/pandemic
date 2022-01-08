@@ -293,6 +293,35 @@ void Canvas::DrawMonoImageMask(Point pos, const IImage& img, Color color, Rect i
 	}
 }
 
+void Canvas::DrawMonoTextured(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
+			SetPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
 void Canvas::DrawMonoTexturedMask(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect)
 {
 	REQUIRE(img.HasColors() == false);
@@ -376,6 +405,36 @@ void Canvas::DrawMonoTexturedAdd(Point pos, const IImage& img, const IImage& tex
 			int ty = (texoffset.y + y) % tex.Height();
 			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
 			AddPixel(drawrect.x + x, drawrect.y + y, c);
+		}
+	}
+}
+
+void Canvas::DrawMonoTexturedMod(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset, Rect imgrect)
+{
+	REQUIRE(img.HasColors() == false);
+	REQUIRE(tex.HasColors() == true);
+
+	Rect origimgrect = imgrect;
+	Rect drawrect;
+	if(!PrepareImageDraw(pos, img, imgrect, drawrect))
+		return;
+
+	// Adjust textoffset by the same amount as imgrect was adjusted
+	texoffset.x += imgrect.x - origimgrect.x;
+	texoffset.y += imgrect.y - origimgrect.y;
+
+	// Draw image
+	MonoSampler imgsampler = img.GetMonoSampler();
+	ColorSampler texsampler = tex.GetColorSampler();
+	for(int y = 0; y <= drawrect.height; y++)
+	{
+		for(int x = 0; x <= drawrect.width; x++)
+		{
+			int tx = (texoffset.x + x) % tex.Width();
+			int ty = (texoffset.y + y) % tex.Height();
+			Color c = Color(texsampler(tx, ty), imgsampler(imgrect.x + x, imgrect.y + y));
+			c.ModulateRGBA(mod);
+			SetPixel(drawrect.x + x, drawrect.y + y, c);
 		}
 	}
 }

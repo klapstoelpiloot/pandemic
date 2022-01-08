@@ -61,12 +61,16 @@ public:
 	void DrawMonoImageAdd(Point pos, const IImage& img, Color color, Rect imgrect);
 	void DrawMonoImageMask(Point pos, const IImage& img, Color color) { DrawMonoImageMask(pos, img, color, Rect(Point(0, 0), img.GetSize())); }
 	void DrawMonoImageMask(Point pos, const IImage& img, Color color, Rect imgrect);
+	void DrawMonoTextured(Point pos, const IImage& img, const IImage& tex, Point texoffset = Point()) { DrawMonoTextured(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoTextured(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect);
 	void DrawMonoTexturedMask(Point pos, const IImage& img, const IImage& tex, Point texoffset = Point()) { DrawMonoTexturedMask(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
 	void DrawMonoTexturedMask(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect);
 	void DrawMonoTexturedBlend(Point pos, const IImage& img, const IImage& tex, Point texoffset = Point()) { DrawMonoTexturedBlend(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
 	void DrawMonoTexturedBlend(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect);
 	void DrawMonoTexturedAdd(Point pos, const IImage& img, const IImage& tex, Point texoffset = Point()) { DrawMonoTexturedAdd(pos, img, tex, texoffset, Rect(Point(0, 0), img.GetSize())); }
 	void DrawMonoTexturedAdd(Point pos, const IImage& img, const IImage& tex, Point texoffset, Rect imgrect);
+	void DrawMonoTexturedMod(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset = Point()) { DrawMonoTexturedMod(pos, img, tex, mod, texoffset, Rect(Point(0, 0), img.GetSize())); }
+	void DrawMonoTexturedMod(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset, Rect imgrect);
 	void DrawMonoTexturedModMask(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset = Point()) { DrawMonoTexturedModMask(pos, img, tex, mod, texoffset, Rect(Point(0, 0), img.GetSize())); }
 	void DrawMonoTexturedModMask(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset, Rect imgrect);
 	void DrawMonoTexturedModBlend(Point pos, const IImage& img, const IImage& tex, Color mod, Point texoffset = Point()) { DrawMonoTexturedModBlend(pos, img, tex, mod, texoffset, Rect(Point(0, 0), img.GetSize())); }

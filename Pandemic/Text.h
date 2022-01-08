@@ -62,14 +62,17 @@ public:
 	inline const Size& GetTextSize() const { return textsize; }
 	inline Rect GetTextRect(Point pos) const { return Rect(pos.Offset(offsetadjust), textsize); }
 	inline void SetCharSpacing(int pixels) { this->charspacing = pixels; Update(); }
+
 	// Drawing
 	void DrawOpaque(Canvas& canvas, Point pos, Color c) const;
 	void DrawBlend(Canvas& canvas, Point pos, Color c) const;
 	void DrawAdd(Canvas& canvas, Point pos, Color c) const;
 	void DrawMask(Canvas& canvas, Point pos, Color c) const;
+	void DrawTexturedOpaque(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
 	void DrawTexturedMask(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
 	void DrawTexturedBlend(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
 	void DrawTexturedAdd(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
+	void DrawTexturedModOpaque(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
 	void DrawTexturedModMask(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
 	void DrawTexturedModBlend(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
 	void DrawTexturedModAdd(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
