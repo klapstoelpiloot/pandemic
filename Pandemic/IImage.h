@@ -1,6 +1,7 @@
 #pragma once
 #include "Color.h"
 #include "Samplers.h"
+#include "Size.h"
 
 class IImage
 {

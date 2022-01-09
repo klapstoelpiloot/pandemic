@@ -4,7 +4,7 @@
 #include "Font.h"
 #include "Sound.h"
 #include "Animation.h"
-#include "ProgressBar.h"
+#include "LoadingScreen.h"
 
 typedef std::unordered_map<std::string, Image*> ImagesMap;
 typedef std::unordered_map<std::string, Font*> FontsMap;
@@ -16,8 +16,7 @@ class Resources final
 {
 private:
 
-	// We use this to display our progress
-	ProgressBar bar;
+	LoadingScreen loadingscreen;
 
 	// Resources
 	ImagesMap images;
@@ -33,7 +32,6 @@ private:
 
 	// Methods
 	void CopyFilenamesByExtension(vector<String>& input, vector<String>& output, const char* extension);
-	void UpdateProgress(ProgressBar& bar, uint totalfiles, uint& filesdone);
 
 public:
 
@@ -41,7 +39,6 @@ public:
 	~Resources();
 
 	// Access
-	ProgressBar* GetProgressBar() { return &bar; }
 	const Image& GetImage(const char* filename) const;
 	const Font& GetFont(const char* filename) const;
 	const Sound& GetSound(const char* filename) const;

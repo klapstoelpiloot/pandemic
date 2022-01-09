@@ -141,9 +141,6 @@
     <ClCompile Include="TopMenuState.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="ProgressBar.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="SystemTestRenderer.cpp">
       <Filter>Renderers</Filter>
     </ClCompile>
@@ -300,6 +297,12 @@
     <ClCompile Include="UnstoppableAnimation.cpp">
       <Filter>Renderers\Animations</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingImage.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingScreen.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -400,9 +403,6 @@
     </ClInclude>
     <ClInclude Include="TopMenuState.h">
       <Filter>Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ProgressBar.h">
-      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="SystemTestRenderer.h">
       <Filter>Renderers</Filter>
@@ -1477,6 +1477,12 @@
     </ClInclude>
     <ClInclude Include="UnstoppableAnimation.h">
       <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingImage.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingScreen.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

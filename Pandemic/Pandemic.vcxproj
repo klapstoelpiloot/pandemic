@@ -60,6 +60,8 @@
     <ClCompile Include="HotShotAnimation.cpp" />
     <ClCompile Include="ImpressiveAnimation.cpp" />
     <ClCompile Include="IncredibleAnimation.cpp" />
+    <ClCompile Include="LoadingImage.cpp" />
+    <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="MegaShotAnimation.cpp" />
     <ClCompile Include="ParticleOverlayRenderer.cpp" />
     <ClCompile Include="SetAnimation.cpp" />
@@ -107,7 +109,6 @@
     <ClCompile Include="IOModuleLink.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuStateMachine.cpp" />
-    <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="TextFlasher.cpp" />
     <ClCompile Include="TextShine.cpp" />
     <ClCompile Include="TopMenuState.cpp" />
@@ -142,6 +143,8 @@
     <ClInclude Include="HotShotAnimation.h" />
     <ClInclude Include="ImpressiveAnimation.h" />
     <ClInclude Include="IncredibleAnimation.h" />
+    <ClInclude Include="LoadingImage.h" />
+    <ClInclude Include="LoadingScreen.h" />
     <ClInclude Include="MegaShotAnimation.h" />
     <ClInclude Include="ParticleOverlayRenderer.h" />
     <ClInclude Include="SetAnimation.h" />
@@ -489,7 +492,6 @@
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MenuStateMachine.h" />
-    <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="TextFlasher.h" />
     <ClInclude Include="TextShine.h" />
     <ClInclude Include="TopMenuState.h" />
