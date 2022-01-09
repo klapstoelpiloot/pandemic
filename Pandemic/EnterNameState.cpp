@@ -84,6 +84,7 @@ bool EnterNameState::HandleMessage(const IOModule_IOMessage& msg)
 
 		case IOModule_IOMessage_CancelButtonPressed_tag:
 		{
+			Main::GetResources().GetSound("continue.wav").Play();
 			GameData& gd = statemachine->GetData();
 
 			// Add the last character

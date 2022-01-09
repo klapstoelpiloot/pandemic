@@ -3,11 +3,9 @@
 #include "IRenderer.h"
 #include "Text.h"
 #include "GameDefines.h"
-#include "GameBackgroundRenderer.h"
-#include "ClassicSetRenderer.h"
-#include "ParticleEffect.h"
+#include "ParticleOverlayRenderer.h"
 
-class ClassicGameRenderer final : public virtual IRenderer
+class ClassicHUDRenderer final : public virtual IRenderer
 {
 private:
 
@@ -18,33 +16,36 @@ private:
 	Text roundlabel;
 	Text scorelabel;
 	Text puckslabel;
+	Text pointtext[8];
+	TweenXY pointprogress[8];
+	vector<int> points;
 	const Image& texture;
 	std::array<Text, GAME_GATES> gatenumbers;
 	std::array<bool, GAME_GATES> gaterequired;
 	ParticleEffect gateparticles;
-	ParticleEffect setparticles;
-	ParticleEffect setsparks;
-	ClassicSetRenderer setrenderer;
-
-	// Position to render the text at
-	Point position;
+	TimePoint fadeoutstart;
+	TimePoint laststeptime;
+	TimePoint scoresettime;
 
 	// Methods
 	void DrawGateLine(Canvas& canvas, int startx, int endx, Color color);
 	void SpawnGateEffectBig(int startx, int endx);
 	void SpawnGateEffectSmall(int startx, int endx);
 	void SpawnGateParticle(int x, int y, int centerx, Color color);
+	void FloatPoints(String text, int x, int y);
 
 public:
 
-	ClassicGameRenderer();
+	ClassicHUDRenderer(ParticleOverlayRenderer& particlesoverlay);
 
 	virtual void Render(Canvas& canvas) override;
 	void SetRound(int numround) { round.SetText(String::From(numround)); }
 	void SetScore(int newscore) { score.SetText(String::From(newscore)); }
 	void SetPucks(int numpucks) { pucks.SetText(String::From(numpucks)); }
 	void SetRequiredGates(bool* gates);
-	void ShowSetAnimation(int numset);
+	void Show() { fadeoutstart = TimePoint(); }
+	void Hide() { fadeoutstart = Clock::now(); }
 	void ScoreRequiredGate(int gate);
 	void ScoreGate(int gate);
+	void ScoreSet();
 };

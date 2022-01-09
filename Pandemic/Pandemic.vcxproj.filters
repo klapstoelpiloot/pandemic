@@ -55,6 +55,12 @@
     <Filter Include="GLM\simd">
       <UniqueIdentifier>{7b4f0672-131f-4bed-91cc-9a5d03d50f5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderers\Animations">
+      <UniqueIdentifier>{2a875352-1b67-416a-8af8-d9edf790d306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tweeny">
+      <UniqueIdentifier>{40ae7a16-369a-483d-a689-f61c317c9426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -135,9 +141,6 @@
     <ClCompile Include="TopMenuState.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="ProgressBar.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="SystemTestRenderer.cpp">
       <Filter>Renderers</Filter>
     </ClCompile>
@@ -161,9 +164,6 @@
     </ClCompile>
     <ClCompile Include="GameDesc.cpp">
       <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ClassicGameRenderer.cpp">
-      <Filter>Renderers</Filter>
     </ClCompile>
     <ClCompile Include="RoundData.cpp">
       <Filter>Game</Filter>
@@ -198,9 +198,6 @@
     <ClCompile Include="Animator.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationRenderer.cpp">
-      <Filter>Renderers</Filter>
-    </ClCompile>
     <ClCompile Include="IntermissionRenderer.cpp">
       <Filter>Renderers</Filter>
     </ClCompile>
@@ -217,9 +214,6 @@
       <Filter>Renderers</Filter>
     </ClCompile>
     <ClCompile Include="FinishRenderer.cpp">
-      <Filter>Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="ClassicSetRenderer.cpp">
       <Filter>Renderers</Filter>
     </ClCompile>
     <ClCompile Include="ParticleEffect.cpp">
@@ -263,6 +257,51 @@
     </ClCompile>
     <ClCompile Include="glm\detail\glm.cpp">
       <Filter>GLM\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="SetAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="GreatShotAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleOverlayRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassicHUDRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="HotShotAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Voronoi.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextShine.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="MegaShotAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpressiveAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="ExcellentAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="IncredibleAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="UnstoppableAnimation.cpp">
+      <Filter>Renderers\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingImage.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingScreen.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -365,9 +404,6 @@
     <ClInclude Include="TopMenuState.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="ProgressBar.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="SystemTestRenderer.h">
       <Filter>Renderers</Filter>
     </ClInclude>
@@ -400,9 +436,6 @@
     </ClInclude>
     <ClInclude Include="GameDesc.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassicGameRenderer.h">
-      <Filter>Renderers</Filter>
     </ClInclude>
     <ClInclude Include="CRC32.h">
       <Filter>Tools</Filter>
@@ -449,9 +482,6 @@
     <ClInclude Include="Animator.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationRenderer.h">
-      <Filter>Renderers</Filter>
-    </ClInclude>
     <ClInclude Include="IntermissionRenderer.h">
       <Filter>Renderers</Filter>
     </ClInclude>
@@ -468,9 +498,6 @@
       <Filter>Renderers</Filter>
     </ClInclude>
     <ClInclude Include="FinishRenderer.h">
-      <Filter>Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassicSetRenderer.h">
       <Filter>Renderers</Filter>
     </ClInclude>
     <ClInclude Include="ParticleEffect.h">
@@ -1385,6 +1412,78 @@
     <ClInclude Include="Samplers.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="SetAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="IAnimationRenderer.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="GreatShotAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleOverlayRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassicHUDRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\dispatcher.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\easing.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\easingresolve.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\int2type.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\tween.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\tweenpoint.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\tweentraits.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="tweeny\tweeny.h">
+      <Filter>Tweeny</Filter>
+    </ClInclude>
+    <ClInclude Include="HotShotAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Voronoi.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextShine.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MegaShotAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpressiveAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="ExcellentAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="IncredibleAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="UnstoppableAnimation.h">
+      <Filter>Renderers\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingImage.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingScreen.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="String.natvis">
@@ -1802,6 +1901,18 @@
     </None>
     <None Include="glm\gtx\wrap.inl">
       <Filter>GLM\gtx</Filter>
+    </None>
+    <None Include="tweeny\tweenpoint.tcc">
+      <Filter>Tweeny</Filter>
+    </None>
+    <None Include="tweeny\tweeny.tcc">
+      <Filter>Tweeny</Filter>
+    </None>
+    <None Include="tweeny\tween.tcc">
+      <Filter>Tweeny</Filter>
+    </None>
+    <None Include="tweeny\tweenone.tcc">
+      <Filter>Tweeny</Filter>
     </None>
   </ItemGroup>
 </Project>

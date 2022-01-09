@@ -5,18 +5,20 @@ Text::Text() :
 {
 }
 
-Text::Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign) :
+Text::Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing) :
 	font(&font),
 	alignh(horizontalalign),
-	alignv(verticalalign)
+	alignv(verticalalign),
+	charspacing(charspacing)
 {
 }
 
-Text::Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign) :
+Text::Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing) :
 	text(text),
 	font(&font),
 	alignh(horizontalalign),
-	alignv(verticalalign)
+	alignv(verticalalign),
+	charspacing(charspacing)
 {
 	Update();
 }
@@ -50,7 +52,7 @@ void Text::Update()
 		TextChar tc;
 		tc.imgrect = fc.imgrect;
 		tc.position = Point(xpos + fc.offset.x, fc.offset.y);
-		xpos += fc.advance;
+		xpos += fc.advance + charspacing;
 		maxh = std::max(maxh, fc.imgrect.height);
 		chars.push_back(tc);
 	}
@@ -59,7 +61,6 @@ void Text::Update()
 	textsize = Size(xpos, font->LineHeight());
 
 	// Adjust offsets for alignment
-	Size offsetadjust;
 	switch(alignh)
 	{
 		case HorizontalAlign::Left: offsetadjust.width = 0; break;
@@ -150,7 +151,19 @@ void Text::DrawMask(Canvas& canvas, Point pos, Color c) const
 	}
 }
 
-void Text::DrawTexturedMask(Canvas& canvas, Point pos, const Image& tex, Point texoffset) const
+void Text::DrawTexturedOpaque(Canvas& canvas, Point pos, const IImage& tex, Point texoffset) const
+{
+	if(text.IsEmpty() || (font == nullptr))
+		return;
+
+	const Image& img = font->GetImage();
+	REQUIRE(!img.HasColors());
+
+	for(const TextChar& tc : chars)
+		canvas.DrawMonoTextured(tc.position.Offset(pos.x, pos.y), img, tex, texoffset, tc.imgrect);
+}
+
+void Text::DrawTexturedMask(Canvas& canvas, Point pos, const IImage& tex, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;
@@ -162,7 +175,19 @@ void Text::DrawTexturedMask(Canvas& canvas, Point pos, const Image& tex, Point t
 		canvas.DrawMonoTexturedMask(tc.position.Offset(pos.x, pos.y), img, tex, texoffset, tc.imgrect);
 }
 
-void Text::DrawTexturedAdd(Canvas& canvas, Point pos, const Image& tex, Point texoffset) const
+void Text::DrawTexturedBlend(Canvas& canvas, Point pos, const IImage& tex, Point texoffset) const
+{
+	if(text.IsEmpty() || (font == nullptr))
+		return;
+
+	const Image& img = font->GetImage();
+	REQUIRE(!img.HasColors());
+
+	for(const TextChar& tc : chars)
+		canvas.DrawMonoTexturedBlend(tc.position.Offset(pos.x, pos.y), img, tex, texoffset, tc.imgrect);
+}
+
+void Text::DrawTexturedAdd(Canvas& canvas, Point pos, const IImage& tex, Point texoffset) const
 {
 	if(text.IsEmpty() || (font == nullptr))
 		return;
@@ -172,6 +197,54 @@ void Text::DrawTexturedAdd(Canvas& canvas, Point pos, const Image& tex, Point te
 
 	for(const TextChar& tc : chars)
 		canvas.DrawMonoTexturedAdd(tc.position.Offset(pos.x, pos.y), img, tex, texoffset, tc.imgrect);
+}
+
+void Text::DrawTexturedModOpaque(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset) const
+{
+	if(text.IsEmpty() || (font == nullptr))
+		return;
+
+	const Image& img = font->GetImage();
+	REQUIRE(!img.HasColors());
+
+	for(const TextChar& tc : chars)
+		canvas.DrawMonoTexturedMod(tc.position.Offset(pos.x, pos.y), img, tex, mod, texoffset, tc.imgrect);
+}
+
+void Text::DrawTexturedModMask(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset) const
+{
+	if(text.IsEmpty() || (font == nullptr))
+		return;
+
+	const Image& img = font->GetImage();
+	REQUIRE(!img.HasColors());
+
+	for(const TextChar& tc : chars)
+		canvas.DrawMonoTexturedModMask(tc.position.Offset(pos.x, pos.y), img, tex, mod, texoffset, tc.imgrect);
+}
+
+void Text::DrawTexturedModBlend(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset) const
+{
+	if(text.IsEmpty() || (font == nullptr))
+		return;
+
+	const Image& img = font->GetImage();
+	REQUIRE(!img.HasColors());
+
+	for(const TextChar& tc : chars)
+		canvas.DrawMonoTexturedModBlend(tc.position.Offset(pos.x, pos.y), img, tex, mod, texoffset, tc.imgrect);
+}
+
+void Text::DrawTexturedModAdd(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset) const
+{
+	if(text.IsEmpty() || (font == nullptr))
+		return;
+
+	const Image& img = font->GetImage();
+	REQUIRE(!img.HasColors());
+
+	for(const TextChar& tc : chars)
+		canvas.DrawMonoTexturedModAdd(tc.position.Offset(pos.x, pos.y), img, tex, mod, texoffset, tc.imgrect);
 }
 
 void Text::DrawShadowMask(Canvas& canvas, Point pos, int distance, Color c) const

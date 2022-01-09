@@ -13,6 +13,9 @@
 // See: https://www.reddit.com/r/C_Programming/comments/gudfyk/faster_divide_by_255/
 #define DIV_255_FAST(x)    (((x) + (((x) + 257) >> 8)) >> 8)
 
+// Modulates two byte colors (for example, a red value and an alpha value)
+#define MOD_BYTE_COLOR(a, b) static_cast<byte>(DIV_255_FAST(static_cast<uint>(a) * static_cast<uint>(b)))
+
 struct Color
 {
 public:
@@ -27,6 +30,7 @@ public:
 	Color() { r = 0u; g = 0u; b = 0u; a = 0u; }
 	Color(byte _r, byte _g, byte _b) { r = _r; g = _g; b = _b; a = 255u; }
 	Color(byte _r, byte _g, byte _b, byte _a) { r = _r; g = _g; b = _b; a = _a; }
+	Color(Color _c, byte _a) { r = _c.r; g = _c.g; b = _c.b; a = MOD_BYTE_COLOR(_c.a, _a); }
 
 	// TODO: I could probably squeeze some more performance out of the operations below with SIMD instructions
 
@@ -62,19 +66,42 @@ public:
 		r = (c.r & c.a) | (r & static_cast<byte>(~c.a));
 		g = (c.g & c.a) | (g & static_cast<byte>(~c.a));
 		b = (c.b & c.a) | (b & static_cast<byte>(~c.a));
+		a |= c.a;
 	}
 
 	// Modulates the brightness of this color by the amount specified (0-255)
-	inline void Modulate(byte m)
+	inline void ModulateRGB(byte m)
 	{
-		uint rm = static_cast<uint>(r) * static_cast<uint>(m);
-		uint gm = static_cast<uint>(g) * static_cast<uint>(m);
-		uint bm = static_cast<uint>(b) * static_cast<uint>(m);
-		r = static_cast<byte>(DIV_255_FAST(rm));
-		g = static_cast<byte>(DIV_255_FAST(gm));
-		b = static_cast<byte>(DIV_255_FAST(bm));
+		r = MOD_BYTE_COLOR(r, m);
+		g = MOD_BYTE_COLOR(g, m);
+		b = MOD_BYTE_COLOR(b, m);
+	}
+
+	// Modulates the alpha of this color by the amount specified (0-255)
+	inline void ModulateA(byte m)
+	{
+		a = MOD_BYTE_COLOR(a, m);
+	}
+
+	// Modulates the color and alpha of this color by the amount specified (0-255)
+	inline void ModulateRGBA(byte m)
+	{
+		r = MOD_BYTE_COLOR(r, m);
+		g = MOD_BYTE_COLOR(g, m);
+		b = MOD_BYTE_COLOR(b, m);
+		a = MOD_BYTE_COLOR(a, m);
+	}
+
+	// Modulates the color and alpha of this color by the specified values in c
+	inline void ModulateRGBA(Color c)
+	{
+		r = MOD_BYTE_COLOR(r, c.r);
+		g = MOD_BYTE_COLOR(g, c.g);
+		b = MOD_BYTE_COLOR(b, c.b);
+		a = MOD_BYTE_COLOR(a, c.a);
 	}
 
 	inline static float ToFloat(byte b) { return static_cast<float>(b) * 0.00392156862745f; }
 	inline static byte ToByte(float f) { return static_cast<byte>(std::clamp(static_cast<int>(f * 255.0f), 0, 255)); }
+	inline static byte Modulate(byte a, byte b) { return static_cast<byte>(DIV_255_FAST(static_cast<uint>(a) * static_cast<uint>(b))); }
 };

@@ -4,19 +4,35 @@
 #include "MenuStateMachine.h"
 
 #define NUM_SHOT_SOUNDS				3
-#define NUM_COMPLIMENT_SOUNDS		6
-#define COMPLIMENT_RND_MIN			2
-#define COMPLIMENT_RND_MAX			20
-#define COMPLIMENT_SHORT_DELAY		300
-#define COMPLIMENT_LONG_DELAY		900
+#define ANI_START_DELAY				ch::milliseconds(300)
 
 PlayingState::PlayingState(GameStateMachine* _statemachine) :
 	statemachine(_statemachine),
+	hud(particlesoverlay),
+	setanimation(particlesoverlay),
+	greatshotanimation(particlesoverlay),
+	hotshotanimation(particlesoverlay),
+	megashotanimation(particlesoverlay),
+	impressiveanimation(particlesoverlay),
+	excellentanimation(particlesoverlay),
+	incredibleanimation(particlesoverlay),
+	unstoppableanimation(particlesoverlay),
+	showinganimations(false),
 	scoringenabled(false),
-	complimentchance(0),
+	throwcomboscored(false),
+	easycombos(false),
+	combocount(0),
 	slidetimeout(0),
 	roundtimeout(0)
 {
+	// Make the list of combo animations in order of higher achievements
+	comboanimations.push_back(&greatshotanimation);
+	comboanimations.push_back(&hotshotanimation);
+	comboanimations.push_back(&megashotanimation);
+	comboanimations.push_back(&impressiveanimation);
+	comboanimations.push_back(&excellentanimation);
+	comboanimations.push_back(&incredibleanimation);
+	comboanimations.push_back(&unstoppableanimation);
 }
 
 void PlayingState::Enter()
@@ -24,18 +40,29 @@ void PlayingState::Enter()
 	// TODO: Temporary fix. Remove when renderers are fixed so that menu can stay open.
 	Main::GetMenu().Hide();
 
+	showinganimations = false;
 	scoringenabled = true;
-	complimentchance = 0;
-	complimenttime = TimePoint();
+	throwcomboscored = false;
+	combocount = 0;
+	while(!aniqueue.empty())
+		aniqueue.pop();
+	anistarttime = TimePoint();
 	throwfinishtime = TimePoint();
 	roundfinishtime = TimePoint();
 	slidetimeout = Main::GetConfig().GetInt("Game.SlideTimeoutMs", 2000);
 	roundtimeout = Main::GetConfig().GetInt("Game.RoundTimeoutMs", 2000);
+	easycombos = Main::GetConfig().GetBool("Game.EasyCombos", false);
+	hud.Show();
 
 	// Setup rendering
+	// Animations before the game renderer, so that particles are renderer on top
 	Main::GetGraphics().ClearRenderers();
 	Main::GetGraphics().AddRenderer(&statemachine->GetBackground());
-	Main::GetGraphics().AddRenderer(&gamerenderer);
+	Main::GetGraphics().AddRenderer(&hud);
+	for(auto ca : comboanimations)
+		Main::GetGraphics().AddRenderer(ca);
+	Main::GetGraphics().AddRenderer(&setanimation);
+	Main::GetGraphics().AddRenderer(&particlesoverlay);
 	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 	UpdateDisplay();
 
@@ -51,16 +78,33 @@ void PlayingState::Update()
 	TimePoint now = Clock::now();
 	GameData& gd = statemachine->GetData();
 
-	// Time to compliment the player?
-	if(ch::IsTimeSet(complimenttime) && (now >= complimenttime))
+	// Time to show the animiation(s)?
+	if(ch::IsTimeSet(anistarttime) && (now >= anistarttime))
 	{
-		// Reset the timer
-		complimenttime = TimePoint();
-		complimentchance = 0;
+		anistarttime = TimePoint();
+		if(!aniqueue.empty())
+		{
+			showinganimations = true;
+			hud.Hide();
+			aniqueue.front()->Start();
+		}
+	}
 
-		// Play a complimentary sound
-		int rndindex = Random(1, NUM_COMPLIMENT_SOUNDS);
-		Main::GetResources().GetSound("good" + String::From(rndindex) + ".wav").Play();
+	// Animation done?
+	if(showinganimations && aniqueue.front()->HasFinished())
+	{
+		aniqueue.pop();
+		if(!aniqueue.empty())
+		{
+			// Play the next animation
+			aniqueue.front()->Start();
+		}
+		else
+		{
+			// Done with the animations
+			showinganimations = false;
+			hud.Show();
+		}
 	}
 
 	// Finishing a throw?
@@ -71,13 +115,16 @@ void PlayingState::Update()
 		// Reset the timer
 		throwfinishtime = TimePoint();
 
-		// Increase compliment chance
-		complimentchance++;
-
 		// When this was our last puck for this round, don't count any more scores. This is to
 		// prevent accedential scoring when the player is quick to pick up the pucks from the board.
 		if(rd.pucksthrown == rd.startpucks)
 			scoringenabled = false;
+
+		// When no puck was scored during this throw, then reset the combo
+		if(!throwcomboscored)
+			combocount = 0;
+
+		throwcomboscored = false;
 	}
 
 	// Finishing a round?
@@ -195,23 +242,30 @@ bool PlayingState::HandleMessage(const IOModule_IOMessage& msg)
 				Main::GetResources().GetSound("score.wav").Play();
 				if(newsets != prevsets)
 				{
+					hud.ScoreRequiredGate(gateindex);
+					CheckComboAchievement();
+
 					// A new set is completed!
-					Main::GetResources().GetSound("set.wav").Play();
-					gamerenderer.ShowSetAnimation(newsets);
-					if(Random(COMPLIMENT_RND_MIN, COMPLIMENT_RND_MAX) < complimentchance)
-						complimenttime = Clock::now() + ch::milliseconds(COMPLIMENT_LONG_DELAY);
+					hud.ScoreSet();
+					setanimation.SetIndex(newsets);
+					aniqueue.push(&setanimation);
+
+					if(!showinganimations)
+						anistarttime = Clock::now() + ANI_START_DELAY;
 				}
 				else if(prevreq)
 				{
 					// Scored in a gate we needed
-					gamerenderer.ScoreRequiredGate(gateindex);
-					if(!ch::IsTimeSet(complimenttime) && (Random(COMPLIMENT_RND_MIN, COMPLIMENT_RND_MAX) < complimentchance))
-						complimenttime = Clock::now() + ch::milliseconds(COMPLIMENT_SHORT_DELAY);
+					hud.ScoreRequiredGate(gateindex);
+					CheckComboAchievement();
 				}
 				else
 				{
 					// Scored in a gate we don't need
-					gamerenderer.ScoreGate(gateindex);
+					hud.ScoreGate(gateindex);
+
+					if(easycombos)
+						CheckComboAchievement();
 				}
 
 				UpdateDisplay();
@@ -234,11 +288,11 @@ void PlayingState::UpdateDisplay()
 	RoundData& rd = gd.CurrentRound();
 	bool gatesrequired[GAME_GATES];
 
-	gamerenderer.SetRound(rd.index + 1);
-	gamerenderer.SetPucks(rd.startpucks - rd.pucksthrown);
-	gamerenderer.SetScore(gd.CalculateScore());
+	hud.SetRound(rd.index + 1);
+	hud.SetPucks(rd.startpucks - rd.pucksthrown);
+	hud.SetScore(gd.CalculateScore());
 	gd.GetGatesNeededForSet(gatesrequired, true);
-	gamerenderer.SetRequiredGates(gatesrequired);
+	hud.SetRequiredGates(gatesrequired);
 }
 
 void PlayingState::PlayShotSound()
@@ -252,4 +306,21 @@ void PlayingState::KillShotSounds()
 {
 	for(int i = 1; i <= NUM_SHOT_SOUNDS; i++)
 		Main::GetResources().GetSound("shot" + String::From(i) + ".wav").Stop();
+}
+
+void PlayingState::CheckComboAchievement()
+{
+	throwcomboscored = true;
+	combocount++;
+	if(combocount > 1)
+	{
+		int comboindex = combocount - 2;
+		if(comboindex < static_cast<int>(comboanimations.size()))
+			aniqueue.push(comboanimations[comboindex]);
+		else
+			aniqueue.push(comboanimations.back());
+
+		if(!showinganimations)
+			anistarttime = Clock::now() + ANI_START_DELAY;
+	}
 }

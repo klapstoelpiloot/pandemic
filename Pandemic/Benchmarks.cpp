@@ -36,7 +36,7 @@ void RunBenchmarks()
 	// Benchmark modulate
 	for(int i = 0; i < NUM_ITERATIONS; i++)
 	{
-		colors[i].Modulate(colors[i + NUM_ITERATIONS].a);
+		colors[i].ModulateRGBA(colors[i + NUM_ITERATIONS].a);
 	}
 
 	TimePoint t4 = Clock::now();

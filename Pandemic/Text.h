@@ -38,7 +38,9 @@ private:
 
 	// The array of characters we should be drawing
 	vector<TextChar> chars;
+	int charspacing;
 	Size textsize;
+	Size offsetadjust;
 
 	// This updates the arrangement of the characters for drawing
 	void Update();
@@ -47,8 +49,8 @@ public:
 
 	// Constructor/destructor
 	Text();
-	Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign);
-	Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign);
+	Text(const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing = 0);
+	Text(const String& text, const Font& font, HorizontalAlign horizontalalign, VerticalAlign verticalalign, int charspacing = 0);
 	virtual ~Text();
 
 	// Properties
@@ -58,14 +60,22 @@ public:
 	inline const String& GetText() const { return text; }
 	inline void SetText(const String& text) { this->text = text; Update(); }
 	inline const Size& GetTextSize() const { return textsize; }
+	inline Rect GetTextRect(Point pos) const { return Rect(pos.Offset(offsetadjust), textsize); }
+	inline void SetCharSpacing(int pixels) { this->charspacing = pixels; Update(); }
 
 	// Drawing
 	void DrawOpaque(Canvas& canvas, Point pos, Color c) const;
 	void DrawBlend(Canvas& canvas, Point pos, Color c) const;
 	void DrawAdd(Canvas& canvas, Point pos, Color c) const;
 	void DrawMask(Canvas& canvas, Point pos, Color c) const;
-	void DrawTexturedMask(Canvas& canvas, Point pos, const Image& tex, Point texoffset = Point()) const;
-	void DrawTexturedAdd(Canvas& canvas, Point pos, const Image& tex, Point texoffset = Point()) const;
+	void DrawTexturedOpaque(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
+	void DrawTexturedMask(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
+	void DrawTexturedBlend(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
+	void DrawTexturedAdd(Canvas& canvas, Point pos, const IImage& tex, Point texoffset = Point()) const;
+	void DrawTexturedModOpaque(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
+	void DrawTexturedModMask(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
+	void DrawTexturedModBlend(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
+	void DrawTexturedModAdd(Canvas& canvas, Point pos, const IImage& tex, Color mod, Point texoffset = Point()) const;
 
 	// More specialized drawing
 	void DrawShadowMask(Canvas& canvas, Point pos, int distance, Color c) const;

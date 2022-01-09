@@ -11,6 +11,21 @@
 #include "String.h"
 #include "RTTI.h"
 
+// tweeny raises some warnings (and rightfully so) about integer conversion
+// but instead of messing with the source code I chose to silence these warnings.
+// TODO: Update this source code when the author has a proper fix.
+// https://github.com/mobius3/tweeny/issues/31
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#include "tweeny/tweeny.h"
+#pragma GCC diagnostic pop
+
+// Types from Tweeny library
+using tweeny::easing;
+typedef tweeny::tween<float> TweenFloat;
+typedef tweeny::tween<int> TweenInt;
+typedef tweeny::tween<int, int> TweenXY;
+
 // This outputs the given arguments to the specified output stream
 template<typename... Args>
 int ArgsToStream(std::ostream& s, Args&... args)

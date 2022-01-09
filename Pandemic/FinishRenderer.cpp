@@ -10,7 +10,7 @@
 #define SCROLL_SPEED		0.2f
 #define TIME_STEP			10
 #define NUM_SMOKE_IMAGES	6
-#define NUM_SMOKES			50
+#define NUM_SMOKES			60
 
 FinishRenderer::FinishRenderer() :
 	gameovertext(Main::GetResources().BoldBitsLarge(), HorizontalAlign::Center, VerticalAlign::Middle),
@@ -37,7 +37,7 @@ void FinishRenderer::Render(Canvas& canvas)
 	if(ch::IsTimeSet(nextsteptime))
 	{
 		// Step time forward and scroll
-		if(Clock::now() >= nextsteptime)
+		while(Clock::now() >= nextsteptime)
 		{
 			scrollspeed += SCROLL_SPEED;
 			scrollpos += scrollspeed;

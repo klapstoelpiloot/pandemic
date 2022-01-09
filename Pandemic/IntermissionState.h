@@ -1,7 +1,6 @@
 #pragma once
 #include "IState.h"
 #include "IMessageHandler.h"
-#include "AnimationRenderer.h"
 #include "IntermissionRenderer.h"
 #include "ScreenDissolveRenderer.h"
 

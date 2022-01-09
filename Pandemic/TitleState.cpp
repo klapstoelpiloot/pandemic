@@ -5,8 +5,8 @@
 
 #define BUTTON_FIRST_BLOCK_TIME		600
 #define BUTTON_BLOCK_TIME			600
-#define BUTTON_FIRST_FLASH_DELAY	8500
-#define BUTTON_FLASH_DELAY			6500
+#define BUTTON_FIRST_FLASH_DELAY	11500
+#define BUTTON_FLASH_DELAY			11500
 #define BUTTON_FLASH_INTERVAL		400
 
 TitleState::TitleState(GameStateMachine* _statemachine) :
@@ -48,6 +48,7 @@ void TitleState::Update()
 {
 	int64 t = ToMilliseconds(Clock::now() - flashstarttime);
 	bool buttonson = (t > 0) && (((t / BUTTON_FLASH_INTERVAL) % 2) == 0);
+	renderer.SetKeyFlashState(buttonson);
 	if(buttonson != flashbuttonson)
 	{
 		flashbuttonson = buttonson;

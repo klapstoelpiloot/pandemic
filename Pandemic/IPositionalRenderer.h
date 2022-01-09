@@ -8,7 +8,7 @@ public:
 	virtual ~IPositionalRenderer() = default;
 protected:
 	IPositionalRenderer() { }
-	IPositionalRenderer(const IRenderer&) { }
+	IPositionalRenderer(const IPositionalRenderer&) { }
 	IPositionalRenderer& operator = (const IPositionalRenderer&) { return *this; }
 public:
 

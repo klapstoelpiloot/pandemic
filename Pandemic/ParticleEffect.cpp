@@ -5,7 +5,9 @@
 
 ParticleEffect::ParticleEffect() :
 	additive(false),
+	lasttime(0),
 	lifetime(2000),
+	gravity(0.0f, 0.0f),
 	fadealpha(0.0f),
 	deceleration(0.0f),
 	swingstrength(0.0f)

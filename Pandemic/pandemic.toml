@@ -36,6 +36,7 @@ ButtonRepeatInterval = 100
 SlideTimeoutMs = 1000
 RoundTimeoutMs = 1500
 PuckLostCheckTimeoutMs = 1000
+EasyCombos = true
 
 [Resources]
 title.mp3.Volume = 40

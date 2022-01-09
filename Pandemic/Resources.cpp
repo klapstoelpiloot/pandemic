@@ -5,7 +5,9 @@
 Resources::Resources()
 {
 	Main::GetGraphics().ClearRenderers();
-	Main::GetGraphics().AddRenderer(&bar);
+	// The loading is so short, we don't really need this
+	//Main::GetGraphics().AddRenderer(&loadingscreen);
+	//Main::GetGraphics().Present();
 
 	std::cout << "Loading resources... " << std::endl;
 	
@@ -17,15 +19,13 @@ Resources::Resources()
 	ENSURE(result);
 
 	// Make lists of the files we want to load.
-	// We use these lists to load resources by type and keep track of our progress.
+	// We use these lists to load resources by type.
 	vector<String> ddsfiles, fntfiles, wavfiles, mp3files, anifiles;
 	CopyFilenamesByExtension(allfiles, ddsfiles, ".dds");
 	CopyFilenamesByExtension(allfiles, fntfiles, ".fnt");
 	CopyFilenamesByExtension(allfiles, wavfiles, ".wav");
 	CopyFilenamesByExtension(allfiles, mp3files, ".mp3");
 	CopyFilenamesByExtension(allfiles, anifiles, ".ani");
-	uint totalresources = ddsfiles.size() + fntfiles.size() + wavfiles.size() + mp3files.size() + anifiles.size();
-	uint filesdone = 0;
 
 	// Load music
 	for(const String& filename : mp3files)
@@ -34,7 +34,6 @@ Resources::Resources()
 		int vol = config.GetInt(String("Resources.") + name + ".Volume", 100);
 		Sound* mus = new Sound(filename, true, static_cast<float>(vol) / 100.0f);
 		music.insert(MusicMap::value_type(name, mus));
-		UpdateProgress(bar, totalresources, filesdone);
 	}
 
 	// Load images
@@ -43,7 +42,6 @@ Resources::Resources()
 		String name = File::GetFileName(filename);
 		Image* img = new Image(filename);
 		images.insert(ImagesMap::value_type(name, img));
-		UpdateProgress(bar, totalresources, filesdone);
 	}
 
 	// Load sounds
@@ -53,7 +51,6 @@ Resources::Resources()
 		int vol = config.GetInt(String("Resources.") + name + ".Volume", 100);
 		Sound* snd = new Sound(filename, false, static_cast<float>(vol) / 100.0f);
 		sounds.insert(SoundsMap::value_type(name, snd));
-		UpdateProgress(bar, totalresources, filesdone);
 	}
 
 	// Load fonts
@@ -62,7 +59,6 @@ Resources::Resources()
 		String name = File::GetFileName(filename);
 		Font* fnt = new Font(filename, *this);
 		fonts.insert(FontsMap::value_type(name, fnt));
-		UpdateProgress(bar, totalresources, filesdone);
 	}
 
 	// Load animations
@@ -71,7 +67,6 @@ Resources::Resources()
 		String name = File::GetFileName(filename);
 		Animation* fnt = new Animation(filename, *this);
 		animations.insert(AnimationsMap::value_type(name, fnt));
-		UpdateProgress(bar, totalresources, filesdone);
 	}
 
 	// Make shortcuts for common resources
@@ -168,11 +163,4 @@ void Resources::CopyFilenamesByExtension(vector<String>& input, vector<String>& 
 		if(String::ToLower(File::GetExtension(filename)) == extlowercase)
 			output.push_back(filename);
 	}
-}
-
-void Resources::UpdateProgress(ProgressBar& bar, uint totalfiles, uint& filesdone)
-{
-	// Advance the progress bar and redraw the display
-	bar.SetProgress(static_cast<float>(++filesdone) / static_cast<float>(totalfiles));
-	Main::GetGraphics().Present();
 }
