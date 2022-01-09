@@ -16,9 +16,11 @@ private:
 	GameStateMachine* statemachine;
 	HighscoreRenderer renderer;
 	GameType gametype;
+	TimePoint showtitletime;
 
 	// Methods
 	void Setup();
+	void SetAlternatingTime();
 
 public:
 

@@ -17,6 +17,10 @@ private:
 	bool flashbuttonson;
 	TimePoint flashstarttime;
 	TimePoint buttonunlocktime;
+	TimePoint showhighscorestime;
+
+	// Methods
+	void SetAlternatingTime();
 
 public:
 

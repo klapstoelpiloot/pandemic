@@ -8,6 +8,7 @@
 #define BUTTON_FIRST_FLASH_DELAY	11500
 #define BUTTON_FLASH_DELAY			11500
 #define BUTTON_FLASH_INTERVAL		400
+#define ALTERNATE_HIGHSCORES_TIME	30000
 
 TitleState::TitleState(GameStateMachine* _statemachine) :
 	statemachine(_statemachine),
@@ -29,14 +30,18 @@ void TitleState::Enter()
 
 	Main::GetGraphics().ClearRenderers();
 	Main::GetGraphics().AddRenderer(&renderer);
+	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 
 	// If the time has passed the button unlock, then reinitialize the button/flash times
 	if(Clock::now() > buttonunlocktime)
 	{
+		statemachine->GetScreenMelt().Begin();
 		renderer.BeginReturnToTitle();
 		flashstarttime = Clock::now() + ch::milliseconds(BUTTON_FLASH_DELAY);
 		buttonunlocktime = Clock::now() + ch::milliseconds(BUTTON_BLOCK_TIME);
 	}
+
+	SetAlternatingTime();
 }
 
 void TitleState::Leave()
@@ -63,6 +68,16 @@ void TitleState::Update()
 			Main::GetButtons().SetAllGameLEDsOff();
 		}
 	}
+
+	if(Main::GetMenu().IsShown())
+	{
+		SetAlternatingTime();
+	}
+	else if(ch::IsTimeSet(showhighscorestime) && (Clock::now() > showhighscorestime))
+	{
+		// Go to the highscores when it is time
+		statemachine->ChangeState(statemachine->GetHighscoreState());
+	}
 }
 
 bool TitleState::HandleMessage(const IOModule_IOMessage& msg)
@@ -82,4 +97,13 @@ bool TitleState::HandleMessage(const IOModule_IOMessage& msg)
 		default:
 			return false;
 	}
+}
+
+void TitleState::SetAlternatingTime()
+{
+	// Alternating between title and highscore screens?
+	if(Main::GetConfig().GetBool("General.AlternateTitleHighscores", false))
+		showhighscorestime = Clock::now() + ch::milliseconds(ALTERNATE_HIGHSCORES_TIME);
+	else
+		showhighscorestime = TimePoint();
 }

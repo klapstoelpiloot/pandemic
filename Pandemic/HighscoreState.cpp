@@ -3,6 +3,8 @@
 #include "GameStateMachine.h"
 #include "Main.h"
 
+#define ALTERNATE_TITLE_TIME	30000
+
 HighscoreState::HighscoreState(GameStateMachine* _statemachine) :
 	statemachine(_statemachine),
 	gametype(GameType::Casual)
@@ -38,6 +40,16 @@ void HighscoreState::Leave()
 void HighscoreState::Update()
 {
 	statemachine->PlayOrRepeatTitleMusic();
+
+	if(Main::GetMenu().IsShown())
+	{
+		SetAlternatingTime();
+	}
+	else if(ch::IsTimeSet(showtitletime) && (Clock::now() > showtitletime))
+	{
+		// Go to the title when it is time
+		statemachine->ChangeState(statemachine->GetTitleState());
+	}
 }
 
 bool HighscoreState::HandleMessage(const IOModule_IOMessage& msg)
@@ -63,4 +75,14 @@ void HighscoreState::Setup()
 	HighscoreManager scores = Main::GetScores();
 	scores.Load(gametype);
 	renderer.Setup(scores.GetHighscores(), scores.GetPeriodscores(), gametype, scores.GetPeriodScoresInterval());
+	SetAlternatingTime();
+}
+
+void HighscoreState::SetAlternatingTime()
+{
+	// Alternating between title and highscore screens?
+	if(Main::GetConfig().GetBool("General.AlternateTitleHighscores", false))
+		showtitletime = Clock::now() + ch::milliseconds(ALTERNATE_TITLE_TIME);
+	else
+		showtitletime = TimePoint();
 }

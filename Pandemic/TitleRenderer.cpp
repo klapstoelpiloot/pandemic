@@ -6,7 +6,8 @@
 #include "glm/vec2.hpp"
 #include "glm/geometric.hpp"
 
-#define TITLE_START_TIME			500
+#define FIRST_START_TIME			500
+#define SHORT_START_TIME			500
 #define TITLE_FADE_DURATION			4000
 #define CREDIT_START_TIME			2000	// From title start time
 #define CREDIT_FADE_IN_DURATION		500
@@ -38,9 +39,9 @@ TitleRenderer::TitleRenderer() :
 
 void TitleRenderer::BeginFirstStart()
 {
-	titlestarttime = Clock::now() + ch::milliseconds(TITLE_START_TIME);
+	titlestarttime = Clock::now() + ch::milliseconds(FIRST_START_TIME);
 	creditstarttime = titlestarttime + ch::milliseconds(CREDIT_START_TIME);
-	laststeptime = Clock::now() + ch::milliseconds(TITLE_START_TIME);
+	laststeptime = Clock::now() + ch::milliseconds(FIRST_START_TIME);
 	showkeyinfo = false;
 	creditindex = 0;
 	creditstext.SetText(CREDITS[creditindex]);
@@ -49,9 +50,9 @@ void TitleRenderer::BeginFirstStart()
 
 void TitleRenderer::BeginReturnToTitle()
 {
-	titlestarttime = Clock::now() + ch::milliseconds(TITLE_START_TIME);
+	titlestarttime = Clock::now() + ch::milliseconds(SHORT_START_TIME);
 	creditstarttime = titlestarttime + ch::milliseconds(CREDIT_START_TIME);
-	laststeptime = Clock::now() + ch::milliseconds(TITLE_START_TIME);
+	laststeptime = Clock::now() + ch::milliseconds(SHORT_START_TIME);
 	showkeyinfo = false;
 	creditindex = 0;
 	creditstext.SetText(CREDITS[creditindex]);
