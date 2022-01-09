@@ -4,6 +4,7 @@
 #include "ParticleEffect.h"
 #include "IAnimationRenderer.h"
 #include "ParticleOverlayRenderer.h"
+#include "TextShine.h"
 
 class SetAnimation final : public virtual IAnimationRenderer
 {
@@ -14,12 +15,18 @@ private:
 	ParticleEffect particles;
 	ParticleEffect sparks;
 	Text settext;
+	Text nextset;
+	Text prevset;
 	const Image& texture;
+	TweenInt numberoffset;
+	TextShine shine;
 	TimePoint starttime;
+	TimePoint bangtime;
+	TimePoint laststeptime;
 	int index;
 
 	// Methods
-	void SpawnParticle(Color color, int yoffset);
+	void SpawnParticle(Color color, int x, int y);
 
 public:
 

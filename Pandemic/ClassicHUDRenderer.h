@@ -16,17 +16,23 @@ private:
 	Text roundlabel;
 	Text scorelabel;
 	Text puckslabel;
+	Text pointtext[8];
+	TweenXY pointprogress[8];
+	vector<int> points;
 	const Image& texture;
 	std::array<Text, GAME_GATES> gatenumbers;
 	std::array<bool, GAME_GATES> gaterequired;
 	ParticleEffect gateparticles;
 	TimePoint fadeoutstart;
+	TimePoint laststeptime;
+	TimePoint scoresettime;
 
 	// Methods
 	void DrawGateLine(Canvas& canvas, int startx, int endx, Color color);
 	void SpawnGateEffectBig(int startx, int endx);
 	void SpawnGateEffectSmall(int startx, int endx);
 	void SpawnGateParticle(int x, int y, int centerx, Color color);
+	void FloatPoints(String text, int x, int y);
 
 public:
 
@@ -41,4 +47,5 @@ public:
 	void Hide() { fadeoutstart = Clock::now(); }
 	void ScoreRequiredGate(int gate);
 	void ScoreGate(int gate);
+	void ScoreSet();
 };

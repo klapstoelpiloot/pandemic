@@ -1,5 +1,4 @@
 #include "TitleRenderer.h"
-#include "ProgressBar.h"
 #include "File.h"
 #include "Main.h"
 #include <cmath>

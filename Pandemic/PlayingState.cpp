@@ -246,9 +246,12 @@ bool PlayingState::HandleMessage(const IOModule_IOMessage& msg)
 					CheckComboAchievement();
 
 					// A new set is completed!
+					hud.ScoreSet();
 					setanimation.SetIndex(newsets);
 					aniqueue.push(&setanimation);
-					anistarttime = Clock::now() + ANI_START_DELAY;
+
+					if(!showinganimations)
+						anistarttime = Clock::now() + ANI_START_DELAY;
 				}
 				else if(prevreq)
 				{

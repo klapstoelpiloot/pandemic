@@ -30,6 +30,8 @@
 #define COUNTERS_OUTLINE	BLACK
 #define NUM_SPARK_IMAGES	3
 #define FADE_OUT_DURATION	ch::milliseconds(200)
+#define FLOAT_DURATION		2000
+#define SCORE_SET_DELAY		1000
 
 String GATE_NUMBERS[] = { "2", "3", "4", "1" };
 
@@ -40,6 +42,13 @@ ClassicHUDRenderer::ClassicHUDRenderer(ParticleOverlayRenderer& particlesoverlay
 	roundlabel(Main::GetResources().Smallest(), HorizontalAlign::Left, VerticalAlign::Top),
 	scorelabel(Main::GetResources().Smallest(), HorizontalAlign::Right, VerticalAlign::Top),
 	puckslabel(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Top),
+	pointtext {
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom)
+	},
 	texture(Main::GetResources().GetImage("yellow12.dds")),
 	gaterequired{ {false, false, false, false} }
 {
@@ -72,8 +81,31 @@ ClassicHUDRenderer::ClassicHUDRenderer(ParticleOverlayRenderer& particlesoverlay
 void ClassicHUDRenderer::Render(Canvas& canvas)
 {
 	TimePoint t = Clock::now();
+	int dt = static_cast<int>(ch::ToMilliseconds(t - laststeptime));
+	laststeptime = t;
 	if(!ch::IsTimeSet(fadeoutstart) || (t < (fadeoutstart + FADE_OUT_DURATION)))
 	{
+		// Remove floating points that have finished
+		for(int i = points.size() - 1; i >= 0; i--)
+		{
+			if(pointprogress[points[i]].progress() >= 1.0f)
+				points.erase(points.begin() + i);
+		}
+
+		// Time to show the set score?
+		if(ch::IsTimeSet(scoresettime) && (t > scoresettime))
+		{
+			scoresettime = TimePoint();
+			int x = 0;
+			switch(Random(0, 2))
+			{
+				case 0: x = (GATE1_END + GATE2_START) / 2; break;
+				case 1: x = (GATE2_END + GATE3_START) / 2; break;
+				case 2: x = (GATE3_END + GATE4_START) / 2; break;
+			}
+			FloatPoints("+10", x, GATE_NUMBER_Y);
+		}
+
 		byte alpha;
 		if(ch::IsTimeSet(fadeoutstart))
 		{
@@ -123,6 +155,19 @@ void ClassicHUDRenderer::Render(Canvas& canvas)
 		roundlabel.DrawBlend(canvas, Point(ROUND_X, LABELS_Y), Color(LABELS_COLOR, alpha));
 		scorelabel.DrawBlend(canvas, Point(SCORE_X, LABELS_Y), Color(LABELS_COLOR, alpha));
 		puckslabel.DrawBlend(canvas, Point(PUCKS_X, LABELS_Y), Color(LABELS_COLOR, alpha));
+
+		// Advance floating points and draw them
+		for(int index : points)
+		{
+			Point p = pointprogress[index].step(dt);
+
+			// Determine color
+			int m = (((ch::ToMilliseconds(t) + p.y * 17) % 100) > 50) ? 1 : 0;
+			Color c = Color(255, 155 + 100 * m, 255 * m, alpha);
+
+			pointtext[index].DrawOutlineBlend(canvas, p, 1, Color(BLACK, alpha));
+			pointtext[index].DrawBlend(canvas, p, c);
+		}
 	}
 }
 
@@ -136,10 +181,25 @@ void ClassicHUDRenderer::ScoreRequiredGate(int gate)
 {
 	switch(gate)
 	{
-		case 0: SpawnGateEffectBig(GATE1_START, GATE1_END); break;
-		case 1: SpawnGateEffectBig(GATE2_START, GATE2_END); break;
-		case 2: SpawnGateEffectBig(GATE3_START, GATE3_END); break;
-		case 3: SpawnGateEffectBig(GATE4_START, GATE4_END); break;
+		case 0:
+			SpawnGateEffectBig(GATE1_START, GATE1_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE1_START + GATE1_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
+
+		case 1:
+			SpawnGateEffectBig(GATE2_START, GATE2_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE2_START + GATE2_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
+
+		case 2:
+			SpawnGateEffectBig(GATE3_START, GATE3_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE3_START + GATE3_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
+
+		case 3:
+			SpawnGateEffectBig(GATE4_START, GATE4_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE4_START + GATE4_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
 	}
 }
 
@@ -147,11 +207,32 @@ void ClassicHUDRenderer::ScoreGate(int gate)
 {
 	switch(gate)
 	{
-		case 0: SpawnGateEffectSmall(GATE1_START, GATE1_END); break;
-		case 1: SpawnGateEffectSmall(GATE2_START, GATE2_END); break;
-		case 2: SpawnGateEffectSmall(GATE3_START, GATE3_END); break;
-		case 3: SpawnGateEffectSmall(GATE4_START, GATE4_END); break;
+		case 0:
+			SpawnGateEffectSmall(GATE1_START, GATE1_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE1_START + GATE1_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
+
+		case 1:
+			SpawnGateEffectSmall(GATE2_START, GATE2_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE2_START + GATE2_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
+
+		case 2:
+			SpawnGateEffectSmall(GATE3_START, GATE3_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE3_START + GATE3_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
+
+		case 3:
+			SpawnGateEffectSmall(GATE4_START, GATE4_END);
+			FloatPoints(String("+") + GATE_NUMBERS[gate], (GATE4_START + GATE4_END) / 2 - 2, GATE_NUMBER_Y);
+			break;
 	}
+}
+
+void ClassicHUDRenderer::ScoreSet()
+{
+	if(!ch::IsTimeSet(scoresettime))
+		scoresettime = Clock::now() + ch::milliseconds(SCORE_SET_DELAY);
 }
 
 void ClassicHUDRenderer::DrawGateLine(Canvas& canvas, int startx, int endx, Color color)
@@ -241,4 +322,27 @@ void ClassicHUDRenderer::SpawnGateParticle(int x, int y, int centerx, Color colo
 
 	// Make the particle
 	gateparticles.Spawn(Particle(p, v, color, a, meta));
+}
+
+void ClassicHUDRenderer::FloatPoints(String text, int x, int y)
+{
+	// Find an unused index
+	int index = -1;
+	for(int i = 0; i < 8; i++)
+	{
+		auto it = std::find(points.begin(), points.end(), i);
+		if(it == points.end())
+		{
+			index = i;
+			break;
+		}
+	}
+
+	if(index == -1)
+		return;
+
+	// Add index to the list while this floats up
+	points.push_back(index);
+	pointprogress[index] = tweeny::from(x, y).to(x, 0).during(FLOAT_DURATION);
+	pointtext[index].SetText(text);
 }
