@@ -69,6 +69,7 @@ void SetAnimation::Start()
 		numberoffset.step(SCROLL_DURATION / 3);
 		bangtime = Clock::now() + ch::milliseconds(SCROLL_DURATION - SCROLL_DURATION / 3);
 	}
+	setshinetime = bangtime + ch::milliseconds(100);
 }
 
 void SetAnimation::Render(Canvas& canvas)
@@ -89,7 +90,7 @@ void SetAnimation::Render(Canvas& canvas)
 	if(ch::IsTimeSet(bangtime) && (t > bangtime))
 	{
 		bangtime = TimePoint();
-		shine.Begin(settext.GetTextSize());
+		textshine.Begin(settext.GetTextSize());
 
 		// Play timed sound
 		Main::GetResources().GetSound("set.wav").Play();
@@ -102,6 +103,12 @@ void SetAnimation::Render(Canvas& canvas)
 		}
 	}
 
+	if(ch::IsTimeSet(setshinetime) && (t > setshinetime))
+	{
+		setshinetime = TimePoint();
+		setshine.Begin(nextset.GetTextSize());
+	}
+
 	settext.DrawOutlineMask(canvas, Point(SETTEXT_X, CENTER_Y), 2, BLACK);
 	nextset.DrawOutlineMask(canvas, Point(SET_X, textoffset), 2, BLACK);
 	prevset.DrawOutlineMask(canvas, Point(SET_X, CENTER_Y + textoffset), 2, BLACK);
@@ -110,14 +117,12 @@ void SetAnimation::Render(Canvas& canvas)
 	nextset.DrawTexturedMask(canvas, Point(SET_X, textoffset), texture);
 	prevset.DrawTexturedMask(canvas, Point(SET_X, CENTER_Y + textoffset), texture);
 
-	shine.Draw(canvas, settext, Point(SETTEXT_X, CENTER_Y));
-	shine.Draw(canvas, nextset, Point(SET_X, textoffset));
+	textshine.Draw(canvas, settext, 2, Point(SETTEXT_X, CENTER_Y));
+	setshine.Draw(canvas, nextset, 2, Point(SET_X, textoffset));
 }
 
 void SetAnimation::SpawnParticle(Color color, int x, int y)
 {
-	const Size& size = settext.GetTextSize();
-
 	// Spawn position
 	glm::vec2 p(static_cast<float>(x), static_cast<float>(y));
 

@@ -62,6 +62,6 @@ void GreatShotAnimation::Render(Canvas& canvas)
 	text2.DrawOutlineMask(canvas, t2pos, 2, BLACK);
 	text1.DrawTexturedMask(canvas, t1pos, texture);
 	text2.DrawTexturedMask(canvas, t2pos, texture);
-	shine1.Draw(canvas, text1, t1pos);
-	shine2.Draw(canvas, text2, t2pos);
+	shine1.Draw(canvas, text1, 2, t1pos);
+	shine2.Draw(canvas, text2, 2, t2pos);
 }

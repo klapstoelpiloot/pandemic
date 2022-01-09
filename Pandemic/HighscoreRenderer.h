@@ -5,6 +5,7 @@
 #include "ScoresTable.h"
 #include "GameDesc.h"
 #include "ScoresPeriod.h"
+#include "TextShine.h"
 
 class HighscoreRenderer final : public virtual IRenderer
 {
@@ -30,6 +31,8 @@ private:
 	int hipagesize;
 	int daypagesize;
 	bool continuousloop;
+	TextShine shine;
+	TimePoint nextshinetime;
 
 	// Methods
 	void Cleanup();

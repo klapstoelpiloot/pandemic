@@ -61,6 +61,6 @@ void IncredibleAnimation::Render(Canvas& canvas)
 
 	text.DrawOutlineMask(canvas, Point(65, textoffset), 2, BLACK);
 	text.DrawTexturedMask(canvas, Point(65, textoffset), texture, to);
-	shine.Draw(canvas, text, Point(65, textoffset));
+	shine.Draw(canvas, text, 2, Point(65, textoffset));
 	flasher.Draw(canvas, text, Point(65, textoffset), 2);
 }

@@ -163,7 +163,7 @@ void ClassicHUDRenderer::Render(Canvas& canvas)
 
 			// Determine color
 			int m = (((ch::ToMilliseconds(t) + p.y * 17) % 100) > 50) ? 1 : 0;
-			Color c = Color(255, 155 + 100 * m, 255 * m, alpha);
+			Color c = Color(255, static_cast<byte>(155 + 100 * m), static_cast<byte>(255 * m), alpha);
 
 			pointtext[index].DrawOutlineBlend(canvas, p, 1, Color(BLACK, alpha));
 			pointtext[index].DrawBlend(canvas, p, c);

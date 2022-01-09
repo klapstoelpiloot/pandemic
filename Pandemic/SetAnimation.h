@@ -19,10 +19,12 @@ private:
 	Text prevset;
 	const Image& texture;
 	TweenInt numberoffset;
-	TextShine shine;
+	TextShine textshine;
+	TextShine setshine;
 	TimePoint starttime;
 	TimePoint bangtime;
 	TimePoint laststeptime;
+	TimePoint setshinetime;
 	int index;
 
 	// Methods

@@ -18,6 +18,7 @@
 #define NAME_COLOR			WHITE
 #define SCORE_COLOR			Color(255, 220, 62)
 #define EMPTY_LIST_TEXT		"             NOBODY YET"
+#define SHINE_INTERVAL		ch::milliseconds(1000)
 
 HighscoreRenderer::HighscoreRenderer() :
 	hiscoretext("ALLTIME HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
@@ -43,10 +44,11 @@ HighscoreRenderer::~HighscoreRenderer()
 
 void HighscoreRenderer::Render(Canvas& canvas)
 {
+	TimePoint t = Clock::now();
 	// Determine scroll position
 	int scrollpos = 0;
-	if(Clock::now() > scrollstarttime)
-		scrollpos = static_cast<int>(ch::ToMilliseconds(Clock::now() - scrollstarttime) / SCROLL_SPEED);
+	if(t > scrollstarttime)
+		scrollpos = static_cast<int>(ch::ToMilliseconds(t - scrollstarttime) / SCROLL_SPEED);
 
 	// Start drawing
 	int hitrophyy = CalculateY(TROPHY_Y, scrollpos);
@@ -56,18 +58,36 @@ void HighscoreRenderer::Render(Canvas& canvas)
 	int dayscopetexty = CalculateY(SCOPE_TEXT_Y + hipagesize, scrollpos);
 	int daygametexty = CalculateY(GAME_TEXT_Y + hipagesize, scrollpos);
 
-	canvas.DrawColorImageMask(Point(CENTER_X - (higametext.GetTextSize().width / 2) - 18, hitrophyy), yellowtrophy);
-	canvas.DrawColorImageMask(Point(CENTER_X + (higametext.GetTextSize().width / 2) + 4, hitrophyy), yellowtrophy);
-	canvas.DrawColorImageMask(Point(CENTER_X - (periodgametext.GetTextSize().width / 2) - 18, daytrophyy), graytrophy);
-	canvas.DrawColorImageMask(Point(CENTER_X + (periodgametext.GetTextSize().width / 2) + 4, daytrophyy), graytrophy);
+	if((t > nextshinetime) && ((higametexty == GAME_TEXT_Y) || (daygametexty == GAME_TEXT_Y)))
+	{
+		nextshinetime += SHINE_INTERVAL;
+		shine.Begin(Size(DISPLAY_WIDTH, DISPLAY_HEIGHT));
+	}
+
+	Point yt1 = Point(CENTER_X - (higametext.GetTextSize().width / 2) - 18, hitrophyy);
+	Point yt2 = Point(CENTER_X + (higametext.GetTextSize().width / 2) + 4, hitrophyy);
+	Point gt1 = Point(CENTER_X - (periodgametext.GetTextSize().width / 2) - 18, daytrophyy);
+	Point gt2 = Point(CENTER_X + (periodgametext.GetTextSize().width / 2) + 4, daytrophyy);
+	canvas.DrawColorImageMask(yt1, yellowtrophy);
+	canvas.DrawColorImageMask(yt2, yellowtrophy);
+	canvas.DrawColorImageMask(gt1, graytrophy);
+	canvas.DrawColorImageMask(gt2, graytrophy);
+	shine.Draw(canvas, yellowtrophy, yt1);
+	shine.Draw(canvas, yellowtrophy, yt2);
+	shine.Draw(canvas, graytrophy, gt1);
+	shine.Draw(canvas, graytrophy, gt2);
 	hiscoretext.DrawOutlineMask(canvas, Point(CENTER_X, hiscopetexty), 1, BLACK);
 	hiscoretext.DrawTexturedMask(canvas, Point(CENTER_X, hiscopetexty), yellowtexture);
+	shine.Draw(canvas, hiscoretext, 1, Point(CENTER_X, hiscopetexty));
 	higametext.DrawOutlineMask(canvas, Point(CENTER_X, higametexty), 1, BLACK);
 	higametext.DrawTexturedMask(canvas, Point(CENTER_X, higametexty), yellowtexture);
+	shine.Draw(canvas, higametext, 1, Point(CENTER_X, higametexty));
 	periodscoretext.DrawOutlineMask(canvas, Point(CENTER_X, dayscopetexty), 1, BLACK);
 	periodscoretext.DrawTexturedMask(canvas, Point(CENTER_X, dayscopetexty), graytexture);
+	shine.Draw(canvas, periodscoretext, 1, Point(CENTER_X, dayscopetexty));
 	periodgametext.DrawOutlineMask(canvas, Point(CENTER_X, daygametexty), 1, BLACK);
 	periodgametext.DrawTexturedMask(canvas, Point(CENTER_X, daygametexty), graytexture);
+	shine.Draw(canvas, periodgametext, 1, Point(CENTER_X, daygametexty));
 	for(size_t i = 0; i < postexts.size(); i++)
 	{
 		int offset;
@@ -153,6 +173,7 @@ void HighscoreRenderer::Setup(const ScoresTable& hightable, const ScoresTable& d
 	daypagesize = FIRST_ITEM_Y + (numdayscores * ITEM_SPACING);
 	begintime = Clock::now();
 	scrollstarttime = Clock::now() + ch::milliseconds(SCROLL_DELAY);
+	nextshinetime = Clock::now() + SHINE_INTERVAL;
 }
 
 bool HighscoreRenderer::IsFinished()
