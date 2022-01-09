@@ -24,7 +24,7 @@ Frequency = 0			# 0 = System default
 Buffers = 2				# Using 2 for low latency, default is 4
 BufferSize = 512		# Using 512 for low latency, default is 1024
 MaxChannels = 256
-Volume = 10
+Volume = 100
 
 [IO]
 SerialPort = "/dev/ttyACM0"
