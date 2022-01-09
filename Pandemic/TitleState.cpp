@@ -25,6 +25,9 @@ void TitleState::Enter()
 	// TODO: Temporary fix. Remove when renderers are fixed so that menu can stay open.
 	Main::GetMenu().Hide();
 
+	// Set IO module in normal operation mode
+	Main::GetIO().SetNormalMode();
+
 	Main::GetResources().GetMusic("inter_short.mp3").Stop();
 	Main::GetResources().GetMusic("inter_long.mp3").Stop();
 
@@ -71,6 +74,7 @@ void TitleState::Update()
 
 	if(Main::GetMenu().IsShown())
 	{
+		// When the menu is shown, we don't want to switch to another screen
 		SetAlternatingTime();
 	}
 	else if(ch::IsTimeSet(showhighscorestime) && (Clock::now() > showhighscorestime))

@@ -23,6 +23,9 @@ void HighscoreState::Enter()
 
 	Main::GetButtons().SetAllGameLEDs(false, false, false, true);
 
+	// Set IO module in normal operation mode
+	Main::GetIO().SetNormalMode();
+
 	Setup();
 
 	// Setup rendering
@@ -43,6 +46,7 @@ void HighscoreState::Update()
 
 	if(Main::GetMenu().IsShown())
 	{
+		// When the menu is shown, we don't want to switch to another screen
 		SetAlternatingTime();
 	}
 	else if(ch::IsTimeSet(showtitletime) && (Clock::now() > showtitletime))
