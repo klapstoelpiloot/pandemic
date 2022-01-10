@@ -32,5 +32,5 @@ Credit to whom credit is due. I'm using the following software libraries:
 The following tools and resources where used:
 - [AngelCode BMFont](http://www.angelcode.com/products/bmfont/) to generate the font atlas images.
 - [Paint.NET](https://www.getpaint.net/) for the images.
-- [Audacity](https://www.audacityteam.org/) for the audio.
-- Sounds and fonts are various free resources plucked from the internet.
+- [Audacity](https://www.audacityteam.org/) for sound editing.
+- [Shadertoy](https://www.shadertoy.com/) for experimenting with visual effects.
