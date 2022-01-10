@@ -23,6 +23,7 @@ The data files must be in the directory /usr/local/games/data/, however, this is
 Credit to whom credit is due. I'm using the following software libraries:
 - [rpi-rgb-led-matrix library](https://github.com/hzeller/rpi-rgb-led-matrix) for the LED-matrix display control _(not included in this repository)_.
 - [GLM library](https://github.com/g-truc/glm) for vector math.
+- [tweeny](https://github.com/mobius3/tweeny) for smooth animations movements.
 - [cpptoml](https://github.com/skystrife/cpptoml) for the TOML configuration file format.
 - [lodepng](https://github.com/lvandeve/lodepng) for PNG file writing.
 - [cxxopts](https://github.com/jarro2783/cxxopts) for command line parameter parsing.
