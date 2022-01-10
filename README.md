@@ -24,6 +24,12 @@ Credit to whom credit is due. I'm using the following software libraries:
 - [rpi-rgb-led-matrix library](https://github.com/hzeller/rpi-rgb-led-matrix) for the LED-matrix display control _(not included in this repository)_.
 - [GLM library](https://github.com/g-truc/glm) for vector math.
 - [tweeny](https://github.com/mobius3/tweeny) for smooth animations movements.
+- [nanopb](https://github.com/nanopb/nanopb) for communication protocol between Raspberry Pi and Arduino.
 - [cpptoml](https://github.com/skystrife/cpptoml) for the TOML configuration file format.
 - [lodepng](https://github.com/lvandeve/lodepng) for PNG file writing.
 - [cxxopts](https://github.com/jarro2783/cxxopts) for command line parameter parsing.
+The following tools and resources where used:
+- [AngelCode BMFont](http://www.angelcode.com/products/bmfont/) to generate the font atlas images.
+- [Paint.NET](https://www.getpaint.net/) for the images.
+- [Audacity](https://www.audacityteam.org/) for the audio.
+- Sounds and fonts are various free resources plucked from the internet.
