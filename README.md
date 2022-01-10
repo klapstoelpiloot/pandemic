@@ -28,6 +28,7 @@ Credit to whom credit is due. I'm using the following software libraries:
 - [cpptoml](https://github.com/skystrife/cpptoml) for the TOML configuration file format.
 - [lodepng](https://github.com/lvandeve/lodepng) for PNG file writing.
 - [cxxopts](https://github.com/jarro2783/cxxopts) for command line parameter parsing.
+
 The following tools and resources where used:
 - [AngelCode BMFont](http://www.angelcode.com/products/bmfont/) to generate the font atlas images.
 - [Paint.NET](https://www.getpaint.net/) for the images.
