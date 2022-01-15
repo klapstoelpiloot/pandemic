@@ -14,7 +14,8 @@ HighscoreManager::HighscoreManager(const Configuration& config) :
 	gametype(GameType::Casual),
 	interval(static_cast<ScoresPeriod>(config.GetInt("General.PeriodicScoresInterval", 0))),
 	highscores(static_cast<size_t>(config.GetInt("General.MaxHighScores", 10))),
-	periodscores(static_cast<size_t>(config.GetInt("General.MaxPeriodicScores", 10)))
+	periodscores(static_cast<size_t>(config.GetInt("General.MaxPeriodicScores", 10))),
+	keephighestonly(config.GetString("General.KeepHighestScoresOnly", false))
 {
 }
 
@@ -37,14 +38,14 @@ bool HighscoreManager::Insert(const ScoreRecord& score)
 {
 	bool result = false;
 
-	if(highscores.Insert(score))
+	if(highscores.Insert(score, keephighestonly))
 	{
 		String highscoresfile = GetHighscoreFilename();
 		highscores.Save(highscoresfile);
 		result = true;
 	}
 
-	if(periodscores.Insert(score))
+	if(periodscores.Insert(score, keephighestonly))
 	{
 		String periodscoresfile = GetPeriodscoreFilename();
 		periodscores.Save(periodscoresfile);

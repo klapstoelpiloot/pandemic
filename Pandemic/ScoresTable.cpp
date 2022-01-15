@@ -62,35 +62,64 @@ bool ScoresTable::IsWorthy(int score) const
 	return (this->size() < maxitems);
 }
 
-bool ScoresTable::Insert(const ScoreRecord& newrecord)
+bool ScoresTable::Insert(const ScoreRecord& newrecord, bool keephighestonly)
 {
-	// Go through the list to see if the given score is higher than any on the list,
-	// in which case we must insert before that item.
-	for(size_t i = 0; i < this->size(); i++)
+	bool addtolist = true;
+	int highestscore = newrecord.score;
+
+	if(keephighestonly)
 	{
-		ScoreRecord& record = (*this)[i];
-		if(newrecord.score > record.score)
+		// Process the current list to remove lower scores for the same player
+		for(auto it = this->begin(); it != this->end(); it++)
 		{
-			// Insert before this item
-			this->insert(this->begin() + i, newrecord);
+			if(String::ToUpper(newrecord.name) != String::ToUpper(it->name))
+				continue;
 
-			// If the list got bigger than allowed, then drop some off the list
-			if(this->size() > maxitems)
-				this->resize(maxitems);
+			// If a higher score is already in the list for this player,
+			// then we don't add to the list.
+			if(it->score >= highestscore)
+			{
+				addtolist = false;
+				highestscore = it->score;
+			}
 
-			return true;
+			// If a lower score is in the list for this player,
+			// remove it from the list.
+			if(it->score < highestscore)
+				it = this->erase(it);
 		}
 	}
 
-	if(this->size() < maxitems)
+	if(addtolist)
 	{
-		// Append at the end of the list
-		this->push_back(newrecord);
-		return true;
-	}
-	else
-	{
-		// There is no place for losers, now go away.
-		return false;
+		// Go through the list to see if the given score is higher than any on the list,
+		// in which case we must insert before that item.
+		for(size_t i = 0; i < this->size(); i++)
+		{
+			ScoreRecord& record = (*this)[i];
+			if(newrecord.score > record.score)
+			{
+				// Insert before this item
+				this->insert(this->begin() + i, newrecord);
+
+				// If the list got bigger than allowed, then drop some off the list
+				if(this->size() > maxitems)
+					this->resize(maxitems);
+
+				return true;
+			}
+		}
+
+		if(this->size() < maxitems)
+		{
+			// Append at the end of the list
+			this->push_back(newrecord);
+			return true;
+		}
+		else
+		{
+			// There is no place for losers, now go away.
+			return false;
+		}
 	}
 }

@@ -8,6 +8,7 @@ MaxPeriodicScores = 10
 PeriodicScoresInterval = 1				# 0 = Daily, 1 = Monthly, 2 = Annually
 AlternateTitleHighscores = true
 RepeatTitleMusic = false
+KeepHighestScoresOnly = true
 
 [Graphics]
 PWM_LSB_Nanoseconds = 300

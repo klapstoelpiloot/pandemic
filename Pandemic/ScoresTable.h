@@ -14,5 +14,5 @@ public:
 	void Load(String filename);
 	void Save(String filename) const;
 	bool IsWorthy(int score) const;
-	bool Insert(const ScoreRecord& newrecord);
+	bool Insert(const ScoreRecord& newrecord, bool keephighestonly);
 };

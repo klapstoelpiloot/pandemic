@@ -14,6 +14,7 @@ private:
 	ScoresPeriod interval;
 	ScoresTable highscores;
 	ScoresTable periodscores;
+	bool keephighestonly;
 
 	// Methods
 	String GetHighscoreFilename() const;
