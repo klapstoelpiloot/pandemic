@@ -22,6 +22,7 @@ The data files must be in the directory /usr/local/games/data/, however, this is
 ## Credits
 Credit to whom credit is due. I'm using the following software libraries:
 - [rpi-rgb-led-matrix library](https://github.com/hzeller/rpi-rgb-led-matrix) for the LED-matrix display control _(not included in this repository)_.
+- [fmod](https://www.fmod.com) for sound & music playback and recording _(not included in this repository)_.
 - [GLM library](https://github.com/g-truc/glm) for vector math.
 - [tweeny](https://github.com/mobius3/tweeny) for smooth animations movements.
 - [nanopb](https://github.com/nanopb/nanopb) for communication protocol between Raspberry Pi and Arduino.
