@@ -106,6 +106,11 @@ void GateWatcher::Reset()
 	newpuck = false;
 }
 
+bool GateWatcher::IsBlocked()
+{
+	return (digitalRead(backsensorpin) == PinStatus::LOW) || (digitalRead(frontsensorpin) == PinStatus::LOW);
+}
+
 void GateWatcher::FrontSensorTrigger()
 {
 	if(!enabled)

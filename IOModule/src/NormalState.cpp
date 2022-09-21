@@ -194,6 +194,18 @@ void NormalState::HandleMessage(const IOModule_PiMessage& msg)
 			buttonright.SetLED(lights.RightButton ? HIGH : LOW);
 			buttonaccept.SetLED(lights.AcceptButton ? HIGH : LOW);
 			buttoncancel.SetLED(lights.CancelButton ? HIGH : LOW);
+			break;
+		}
+
+		// Check if gates are blocked
+		case IOModule_PiMessage_RequestGateStates_tag:
+		{
+			slideinprogress = false;
+			throwing = false;
+			starttime = 0;
+			ResetBridge();
+			mode->GetLink().SendGateStates(gate1.IsBlocked(), gate2.IsBlocked(), gate3.IsBlocked(), gate4.IsBlocked());
+			break;
 		}
 	}
 }

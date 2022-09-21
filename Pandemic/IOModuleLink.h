@@ -50,4 +50,5 @@ public:
 	void SendButtonRepeat(bool enablerepeat);
 	void SendRoundReset();
 	void SetButtonLights(bool left, bool right, bool accept, bool cancel);
+	void RequestGateStates();
 };

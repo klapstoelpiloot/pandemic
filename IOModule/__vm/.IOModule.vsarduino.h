@@ -16,7 +16,6 @@
 #define __AVR_atmega4809__
 #define __MEGAAVR_ATmega4809__
 #define __AVR_ATmega4809__
-#define _VMDEBUG 1
 #define F_CPU 16000000L
 #define ARDUINO 108013
 #define ARDUINO_AVR_NANO_EVERY

@@ -3,14 +3,16 @@
 #include "MenuStateMachine.h"
 #include "Main.h"
 
-#define SHOW_ROUND_TIME			1600
-#define BUTTON_FLASH_INTERVAL	400
-#define ROUND_COMPLETE_TIME		3000
+#define SHOW_ROUND_TIME				1600
+#define BUTTON_FLASH_INTERVAL		400
+#define ROUND_COMPLETE_TIME			3000
+#define FIST_ROUND_MIN_WAIT_TIME	200
 
 IntermissionState::IntermissionState(GameStateMachine* _statemachine) :
 	statemachine(_statemachine),
 	step(IntermissionStep::RoundComplete),
-	flashbuttonson(false)
+	flashbuttonson(false),
+	sensorblocked(false)
 {
 }
 
@@ -38,7 +40,7 @@ void IntermissionState::Enter()
 	step = IntermissionStep::RoundComplete;
 	if(gd.NumRounds() == 0)
 	{
-		nextsteptime = Clock::now() + ch::milliseconds(1);
+		nextsteptime = Clock::now() + ch::milliseconds(FIST_ROUND_MIN_WAIT_TIME);
 		Main::GetResources().GetMusic("inter_short.mp3").Stop();
 	}
 	else
@@ -64,6 +66,7 @@ void IntermissionState::Update()
 			break;
 
 		case IntermissionStep::ShowPucksLeft:
+		case IntermissionStep::CheckSensors:
 		{
 			bool buttonson = (((ch::ToMilliseconds(Clock::now()) / BUTTON_FLASH_INTERVAL) % 2) == 0);
 			if(buttonson != flashbuttonson)
@@ -98,7 +101,7 @@ void IntermissionState::BeginShowPucksLeft()
 	// immediately introduce the first round...
 	if(gd.NumRounds() == 0)
 	{
-		BeginShowRound();
+		CheckSensorsForNextRound();
 	}
 	else
 	{
@@ -131,22 +134,71 @@ void IntermissionState::BeginShowRound()
 	nextsteptime = Clock::now() + ch::milliseconds(SHOW_ROUND_TIME);
 }
 
+void IntermissionState::CheckSensorsForNextRound()
+{
+	step = IntermissionStep::CheckSensors;
+	Main::GetIO().RequestGateStates();
+}
+
 bool IntermissionState::HandleMessage(const IOModule_IOMessage& msg)
 {
 	switch(msg.which_Content)
 	{
-		case IOModule_IOMessage_AcceptButtonPressed_tag:
-			if(step == IntermissionStep::ShowPucksLeft)
+		case IOModule_IOMessage_SensorBlocked_tag:
+			sensorblocked = true;
+			return true;
+
+		case IOModule_IOMessage_SensorCleared_tag:
+			sensorblocked = false;
+			return true;
+
+		case IOModule_IOMessage_StartSlide_tag:
+			if((step == IntermissionStep::ShowPucksLeft) || (step == IntermissionStep::CheckSensors))
 			{
-				Main::GetResources().GetMusic("inter_short.mp3").Stop();
+				Main::GetResources().GetSound("error.wav").Play();
+				renderer.FlashGreenForNextRound();
+			}
+			return true;
+
+		case IOModule_IOMessage_AcceptButtonPressed_tag:
+			if((step == IntermissionStep::ShowPucksLeft) || (step == IntermissionStep::CheckSensors))
+			{
 				Main::GetResources().GetSound("continue.wav").Play();
-				BeginShowRound();
+				CheckSensorsForNextRound();
 			}
 			break;
 
 		case IOModule_IOMessage_CancelButtonPressed_tag:
 			Main::GetMenu().Show();
 			return true;
+
+		case IOModule_IOMessage_GateStates_tag:
+		{
+			bool gateblocked[4];
+			gateblocked[0] = msg.Content.GateStates.Gate1Blocked;
+			gateblocked[1] = msg.Content.GateStates.Gate2Blocked;
+			gateblocked[2] = msg.Content.GateStates.Gate3Blocked;
+			gateblocked[3] = msg.Content.GateStates.Gate4Blocked;
+			if(sensorblocked)
+			{
+				// One or more pucks are under the bridge (blocking the sensor)
+				Main::GetResources().GetSound("error.wav").Play();
+				renderer.ShowPucksBlockingBridge();
+			}
+			else if(gateblocked[0] || gateblocked[1] || gateblocked[2] || gateblocked[3])
+			{
+				// One or more pucks are in the gates (blocking the sensors)
+				Main::GetResources().GetSound("error.wav").Play();
+				renderer.ShowPucksBlockingGates(gateblocked);
+			}
+			else
+			{
+				// We're goo to go! Begin next round.
+				Main::GetResources().GetMusic("inter_short.mp3").Stop();
+				BeginShowRound();
+			}
+			return true;
+		}
 	}
 
 	return false;
