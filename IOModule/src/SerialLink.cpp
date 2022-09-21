@@ -216,3 +216,14 @@ bool SerialLink::SendSensorState(uint32_t sensorindex, bool ishigh)
 	msg.Content.SensorState.High = ishigh;
 	return SendMessage(msg);
 }
+
+bool SerialLink::SendGateStates(bool gate1blocked, bool gate2blocked, bool gate3blocked, bool gate4blocked)
+{
+	IOModule_IOMessage msg;
+	msg.which_Content = IOModule_IOMessage_GateStates_tag;
+	msg.Content.GateStates.Gate1Blocked = gate1blocked;
+	msg.Content.GateStates.Gate2Blocked = gate2blocked;
+	msg.Content.GateStates.Gate3Blocked = gate3blocked;
+	msg.Content.GateStates.Gate4Blocked = gate4blocked;
+	return SendMessage(msg);
+}

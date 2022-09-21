@@ -51,6 +51,9 @@ public:
 	// Enable/disable triggers
 	void Enable() { enabled = true; }
 	void Disable() { enabled = false; }
+
+	// Pulls the sensors to see if the gate is currently blocked
+	bool IsBlocked();
 };
 
 // This is for registration of object instances so that the interrupt handler can find them.

@@ -15,6 +15,7 @@ private:
 	{
 		RoundComplete,
 		ShowPucksLeft,
+		CheckSensors,
 		ShowRound
 	};
 
@@ -25,10 +26,12 @@ private:
 	IntermissionStep step;
 	TimePoint nextsteptime;
 	bool flashbuttonson;
+	bool sensorblocked;
 
 	// Methods
 	void BeginShowPucksLeft();
 	void BeginShowRound();
+	void CheckSensorsForNextRound();
 
 public:
 

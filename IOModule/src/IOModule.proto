@@ -18,6 +18,7 @@ message PiMessage
 		RoundResetMsg RoundReset = 104;
 		SetButtonLightsMsg SetButtonLights = 105;
 		SetButtonRepeatMsg SetButtonRepeat = 106;
+		RequestGateStatesMsg RequestGateStates = 107;
 	}
 }
 
@@ -39,6 +40,7 @@ message IOMessage
 		RemovePuckMsg RemovePuck = 108;
 		SensorBlockedMsg SensorBlocked = 109;
 		SensorClearedMsg SensorCleared = 110;
+		GateStatesMsg GateStates = 111;
 	}
 }
 
@@ -133,6 +135,20 @@ message GateScoreMsg
 message PuckInGateMsg
 {
 	uint32 Gate = 1;
+}
+
+// Checks if any gates are blocked by a puck (in normal mode)
+message RequestGateStatesMsg
+{
+}
+
+// Response to RequestGateStatesMsg
+message GateStatesMsg
+{
+	bool Gate1Blocked = 1;
+	bool Gate2Blocked = 2;
+	bool Gate3Blocked = 3;
+	bool Gate4Blocked = 4;
 }
 
 // Sensor state change in calibration mode

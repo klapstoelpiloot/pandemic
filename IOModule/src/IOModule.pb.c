@@ -60,6 +60,12 @@ PB_BIND(IOModule_GateScoreMsg, IOModule_GateScoreMsg, AUTO)
 PB_BIND(IOModule_PuckInGateMsg, IOModule_PuckInGateMsg, AUTO)
 
 
+PB_BIND(IOModule_RequestGateStatesMsg, IOModule_RequestGateStatesMsg, AUTO)
+
+
+PB_BIND(IOModule_GateStatesMsg, IOModule_GateStatesMsg, AUTO)
+
+
 PB_BIND(IOModule_SensorStateMsg, IOModule_SensorStateMsg, AUTO)
 
 

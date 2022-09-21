@@ -17,6 +17,10 @@
 #define KEY_TEXT_COLOR				Color(200, 200, 200)
 #define TITLE_COLOR					Color(255, 25, 0)
 #define VORONOI_COLOR				Color(255, 25, 0)
+#define VORONOI_SPEED				1.2f
+#define VORONOI_CONTRAST_STRENGTH	130
+#define VORONOI_CONTRAST_CENTER		80
+#define VORONOI_CONTRAST			((259.0f * (VORONOI_CONTRAST_STRENGTH + 255.0f)) / (255.0f * (259.0f - VORONOI_CONTRAST_STRENGTH)))
 #define SPLASH_FADE_DISTANCE		3
 
 // List of credits to display below the title
@@ -94,9 +98,10 @@ void TitleRenderer::Render(Canvas& canvas)
 			// Don't redraw every pixel every frame, that is too expensive.
 			if(((x ^ y ^ temporalditheroffset) & 0x03) == 0)
 			{
-				byte v = Voronoi::PixelShader(x, DISPLAY_HEIGHT - y, timesec);
+				float v = static_cast<float>(Voronoi::PixelShader(x, DISPLAY_HEIGHT - y, timesec * VORONOI_SPEED));
+				byte vc = static_cast<byte>(std::clamp(VORONOI_CONTRAST * (v - VORONOI_CONTRAST_CENTER) + VORONOI_CONTRAST_CENTER, 0.0f, 255.0f));
 				Color c = VORONOI_COLOR;
-				c.ModulateRGB(v);
+				c.ModulateRGB(vc);
 				voronoi.SetPixel(x, y, c);
 			}
 		}

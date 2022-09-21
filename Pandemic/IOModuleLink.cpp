@@ -282,3 +282,10 @@ void IOModuleLink::SetButtonLights(bool left, bool right, bool accept, bool canc
 	msg.Content.SetButtonLights.CancelButton = cancel;
 	SendMessage(msg);
 }
+
+void IOModuleLink::RequestGateStates()
+{
+	IOModule_PiMessage msg;
+	msg.which_Content = IOModule_PiMessage_RequestGateStates_tag;
+	SendMessage(msg);
+}

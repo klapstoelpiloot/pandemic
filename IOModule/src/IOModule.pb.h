@@ -56,6 +56,10 @@ typedef struct _IOModule_RemovePuckMsg {
     char dummy_field;
 } IOModule_RemovePuckMsg;
 
+typedef struct _IOModule_RequestGateStatesMsg {
+    char dummy_field;
+} IOModule_RequestGateStatesMsg;
+
 typedef struct _IOModule_RightButtonPressedMsg {
     char dummy_field;
 } IOModule_RightButtonPressedMsg;
@@ -75,6 +79,13 @@ typedef struct _IOModule_SensorClearedMsg {
 typedef struct _IOModule_GateScoreMsg {
     uint32_t Gate;
 } IOModule_GateScoreMsg;
+
+typedef struct _IOModule_GateStatesMsg {
+    bool Gate1Blocked;
+    bool Gate2Blocked;
+    bool Gate3Blocked;
+    bool Gate4Blocked;
+} IOModule_GateStatesMsg;
 
 typedef struct _IOModule_PuckInGateMsg {
     uint32_t Gate;
@@ -123,6 +134,7 @@ typedef struct _IOModule_IOMessage {
         IOModule_RemovePuckMsg RemovePuck;
         IOModule_SensorBlockedMsg SensorBlocked;
         IOModule_SensorClearedMsg SensorCleared;
+        IOModule_GateStatesMsg GateStates;
     } Content;
 } IOModule_IOMessage;
 
@@ -136,6 +148,7 @@ typedef struct _IOModule_PiMessage {
         IOModule_RoundResetMsg RoundReset;
         IOModule_SetButtonLightsMsg SetButtonLights;
         IOModule_SetButtonRepeatMsg SetButtonRepeat;
+        IOModule_RequestGateStatesMsg RequestGateStates;
     } Content;
 } IOModule_PiMessage;
 
@@ -169,6 +182,8 @@ extern "C" {
 #define IOModule_CancelButtonPressedMsg_init_default {0}
 #define IOModule_GateScoreMsg_init_default       {0}
 #define IOModule_PuckInGateMsg_init_default      {0}
+#define IOModule_RequestGateStatesMsg_init_default {0}
+#define IOModule_GateStatesMsg_init_default      {0, 0, 0, 0}
 #define IOModule_SensorStateMsg_init_default     {_IOModule_Sensor_MIN, 0}
 #define IOModule_SetButtonRepeatMsg_init_default {0}
 #define IOModule_PiMessage_init_zero             {0, {IOModule_NormalModeMsg_init_zero}}
@@ -189,11 +204,17 @@ extern "C" {
 #define IOModule_CancelButtonPressedMsg_init_zero {0}
 #define IOModule_GateScoreMsg_init_zero          {0}
 #define IOModule_PuckInGateMsg_init_zero         {0}
+#define IOModule_RequestGateStatesMsg_init_zero  {0}
+#define IOModule_GateStatesMsg_init_zero         {0, 0, 0, 0}
 #define IOModule_SensorStateMsg_init_zero        {_IOModule_Sensor_MIN, 0}
 #define IOModule_SetButtonRepeatMsg_init_zero    {0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define IOModule_GateScoreMsg_Gate_tag           1
+#define IOModule_GateStatesMsg_Gate1Blocked_tag  1
+#define IOModule_GateStatesMsg_Gate2Blocked_tag  2
+#define IOModule_GateStatesMsg_Gate3Blocked_tag  3
+#define IOModule_GateStatesMsg_Gate4Blocked_tag  4
 #define IOModule_PuckInGateMsg_Gate_tag          1
 #define IOModule_SensorStateMsg_Sensor_tag       1
 #define IOModule_SensorStateMsg_High_tag         2
@@ -220,6 +241,7 @@ extern "C" {
 #define IOModule_IOMessage_RemovePuck_tag        108
 #define IOModule_IOMessage_SensorBlocked_tag     109
 #define IOModule_IOMessage_SensorCleared_tag     110
+#define IOModule_IOMessage_GateStates_tag        111
 #define IOModule_PiMessage_NormalMode_tag        100
 #define IOModule_PiMessage_CalibrateMode_tag     101
 #define IOModule_PiMessage_IndicateError_tag     102
@@ -227,6 +249,7 @@ extern "C" {
 #define IOModule_PiMessage_RoundReset_tag        104
 #define IOModule_PiMessage_SetButtonLights_tag   105
 #define IOModule_PiMessage_SetButtonRepeat_tag   106
+#define IOModule_PiMessage_RequestGateStates_tag 107
 
 /* Struct field encoding specification for nanopb */
 #define IOModule_PiMessage_FIELDLIST(X, a) \
@@ -236,7 +259,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (Content,IndicateError,Content.IndicateError)
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,Settings,Content.Settings), 103) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,RoundReset,Content.RoundReset), 104) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SetButtonLights,Content.SetButtonLights), 105) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SetButtonRepeat,Content.SetButtonRepeat), 106)
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SetButtonRepeat,Content.SetButtonRepeat), 106) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,RequestGateStates,Content.RequestGateStates), 107)
 #define IOModule_PiMessage_CALLBACK NULL
 #define IOModule_PiMessage_DEFAULT NULL
 #define IOModule_PiMessage_Content_NormalMode_MSGTYPE IOModule_NormalModeMsg
@@ -246,6 +270,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SetButtonRepeat,Content.SetButtonRep
 #define IOModule_PiMessage_Content_RoundReset_MSGTYPE IOModule_RoundResetMsg
 #define IOModule_PiMessage_Content_SetButtonLights_MSGTYPE IOModule_SetButtonLightsMsg
 #define IOModule_PiMessage_Content_SetButtonRepeat_MSGTYPE IOModule_SetButtonRepeatMsg
+#define IOModule_PiMessage_Content_RequestGateStates_MSGTYPE IOModule_RequestGateStatesMsg
 
 #define IOModule_IOMessage_FIELDLIST(X, a) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,StartSlide,Content.StartSlide), 100) \
@@ -258,7 +283,8 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (Content,AcceptButtonPressed,Content.AcceptBu
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,CancelButtonPressed,Content.CancelButtonPressed), 107) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,RemovePuck,Content.RemovePuck), 108) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SensorBlocked,Content.SensorBlocked), 109) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SensorCleared,Content.SensorCleared), 110)
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SensorCleared,Content.SensorCleared), 110) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,GateStates,Content.GateStates), 111)
 #define IOModule_IOMessage_CALLBACK NULL
 #define IOModule_IOMessage_DEFAULT NULL
 #define IOModule_IOMessage_Content_StartSlide_MSGTYPE IOModule_StartSlideMsg
@@ -272,6 +298,7 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SensorCleared,Content.SensorCleared)
 #define IOModule_IOMessage_Content_RemovePuck_MSGTYPE IOModule_RemovePuckMsg
 #define IOModule_IOMessage_Content_SensorBlocked_MSGTYPE IOModule_SensorBlockedMsg
 #define IOModule_IOMessage_Content_SensorCleared_MSGTYPE IOModule_SensorClearedMsg
+#define IOModule_IOMessage_Content_GateStates_MSGTYPE IOModule_GateStatesMsg
 
 #define IOModule_RoundResetMsg_FIELDLIST(X, a) \
 
@@ -361,6 +388,19 @@ X(a, STATIC,   SINGULAR, UINT32,   Gate,              1)
 #define IOModule_PuckInGateMsg_CALLBACK NULL
 #define IOModule_PuckInGateMsg_DEFAULT NULL
 
+#define IOModule_RequestGateStatesMsg_FIELDLIST(X, a) \
+
+#define IOModule_RequestGateStatesMsg_CALLBACK NULL
+#define IOModule_RequestGateStatesMsg_DEFAULT NULL
+
+#define IOModule_GateStatesMsg_FIELDLIST(X, a) \
+X(a, STATIC,   SINGULAR, BOOL,     Gate1Blocked,      1) \
+X(a, STATIC,   SINGULAR, BOOL,     Gate2Blocked,      2) \
+X(a, STATIC,   SINGULAR, BOOL,     Gate3Blocked,      3) \
+X(a, STATIC,   SINGULAR, BOOL,     Gate4Blocked,      4)
+#define IOModule_GateStatesMsg_CALLBACK NULL
+#define IOModule_GateStatesMsg_DEFAULT NULL
+
 #define IOModule_SensorStateMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UENUM,    Sensor,            1) \
 X(a, STATIC,   SINGULAR, BOOL,     High,              2)
@@ -390,6 +430,8 @@ extern const pb_msgdesc_t IOModule_AcceptButtonPressedMsg_msg;
 extern const pb_msgdesc_t IOModule_CancelButtonPressedMsg_msg;
 extern const pb_msgdesc_t IOModule_GateScoreMsg_msg;
 extern const pb_msgdesc_t IOModule_PuckInGateMsg_msg;
+extern const pb_msgdesc_t IOModule_RequestGateStatesMsg_msg;
+extern const pb_msgdesc_t IOModule_GateStatesMsg_msg;
 extern const pb_msgdesc_t IOModule_SensorStateMsg_msg;
 extern const pb_msgdesc_t IOModule_SetButtonRepeatMsg_msg;
 
@@ -412,12 +454,14 @@ extern const pb_msgdesc_t IOModule_SetButtonRepeatMsg_msg;
 #define IOModule_CancelButtonPressedMsg_fields &IOModule_CancelButtonPressedMsg_msg
 #define IOModule_GateScoreMsg_fields &IOModule_GateScoreMsg_msg
 #define IOModule_PuckInGateMsg_fields &IOModule_PuckInGateMsg_msg
+#define IOModule_RequestGateStatesMsg_fields &IOModule_RequestGateStatesMsg_msg
+#define IOModule_GateStatesMsg_fields &IOModule_GateStatesMsg_msg
 #define IOModule_SensorStateMsg_fields &IOModule_SensorStateMsg_msg
 #define IOModule_SetButtonRepeatMsg_fields &IOModule_SetButtonRepeatMsg_msg
 
 /* Maximum encoded size of messages (where known) */
 #define IOModule_PiMessage_size                  35
-#define IOModule_IOMessage_size                  9
+#define IOModule_IOMessage_size                  11
 #define IOModule_RoundResetMsg_size              0
 #define IOModule_SetButtonLightsMsg_size         8
 #define IOModule_SettingsMsg_size                32
@@ -434,6 +478,8 @@ extern const pb_msgdesc_t IOModule_SetButtonRepeatMsg_msg;
 #define IOModule_CancelButtonPressedMsg_size     0
 #define IOModule_GateScoreMsg_size               6
 #define IOModule_PuckInGateMsg_size              6
+#define IOModule_RequestGateStatesMsg_size       0
+#define IOModule_GateStatesMsg_size              8
 #define IOModule_SensorStateMsg_size             4
 #define IOModule_SetButtonRepeatMsg_size         2
 
