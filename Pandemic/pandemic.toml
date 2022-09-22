@@ -34,7 +34,7 @@ ButtonRepeatInterval = 100
 
 [Game]
 Rounds = 3
-Pucks = 3
+Pucks = 30
 BonusPucks1 = 1
 BonusPucks2 = 1
 SetPoints = 20
