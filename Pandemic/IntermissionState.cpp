@@ -38,7 +38,7 @@ void IntermissionState::Enter()
 	// Begin showing the round is completed (or empty screen on first round)
 	// Always waits for at least the screen melt time
 	step = IntermissionStep::RoundComplete;
-	if(gd.NumRounds() == 0)
+	if(gd.CurrentRoundNumber() == 0)
 	{
 		nextsteptime = Clock::now() + ch::milliseconds(FIST_ROUND_MIN_WAIT_TIME);
 		Main::GetResources().GetMusic("inter_short.mp3").Stop();
@@ -46,7 +46,7 @@ void IntermissionState::Enter()
 	else
 	{
 		nextsteptime = Clock::now() + ch::milliseconds(ROUND_COMPLETE_TIME);
-		renderer.ShowRoundComplete(gd.NumRounds());
+		renderer.ShowRoundComplete(gd.CurrentRoundNumber());
 		Main::GetResources().GetMusic("inter_short.mp3").Play();
 	}
 }
@@ -99,16 +99,14 @@ void IntermissionState::BeginShowPucksLeft()
 
 	// If we just started the game (as opposed to finishing a round) then
 	// immediately introduce the first round...
-	if(gd.NumRounds() == 0)
+	if(gd.CurrentRoundNumber() == 0)
 	{
 		CheckSensorsForNextRound();
 	}
 	else
 	{
 		// Show pucks left for next round
-		bool isbonusround = false;
-		int nextroundpucks = gd.CalculateNextRoundPucks(&isbonusround);
-		renderer.ShowPucksLeft(nextroundpucks, (gd.NumRounds() == (GAME_ROUNDS - 1)));
+		renderer.ShowPucksLeft(gd);
 		step = IntermissionStep::ShowPucksLeft;
 		screendissolve.Begin();
 	}
@@ -120,11 +118,11 @@ void IntermissionState::BeginShowRound()
 	GameData& gd = statemachine->GetData();
 	bool isbonusround = false;
 	int nextroundpucks = gd.CalculateNextRoundPucks(&isbonusround);
-	RoundData& rd = gd.AddRound(gd.NumRounds(), nextroundpucks);
+	RoundData& rd = gd.AddRound(gd.CurrentRoundNumber(), nextroundpucks);
 	rd.isbonus = isbonusround;
 
 	// Theatrical sound and graphics
-	String soundfile = String("round") + gd.NumRounds() + String(".wav");
+	String soundfile = String("round") + String::From(gd.CurrentRoundNumber()) + String(".wav");
 	Main::GetResources().GetSound(soundfile).Play();
 	renderer.ShowRound(rd.index + 1);
 	Main::GetButtons().SetAllGameLEDs(false, false, false, true);

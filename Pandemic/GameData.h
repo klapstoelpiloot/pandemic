@@ -12,6 +12,21 @@ private:
 	// Type of game
 	GameType type;
 
+	// Total number of rounds to reach
+	uint totalrounds;
+
+	// Number of pucks to play
+	uint totalpucks;
+
+	// Number of bonus pucks to receive upon scoring all in the first round
+	uint bonuspucks1;
+
+	// Number of bonus pucks to receive upon scoring all in the second round
+	uint bonuspucks2;
+
+	// Number of points to receive for a completed set
+	uint setpoints;
+
 	// The rounds played. Last round is the active round.
 	vector<RoundData> rounds;
 
@@ -28,7 +43,11 @@ public:
 
 	// Methods
 	GameType GetType() const { return type; }
-	int NumRounds() const { return rounds.size(); }
+	uint TotalRounds() const { return totalrounds; }
+	uint TotalPucks() const { return totalpucks; }
+	uint BonusPucks1() const { return bonuspucks1; }
+	uint BonusPucks2() const { return bonuspucks2; }
+	uint CurrentRoundNumber() const { return rounds.size(); }		// Zero before any rounds are started
 	RoundData& CurrentRound() { return rounds.back(); }
 	RoundData& GetRound(uint index);
 	const RoundData& GetRound(uint index) const;
@@ -42,4 +61,5 @@ public:
 	const ScoreRecord& GetResult() const { return result; }
 	bool IsCheated() const { return cheated; }
 	void SetIsCheated() { cheated = true; }
+	bool IsLastRound() const { return CurrentRoundNumber() == TotalRounds(); }
 };

@@ -3,6 +3,7 @@
 #include "IRenderer.h"
 #include "Text.h"
 #include "TextFlasher.h"
+#include "GameData.h"
 
 class IntermissionRenderer final : public virtual IRenderer
 {
@@ -40,7 +41,7 @@ public:
 	virtual void Render(Canvas& canvas) override;
 	void ShowRoundComplete(int index);
 	void ShowRound(int index);
-	void ShowPucksLeft(int pucks, int round);
+	void ShowPucksLeft(GameData& gd);
 	void FlashGreenForNextRound();
 	void ShowPucksBlockingBridge();
 	void ShowPucksBlockingGates(bool gates[4]);

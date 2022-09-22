@@ -1,9 +1,15 @@
 #include "GameData.h"
+#include "Main.h"
 
 constexpr int GATE_VALUES[] = { 2, 3, 4, 1 };
 
 GameData::GameData(GameType type) :
 	type(type),
+	totalrounds(Main::GetConfig().GetInt("Game.Rounds", 0)),
+	totalpucks(Main::GetConfig().GetInt("Game.Pucks", 0)),
+	bonuspucks1(Main::GetConfig().GetInt("Game.BonusPucks1", 0)),
+	bonuspucks2(Main::GetConfig().GetInt("Game.BonusPucks2", 0)),
+	setpoints(Main::GetConfig().GetInt("Game.SetPoints", 0)),
 	cheated(false)
 {
 }
@@ -70,7 +76,7 @@ int GameData::CalculateScore() const
 	for(uint g = 0; g < GAME_GATES; g++)
 		basicpoints += GATE_VALUES[g] * gatepucks[g];
 
-	return (sets * GAME_SET_POINTS) + basicpoints;
+	return (sets * setpoints) + basicpoints;
 }
 
 void GameData::GetGatesNeededForSet(bool* gates, bool equalstate) const
@@ -121,7 +127,7 @@ int GameData::CalculateNextRoundPucks(bool* isbonus) const
 
 	// The first round always stars with the same number of pucks
 	if(rounds.size() == 0)
-		return GAME_PUCKS;
+		return totalpucks;
 
 	// In general, the pucks for the next round are all the pucks left on the table.
 	// However, if all pucks were scored in the first round, the player gets 2 extra pucks for the second round and
@@ -134,18 +140,18 @@ int GameData::CalculateNextRoundPucks(bool* isbonus) const
 	if((pucksleft == 0) && (puckslost == 0) && (lastrd.index == 0))
 	{
 		if(isbonus != nullptr) *isbonus = true;
-		return GAME_PUCK_BONUS1;
+		return bonuspucks1;
 	}
 
 	// All scored in second round
 	if((pucksleft == 0) && (puckslost == 0) && (lastrd.index == 1))
 	{
 		if(isbonus != nullptr) *isbonus = true;
-		return GAME_PUCK_BONUS2;
+		return bonuspucks2;
 	}
 
 	// If this was the last round, then no pucks for next round
-	if(lastrd.index == (GAME_ROUNDS - 1))
+	if(lastrd.index == (totalrounds - 1))
 		return 0;
 
 	return pucksleft;

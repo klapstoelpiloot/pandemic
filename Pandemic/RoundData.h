@@ -25,9 +25,6 @@ public:
 	// The number of pucks that has entered the gates
 	int gatepucks[GAME_GATES];
 
-	// The speed at which pucks were thrown (in millimeters per second, 0 = none)
-	uint speeds[GAME_PUCKS];
-
 	// Constructor
 	RoundData();
 	

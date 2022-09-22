@@ -24,7 +24,7 @@ Frequency = 0			# 0 = System default
 Buffers = 2				# Using 2 for low latency, default is 4
 BufferSize = 512		# Using 512 for low latency, default is 1024
 MaxChannels = 256
-Volume = 100
+Volume = 20
 
 [IO]
 SerialPort = "/dev/ttyACM0"
@@ -33,6 +33,11 @@ ButtonRepeatTimeout = 500
 ButtonRepeatInterval = 100
 
 [Game]
+Rounds = 3
+Pucks = 3
+BonusPucks1 = 1
+BonusPucks2 = 1
+SetPoints = 20
 SlideTimeoutMs = 1000
 RoundTimeoutMs = 1500
 PuckLostCheckTimeoutMs = 1000

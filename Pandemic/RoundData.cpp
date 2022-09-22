@@ -7,8 +7,7 @@ RoundData::RoundData() :
 	startpucks(0),
 	pucksthrown(0),
 	pucksremoved(0),
-	gatepucks { 0, 0, 0, 0 },
-	speeds { 0 }
+	gatepucks { 0, 0, 0, 0 }
 {
 }
 

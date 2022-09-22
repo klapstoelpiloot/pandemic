@@ -13,7 +13,8 @@
 #define GREEN_BUTTON_X		41
 #define GREEN_BUTTON_Y		24
 #define TEXT_FLASH_INTERVAL	400
-#define ROUND_FLASH_TIME	1000
+#define ROUND_FLASH_TIME	800
+#define ROUND_ANI_DURATION	900
 
 IntermissionRenderer::IntermissionRenderer() :
 	roundtext(Main::GetResources().BoldBitsLarge(), HorizontalAlign::Center, VerticalAlign::Middle),
@@ -103,20 +104,19 @@ void IntermissionRenderer::ShowRound(int index)
 	starttime = Clock::now();
 	laststeptime = Clock::now();
 	roundtext.SetText("ROUND " + String::From(index));
-	roundprogress = tweeny::from(0).to(DISPLAY_WIDTH / 2).during(500).via(easing::sinusoidalInOut);
+	roundprogress = tweeny::from(0).to(DISPLAY_WIDTH / 2).during(ROUND_ANI_DURATION).via(easing::cubicInOut);
 }
 
-void IntermissionRenderer::ShowPucksLeft(int pucks, int round)
+void IntermissionRenderer::ShowPucksLeft(GameData& gd)
 {
-	this->round = round;
-	pucksleft = pucks;
+	bool isbonusround = false;
+	round = gd.CurrentRoundNumber();
+	pucksleft = gd.CalculateNextRoundPucks(&isbonusround);
 
 	Clear();
 	smalltext1.SetText("CLEAR THE BOARD AND TAKE");
 	bigtext1.SetText(String::From(pucksleft) + " PUCKS");
-	if(round == 0)
-		smalltext2.SetText("FOR THE FIRST ROUND");
-	else if(round == (GAME_ROUNDS - 1))
+	if(gd.IsLastRound())
 		smalltext2.SetText("FOR THE LAST ROUND");
 	else
 		smalltext2.SetText("FOR THE NEXT ROUND");
