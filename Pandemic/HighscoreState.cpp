@@ -77,8 +77,8 @@ void HighscoreState::SetGameType(GameType _gametype)
 void HighscoreState::Setup()
 {
 	HighscoreManager scores = Main::GetScores();
-	scores.Load(gametype);
-	renderer.Setup(scores.GetHighscores(), scores.GetPeriodscores(), gametype, scores.GetPeriodScoresInterval());
+	scores.Load();
+	renderer.Setup(scores.GetCasualHighscores(), scores.GetProHighscores());
 	SetAlternatingTime();
 }
 

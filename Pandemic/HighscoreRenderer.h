@@ -12,10 +12,10 @@ class HighscoreRenderer final : public virtual IRenderer
 private:
 
 	// Members
-	Text hiscoretext;
-	Text periodscoretext;
-	Text higametext;
-	Text periodgametext;
+	Text hiscoretext1;
+	Text hiscoretext2;
+	Text gametypetext1;
+	Text gametypetext2;
 	vector<Text*> postexts;
 	vector<Text*> nametexts;
 	vector<Text*> datetexts;
@@ -26,10 +26,10 @@ private:
 	const Image& graytrophy;
 	TimePoint begintime;
 	TimePoint scrollstarttime;
-	size_t numhiscores;
-	size_t numdayscores;
-	int hipagesize;
-	int daypagesize;
+	size_t numhiscores1;
+	size_t numhiscores2;
+	int pagesize1;
+	int pagesize2;
 	bool continuousloop;
 	TextShine shine;
 	TimePoint nextshinetime;
@@ -48,7 +48,7 @@ public:
 
 	// Methods
 	virtual void Render(Canvas& canvas) override;
-	void Setup(const ScoresTable& hightable, const ScoresTable& daytable, GameType type, ScoresPeriod interval);
+	void Setup(const ScoresTable& casualtable, const ScoresTable& protable);
 	void SetContinuousLoop(bool loop) { continuousloop = loop; }
 	bool IsFinished();
 };
