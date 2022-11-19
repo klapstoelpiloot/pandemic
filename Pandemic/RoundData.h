@@ -25,6 +25,9 @@ public:
 	// The number of pucks that has entered the gates
 	int gatepucks[GAME_GATES];
 
+	// The number of combos scored
+	int combos;
+
 	// Constructor
 	RoundData();
 	

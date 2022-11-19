@@ -4,17 +4,11 @@ vector<GameDesc> GAMETYPES
 {
 	// The casual game is just plain "sjoelen" with relaxed game rules.
 	// Puck may be halfway through the gate to score.
-	GameDesc(GameType::Casual, "CASUAL", false),
+	GameDesc(GameType::Casual, "ARCADE", false),
 
 	// Same as classic "sjoelen" but with professional game rules.
 	// Puck must be fully inside the gate to score.
-	GameDesc(GameType::Pro, "PROFESSIONAL", true),
-
-	// Arcade style gives the player mini games to play.
-	//GameDesc(GameType::GID_ARCADE_EASY, "ARCADE EASY"),
-
-	// Arcade style gives the player mini games to play.
-	//GameDesc(GameType::GID_ARCADE_PRO, "ARCADE PRO")
+	GameDesc(GameType::Pro, "ORIGINAL", true),
 };
 
 const GameDesc& GameDesc::Find(GameType type)

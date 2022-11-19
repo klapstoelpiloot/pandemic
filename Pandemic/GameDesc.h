@@ -7,9 +7,7 @@
 enum class GameType
 {
 	Casual = 0,
-	Pro = 1,
-	ArcadeEasy = 2,
-	ArcadePro = 3
+	Pro = 1
 };
 
 struct GameDesc
