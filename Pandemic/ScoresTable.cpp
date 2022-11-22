@@ -119,4 +119,8 @@ bool ScoresTable::Insert(const ScoreRecord& newrecord)
 			return false;
 		}
 	}
+	else
+	{
+		return false;
+	}
 }

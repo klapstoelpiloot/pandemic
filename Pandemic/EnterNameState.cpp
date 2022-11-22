@@ -101,7 +101,6 @@ bool EnterNameState::HandleMessage(const IOModule_IOMessage& msg)
 			}
 
 			statemachine->AllowTitleMusicRestart();
-			statemachine->GetHighscoreState()->SetGameType(gd.GetType());
 			statemachine->ChangeState(statemachine->GetHighscoreState());
 			return true;
 		}

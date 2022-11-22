@@ -47,6 +47,7 @@ ScoresTable* HighscoreManager::GetTable(GameType gametype)
 		case GameType::Pro: return &pro_highscores;
 		default:
 			NOT_IMPLEMENTED;
+			return nullptr;
 	}
 }
 

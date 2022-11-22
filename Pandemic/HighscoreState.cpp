@@ -6,8 +6,7 @@
 #define ALTERNATE_TITLE_TIME	30000
 
 HighscoreState::HighscoreState(GameStateMachine* _statemachine) :
-	statemachine(_statemachine),
-	gametype(GameType::Casual)
+	statemachine(_statemachine)
 {
 }
 
@@ -67,11 +66,6 @@ bool HighscoreState::HandleMessage(const IOModule_IOMessage& msg)
 		default:
 			return false;
 	}
-}
-
-void HighscoreState::SetGameType(GameType _gametype)
-{
-	gametype = _gametype;
 }
 
 void HighscoreState::Setup()

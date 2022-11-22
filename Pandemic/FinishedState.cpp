@@ -85,9 +85,7 @@ void FinishedState::Update()
 			// When the music finishes, continue to the highscores
 			if(!Main::GetResources().GetMusic("inter_short.mp3").IsPlaying())
 			{
-				GameData& gd = statemachine->GetData();
 				statemachine->AllowTitleMusicRestart();
-				statemachine->GetHighscoreState()->SetGameType(gd.GetType());
 				statemachine->ChangeState(statemachine->GetHighscoreState());
 			}
 			break;

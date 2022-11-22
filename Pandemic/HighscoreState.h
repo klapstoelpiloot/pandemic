@@ -15,7 +15,6 @@ private:
 	// Members
 	GameStateMachine* statemachine;
 	HighscoreRenderer renderer;
-	GameType gametype;
 	TimePoint showtitletime;
 
 	// Methods
@@ -26,7 +25,6 @@ public:
 
 	HighscoreState(GameStateMachine* _statemachine);
 
-	void SetGameType(GameType _gametype);
 	virtual void Enter() override final;
 	virtual void Leave() override final;
 	virtual void Update() override final;
