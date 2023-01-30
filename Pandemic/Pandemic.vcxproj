@@ -112,6 +112,11 @@
     <ClCompile Include="Benchmarks.cpp" />
     <ClCompile Include="ButtonLEDsController.cpp" />
     <ClCompile Include="ClassicHUDRenderer.cpp" />
+    <ClCompile Include="DotMatrixGraphics.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x86'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ExcellentAnimation.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="GreatShotAnimation.cpp" />
@@ -185,6 +190,10 @@
     <ClCompile Include="UnstoppableAnimation.cpp" />
     <ClCompile Include="VerticalMenuRenderer.cpp" />
     <ClCompile Include="Voronoi.cpp" />
+    <ClCompile Include="X11Graphics.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -195,10 +204,16 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonLEDsController.h" />
     <ClInclude Include="ClassicHUDRenderer.h" />
+    <ClInclude Include="DotMatrixGraphics.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x86'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="ExcellentAnimation.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="GreatShotAnimation.h" />
     <ClInclude Include="HotShotAnimation.h" />
+    <ClInclude Include="IGraphicsHAL.h" />
     <ClInclude Include="ImpressiveAnimation.h" />
     <ClInclude Include="IncredibleAnimation.h" />
     <ClInclude Include="LoadingImage.h" />
@@ -580,6 +595,10 @@
     <ClInclude Include="UnstoppableAnimation.h" />
     <ClInclude Include="VerticalMenuRenderer.h" />
     <ClInclude Include="Voronoi.h" />
+    <ClInclude Include="X11Graphics.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="String.natvis">
