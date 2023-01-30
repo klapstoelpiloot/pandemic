@@ -2,7 +2,6 @@
 // protoc --nanopb_out=. IOModule.proto
 syntax = "proto3";
 package IOModule;
-import "nanopb.proto";
 
 // This message encapsulates all possible messages going from the Raspberry Pi to the IO Module.
 // The rule here is that the member name is the same as the type name minus the "Msg" postfix.
