@@ -3,21 +3,25 @@
 #include "IRenderer.h"
 #include "Canvas.h"
 
+#ifdef RPI
 namespace rgb_matrix
 {
 	class RGBMatrix;
 	class FrameCanvas;
 }
+#endif
 
 class Graphics final
 {
 private:
 
+	#ifdef RPI
 	// Matrix display
 	rgb_matrix::RGBMatrix* display;
 
 	// The buffer to which we convert our rasterized image.
 	rgb_matrix::FrameCanvas* displaycanvas;
+	#endif
 
 	// The canvas to which a renderer renders.
 	Canvas canvas;
