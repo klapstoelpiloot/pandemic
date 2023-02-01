@@ -848,15 +848,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <ClCompile>
       <CppLanguageStandard>c++17</CppLanguageStandard>
-      <AdditionalOptions>-pthread -Wno-psabi %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>.;../../rpi-rgb-led-matrix/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;X64;GLM_FORCE_INTRINSICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-pthread -Wno-psabi -Wno-narrowing %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>.;../fmodstudioapi20211linux/api/core/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;X86;GLM_FORCE_INTRINSICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalOptions>-pthread %(AdditionalOptions)</AdditionalOptions>
-      <LibraryDependencies>rgbmatrix;fmod;stdc++fs</LibraryDependencies>
-      <SharedLibrarySearchPath>../../rpi-rgb-led-matrix/lib;%(Link.SharedLibrarySearchPath)</SharedLibrarySearchPath>
-      <AdditionalLibraryDirectories>../../rpi-rgb-led-matrix/lib;%(Link.AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LibraryDependencies>fmod;stdc++fs;X11</LibraryDependencies>
+      <SharedLibrarySearchPath>../fmodstudioapi20211linux/api/core/lib/x86;%(Link.SharedLibrarySearchPath)</SharedLibrarySearchPath>
+      <AdditionalLibraryDirectories>../fmodstudioapi20211linux/api/core/lib/x86;%(Link.AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

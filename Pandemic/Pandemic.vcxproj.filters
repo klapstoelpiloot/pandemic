@@ -303,6 +303,12 @@
     <ClCompile Include="LoadingScreen.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="DotMatrixGraphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="X11Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1483,6 +1489,15 @@
     </ClInclude>
     <ClInclude Include="LoadingScreen.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="DotMatrixGraphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphicsHAL.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="X11Graphics.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
