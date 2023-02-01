@@ -8,3 +8,6 @@
 *.user
 /Pandemic/obj
 /Pandemic/bin
+/IOModuleSimulator/bin
+/IOModuleSimulator/obj
+packages
