@@ -12,7 +12,7 @@ namespace IOModuleSimulator
 		private IOModuleLink link;
 		private Image led_off;
 		private Image led_on;
-		private int animatestep;    // 0 = front sensor high, 1 = both high, 2 = back sensor high, 3 = end (both low)
+		private int animatestep;
 		private Button animatefrontbutton;
 		private Button animatebackbutton;
 		private bool buttonleftdown;
@@ -125,6 +125,7 @@ namespace IOModuleSimulator
 			buttoncanceldown = false;
 		}
 
+		// Called when a message from the Raspberry Pi is received
 		private void Link_MessageReceived(IMessage obj)
 		{
 			switch(obj)
@@ -173,19 +174,22 @@ namespace IOModuleSimulator
 		{
 			switch(animatestep)
 			{
+				// One sensor was covered, now cover both sensors
 				case 0:
-					animatefrontbutton.BackgroundImage = led_off;
-					animatebackbutton.BackgroundImage = led_off;
+					SetSensorState(animatefrontbutton, false);
+					SetSensorState(animatebackbutton, false);
 					break;
 
+				// Open one sensor
 				case 1:
-					animatefrontbutton.BackgroundImage = led_on;
-					animatebackbutton.BackgroundImage = led_off;
+					SetSensorState(animatefrontbutton, true);
+					SetSensorState(animatebackbutton, false);
 					break;
 
+				// The puck has passed through, now both sensors are open
 				case 2:
-					animatefrontbutton.BackgroundImage = led_on;
-					animatebackbutton.BackgroundImage = led_on;
+					SetSensorState(animatefrontbutton, true);
+					SetSensorState(animatebackbutton, true);
 					animateSensorTimer.Stop();
 					animatefrontbutton = null;
 					animatebackbutton = null;
@@ -195,6 +199,7 @@ namespace IOModuleSimulator
 			animatestep++;
 		}
 
+		// This animates the sensor states as if a puck is passing by.
 		private void StartPassThroughAnimation(Button frontbutton, Button backbutton)
 		{
 			animateSensorTimer.Stop();
@@ -207,10 +212,12 @@ namespace IOModuleSimulator
 			animatefrontbutton = frontbutton;
 			animatebackbutton = backbutton;
 			animatestep = 0;
-			animateSensorTimer.Start();
 
-			animatefrontbutton.BackgroundImage = led_off;
-			animatebackbutton.BackgroundImage = led_on;
+			// Step 0: A puck is coming in, covering one sensor only
+			SetSensorState(animatefrontbutton, false);
+			SetSensorState(animatebackbutton, true);
+
+			animateSensorTimer.Start();
 		}
 
 		private bool GetSensorState(Button button)
@@ -237,7 +244,8 @@ namespace IOModuleSimulator
 				if(button == buttonbridgefront) ssm.Sensor = Sensor.Bridge1Sensor;
 				if(button == buttonbridgeback) ssm.Sensor = Sensor.Bridge2Sensor;
 
-				link.SendMessage(ssm);
+				if(link != null)
+					link.SendMessage(ssm);
 			}
 		}
 
