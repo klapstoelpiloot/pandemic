@@ -13,7 +13,7 @@ PWM_Bits = 11
 PWM_Dither_Bits = 0
 GPIO_Slowdown = 4
 Luminance_Correct = true
-Brightness = 100
+Brightness = 80
 RecordRate = 60
 
 [Audio]
@@ -22,10 +22,10 @@ Frequency = 0			# 0 = System default
 Buffers = 2				# Using 2 for low latency, default is 4
 BufferSize = 512		# Using 512 for low latency, default is 1024
 MaxChannels = 256
-Volume = 90
+Volume = 80
 
 [IO]
-SerialPort = "/dev/ttyACM0"
+SerialPort = "/dev/ttyS0"		# Set to "/dev/ttyACM0" on RPI and "/dev/ttyS0" for COM1 on Raspberry Pi Desktop OS.
 ButtonDebounceTimeout = 80
 ButtonRepeatTimeout = 500
 ButtonRepeatInterval = 100
