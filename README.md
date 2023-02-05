@@ -35,6 +35,7 @@ Here is how to set it up:
 - In Visual Studio, use the x86 build profile instead of the ARM profile and build according to the instructions above, as-if your virtual machine is your Raspberry Pi.
 - Because you chose the x86 build profile, the graphics will show in an X11 window and you don't need the rpi-rgb-led-matrix library.
 - In your `pandemic.toml` file, in the `IO` section, set `SerialPort = "/dev/ttyS0"`. This makes the software talk with the configured COM1 port.
+- On the Raspberry Pi Desktop (vm) run `xhost +si:localuser:$USER` and in Visual Studio, go to the project properties, then to Debugging and add `export DISPLAY=:0` to the Pre-Launch Command. This allows you to open an X11 window from a remote SSH connection.
 - Connect your IOModule simulator to the virtual machine before launching the game.
 
 If you did everything above, you should now be able to do this:
