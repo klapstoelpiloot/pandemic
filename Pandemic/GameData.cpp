@@ -76,7 +76,15 @@ int GameData::CalculateScore() const
 	for(uint g = 0; g < GAME_GATES; g++)
 		basicpoints += GATE_VALUES[g] * gatepucks[g];
 
-	return (sets * setpoints) + basicpoints;
+	// Combo points (1 point per combo)
+	int combopoints = 0;
+	if(type == GameType::Casual)
+	{
+		for(uint r = 0; r < rounds.size(); r++)
+			combopoints += rounds[r].combos;
+	}
+
+	return (sets * setpoints) + basicpoints + combopoints;
 }
 
 void GameData::GetGatesNeededForSet(bool* gates, bool equalstate) const

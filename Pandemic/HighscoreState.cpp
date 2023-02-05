@@ -6,8 +6,7 @@
 #define ALTERNATE_TITLE_TIME	30000
 
 HighscoreState::HighscoreState(GameStateMachine* _statemachine) :
-	statemachine(_statemachine),
-	gametype(GameType::Casual)
+	statemachine(_statemachine)
 {
 }
 
@@ -69,16 +68,11 @@ bool HighscoreState::HandleMessage(const IOModule_IOMessage& msg)
 	}
 }
 
-void HighscoreState::SetGameType(GameType _gametype)
-{
-	gametype = _gametype;
-}
-
 void HighscoreState::Setup()
 {
 	HighscoreManager scores = Main::GetScores();
-	scores.Load(gametype);
-	renderer.Setup(scores.GetHighscores(), scores.GetPeriodscores(), gametype, scores.GetPeriodScoresInterval());
+	scores.Load();
+	renderer.Setup(scores.GetCasualHighscores(), scores.GetProHighscores());
 	SetAlternatingTime();
 }
 

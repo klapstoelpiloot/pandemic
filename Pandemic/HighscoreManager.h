@@ -10,27 +10,22 @@ private:
 
 	// Members
 	String scorespath;
-	GameType gametype;
-	ScoresPeriod interval;
-	ScoresTable highscores;
-	ScoresTable periodscores;
+	ScoresTable casual_highscores;
+	ScoresTable pro_highscores;
 
 	// Methods
-	String GetHighscoreFilename() const;
-	String GetPeriodscoreFilename() const;
+	String GetFilename(GameType gametype) const;
+	ScoresTable* GetTable(GameType gametype);
 
 public:
 
 	HighscoreManager(const Configuration& config);
 
-	ScoresPeriod GetPeriodScoresInterval() const { return interval; }
-	const ScoresTable& GetHighscores() const { return highscores; }
-	const ScoresTable& GetPeriodscores() const { return periodscores; }
+	const ScoresTable& GetCasualHighscores() const { return casual_highscores; }
+	const ScoresTable& GetProHighscores() const { return pro_highscores; }
 
-	void Load(GameType _gametype);
-	GameType GetCurrentGameType() const { return gametype; }
-	bool IsWorthyHighscore(int score) const { return highscores.IsWorthy(score); }
-	bool IsWorthyPeriodscore(int score) const { return periodscores.IsWorthy(score); }
-	bool Insert(const ScoreRecord& score);
+	void Load();
+	bool IsWorthy(GameType gametype, int score);
+	bool Insert(GameType gametype, const ScoreRecord& score);
 };
 

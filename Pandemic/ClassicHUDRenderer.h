@@ -26,6 +26,8 @@ private:
 	TimePoint fadeoutstart;
 	TimePoint laststeptime;
 	TimePoint scoresettime;
+	TimePoint scorecombotime;
+	int lastoffgatescore;
 
 	// Methods
 	void DrawGateLine(Canvas& canvas, int startx, int endx, Color color);
@@ -33,6 +35,7 @@ private:
 	void SpawnGateEffectSmall(int startx, int endx);
 	void SpawnGateParticle(int x, int y, int centerx, Color color);
 	void FloatPoints(String text, int x, int y);
+	int GetOffGateFloatPositionX();
 
 public:
 
@@ -48,4 +51,6 @@ public:
 	void ScoreRequiredGate(int gate);
 	void ScoreGate(int gate);
 	void ScoreSet();
+	void ScoreCombo();
+	void Reset();
 };

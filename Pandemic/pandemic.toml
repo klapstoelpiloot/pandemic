@@ -4,8 +4,6 @@ DataPath = "/usr/local/games/data/"
 HighscoresPath = "/usr/local/games/scores/"
 RecordingPath = "/usr/local/games/record/"
 MaxHighScores = 10
-MaxPeriodicScores = 10
-PeriodicScoresInterval = 1				# 0 = Daily, 1 = Monthly, 2 = Annually
 AlternateTitleHighscores = true
 RepeatTitleMusic = false
 
@@ -24,10 +22,10 @@ Frequency = 0			# 0 = System default
 Buffers = 2				# Using 2 for low latency, default is 4
 BufferSize = 512		# Using 512 for low latency, default is 1024
 MaxChannels = 256
-Volume = 100
+Volume = 80
 
 [IO]
-SerialPort = "/dev/ttyS0"
+SerialPort = "/dev/ttyS0"		# Set to "/dev/ttyACM0" on RPI and "/dev/ttyS0" for COM1 on Raspberry Pi Desktop OS.
 ButtonDebounceTimeout = 80
 ButtonRepeatTimeout = 500
 ButtonRepeatInterval = 100

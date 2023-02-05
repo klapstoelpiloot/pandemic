@@ -32,6 +32,7 @@
 #define FADE_OUT_DURATION	ch::milliseconds(200)
 #define FLOAT_DURATION		2000
 #define SCORE_SET_DELAY		1000
+#define SCORE_COMBO_DELAY	1500
 
 String GATE_NUMBERS[] = { "2", "3", "4", "1" };
 
@@ -50,7 +51,8 @@ ClassicHUDRenderer::ClassicHUDRenderer(ParticleOverlayRenderer& particlesoverlay
 		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom)
 	},
 	texture(Main::GetResources().GetImage("yellow12.dds")),
-	gaterequired{ {false, false, false, false} }
+	gaterequired{ {false, false, false, false} },
+	lastoffgatescore(-1)
 {
 	for(uint i = 0; i < gatenumbers.size(); i++)
 	{
@@ -96,14 +98,14 @@ void ClassicHUDRenderer::Render(Canvas& canvas)
 		if(ch::IsTimeSet(scoresettime) && (t > scoresettime))
 		{
 			scoresettime = TimePoint();
-			int x = 0;
-			switch(Random(0, 2))
-			{
-				case 0: x = (GATE1_END + GATE2_START) / 2; break;
-				case 1: x = (GATE2_END + GATE3_START) / 2; break;
-				case 2: x = (GATE3_END + GATE4_START) / 2; break;
-			}
-			FloatPoints("+10", x, GATE_NUMBER_Y);
+			FloatPoints("+10", GetOffGateFloatPositionX(), GATE_NUMBER_Y);
+		}
+
+		// Time to show the combo score?
+		if(ch::IsTimeSet(scorecombotime) && (t > scorecombotime))
+		{
+			scorecombotime = TimePoint();
+			FloatPoints("+1", GetOffGateFloatPositionX(), GATE_NUMBER_Y);
 		}
 
 		byte alpha;
@@ -235,6 +237,29 @@ void ClassicHUDRenderer::ScoreSet()
 		scoresettime = Clock::now() + ch::milliseconds(SCORE_SET_DELAY);
 }
 
+void ClassicHUDRenderer::ScoreCombo()
+{
+	if(!ch::IsTimeSet(scorecombotime))
+		scorecombotime = Clock::now() + ch::milliseconds(SCORE_COMBO_DELAY);
+}
+
+int ClassicHUDRenderer::GetOffGateFloatPositionX()
+{
+	vector<int> positionoptions;
+	if(lastoffgatescore != 0) positionoptions.push_back(0);
+	if(lastoffgatescore != 1) positionoptions.push_back(1);
+	if(lastoffgatescore != 2) positionoptions.push_back(2);
+	lastoffgatescore = Random(0, positionoptions.size() - 1);
+	int x = 0;
+	switch(lastoffgatescore)
+	{
+		case 0: x = (GATE1_END + GATE2_START) / 2; break;
+		case 1: x = (GATE2_END + GATE3_START) / 2; break;
+		case 2: x = (GATE3_END + GATE4_START) / 2; break;
+	}
+	return x;
+}
+
 void ClassicHUDRenderer::DrawGateLine(Canvas& canvas, int startx, int endx, Color color)
 {
 	// Outline on the left
@@ -345,4 +370,13 @@ void ClassicHUDRenderer::FloatPoints(String text, int x, int y)
 	points.push_back(index);
 	pointprogress[index] = tweeny::from(x, y).to(x, 0).during(FLOAT_DURATION);
 	pointtext[index].SetText(text);
+}
+
+void ClassicHUDRenderer::Reset()
+{
+	lastoffgatescore = -1;
+	points.clear();
+	fadeoutstart = TimePoint();
+	scoresettime = TimePoint();
+	scorecombotime = TimePoint();
 }

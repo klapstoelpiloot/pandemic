@@ -72,7 +72,7 @@ void FinishRenderer::Render(Canvas& canvas)
 	gameovertext.DrawTexturedMask(canvas, Point(CENTER_X, gameovery), yellowtexture);
 	scorelabel.DrawTexturedMask(canvas, Point(SCORE_LABEL_X, scorey), yellowtexture);
 	scorecount.DrawTexturedMask(canvas, Point(SCORE_COUNT_X, scorey), yellowtexture);
-	highscoretext.DrawTexturedMask(canvas, Point(CENTER_X, highscorey), isdailyhighscore ? graytexture : yellowtexture);
+	highscoretext.DrawTexturedMask(canvas, Point(CENTER_X, highscorey), yellowtexture);
 
 	flasher.Draw(canvas, gameovertext, Point(CENTER_X, gameovery), 2);
 	flasher.Draw(canvas, scorelabel, Point(SCORE_LABEL_X, scorey), 2);
@@ -99,9 +99,8 @@ void FinishRenderer::ShowTotalScore(int count)
 	scrollspeed = SCROLL_SPEED;
 }
 
-void FinishRenderer::ShowHighscore(bool isdaily)
+void FinishRenderer::ShowHighscore()
 {
-	isdailyhighscore = isdaily;
 	gameovertext.SetText("");
 	highscoretext.SetText("HIGHSCORE");
 	nextsteptime = Clock::now();

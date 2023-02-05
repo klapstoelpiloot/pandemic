@@ -21,7 +21,6 @@ private:
 	float scrollpos;
 	float scrollspeed;
 	TimePoint nextsteptime;
-	bool isdailyhighscore;
 
 	// Methods
 	void SpawnSmoke(int x, int y);
@@ -33,6 +32,6 @@ public:
 	virtual void Render(Canvas& canvas) override;
 	void ShowGameOver();
 	void ShowTotalScore(int count);
-	void ShowHighscore(bool isdaily);
+	void ShowHighscore();
 	void Clear();
 };

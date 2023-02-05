@@ -3,8 +3,8 @@
 
 #define SCROLL_DELAY		2000
 #define CENTER_X			64
-#define GAME_TEXT_Y			9
-#define SCOPE_TEXT_Y		22
+#define GAMETYPE_TEXT_Y		9
+#define HISCORE_TEXT_Y		22
 #define TROPHY_Y			4
 #define FIRST_ITEM_Y		35
 #define POS_X				2
@@ -21,18 +21,18 @@
 #define SHINE_INTERVAL		ch::milliseconds(1000)
 
 HighscoreRenderer::HighscoreRenderer() :
-	hiscoretext("ALLTIME HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
-	periodscoretext("DAILY HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
-	higametext(Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
-	periodgametext(Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
+	hiscoretext1("ALLTIME HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
+	hiscoretext2("ALLTIME HIGHSCORE", Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
+	gametypetext1(Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
+	gametypetext2(Main::GetResources().BoldBits(), HorizontalAlign::Center, VerticalAlign::Middle),
 	yellowtexture(Main::GetResources().GetImage("yellow12.dds")),
 	graytexture(Main::GetResources().GetImage("gray12.dds")),
 	yellowtrophy(Main::GetResources().GetImage("yellow_trophy.dds")),
 	graytrophy(Main::GetResources().GetImage("gray_trophy.dds")),
-	numhiscores(0),
-	numdayscores(0),
-	hipagesize(0),
-	daypagesize(0),
+	numhiscores1(0),
+	numhiscores2(0),
+	pagesize1(0),
+	pagesize2(0),
 	continuousloop(true)
 {
 }
@@ -51,23 +51,23 @@ void HighscoreRenderer::Render(Canvas& canvas)
 		scrollpos = static_cast<int>(ch::ToMilliseconds(t - scrollstarttime) / SCROLL_SPEED);
 
 	// Start drawing
-	int hitrophyy = CalculateY(TROPHY_Y, scrollpos);
-	int daytrophyy = CalculateY(TROPHY_Y + hipagesize, scrollpos);
-	int hiscopetexty = CalculateY(SCOPE_TEXT_Y, scrollpos);
-	int higametexty = CalculateY(GAME_TEXT_Y, scrollpos);
-	int dayscopetexty = CalculateY(SCOPE_TEXT_Y + hipagesize, scrollpos);
-	int daygametexty = CalculateY(GAME_TEXT_Y + hipagesize, scrollpos);
+	int trophy1y = CalculateY(TROPHY_Y, scrollpos);
+	int trophy2y = CalculateY(TROPHY_Y + pagesize1, scrollpos);
+	int hiscoretext1y = CalculateY(HISCORE_TEXT_Y, scrollpos);
+	int gametypetext1y = CalculateY(GAMETYPE_TEXT_Y, scrollpos);
+	int hiscoretext2y = CalculateY(HISCORE_TEXT_Y + pagesize1, scrollpos);
+	int gametypetext2y = CalculateY(GAMETYPE_TEXT_Y + pagesize1, scrollpos);
 
-	if((t > nextshinetime) && ((higametexty == GAME_TEXT_Y) || (daygametexty == GAME_TEXT_Y)))
+	if((t > nextshinetime) && ((gametypetext1y == GAMETYPE_TEXT_Y) || (gametypetext2y == GAMETYPE_TEXT_Y)))
 	{
 		nextshinetime += SHINE_INTERVAL;
 		shine.Begin(Size(DISPLAY_WIDTH, DISPLAY_HEIGHT));
 	}
 
-	Point yt1 = Point(CENTER_X - (higametext.GetTextSize().width / 2) - 18, hitrophyy);
-	Point yt2 = Point(CENTER_X + (higametext.GetTextSize().width / 2) + 4, hitrophyy);
-	Point gt1 = Point(CENTER_X - (periodgametext.GetTextSize().width / 2) - 18, daytrophyy);
-	Point gt2 = Point(CENTER_X + (periodgametext.GetTextSize().width / 2) + 4, daytrophyy);
+	Point yt1 = Point(CENTER_X - (gametypetext1.GetTextSize().width / 2) - 18, trophy1y);
+	Point yt2 = Point(CENTER_X + (gametypetext1.GetTextSize().width / 2) + 4, trophy1y);
+	Point gt1 = Point(CENTER_X - (gametypetext2.GetTextSize().width / 2) - 18, trophy2y);
+	Point gt2 = Point(CENTER_X + (gametypetext2.GetTextSize().width / 2) + 4, trophy2y);
 	canvas.DrawColorImageMask(yt1, yellowtrophy);
 	canvas.DrawColorImageMask(yt2, yellowtrophy);
 	canvas.DrawColorImageMask(gt1, graytrophy);
@@ -76,25 +76,25 @@ void HighscoreRenderer::Render(Canvas& canvas)
 	shine.Draw(canvas, yellowtrophy, yt2);
 	shine.Draw(canvas, graytrophy, gt1);
 	shine.Draw(canvas, graytrophy, gt2);
-	hiscoretext.DrawOutlineMask(canvas, Point(CENTER_X, hiscopetexty), 1, BLACK);
-	hiscoretext.DrawTexturedMask(canvas, Point(CENTER_X, hiscopetexty), yellowtexture);
-	shine.Draw(canvas, hiscoretext, 1, Point(CENTER_X, hiscopetexty));
-	higametext.DrawOutlineMask(canvas, Point(CENTER_X, higametexty), 1, BLACK);
-	higametext.DrawTexturedMask(canvas, Point(CENTER_X, higametexty), yellowtexture);
-	shine.Draw(canvas, higametext, 1, Point(CENTER_X, higametexty));
-	periodscoretext.DrawOutlineMask(canvas, Point(CENTER_X, dayscopetexty), 1, BLACK);
-	periodscoretext.DrawTexturedMask(canvas, Point(CENTER_X, dayscopetexty), graytexture);
-	shine.Draw(canvas, periodscoretext, 1, Point(CENTER_X, dayscopetexty));
-	periodgametext.DrawOutlineMask(canvas, Point(CENTER_X, daygametexty), 1, BLACK);
-	periodgametext.DrawTexturedMask(canvas, Point(CENTER_X, daygametexty), graytexture);
-	shine.Draw(canvas, periodgametext, 1, Point(CENTER_X, daygametexty));
+	hiscoretext1.DrawOutlineMask(canvas, Point(CENTER_X, hiscoretext1y), 1, BLACK);
+	hiscoretext1.DrawTexturedMask(canvas, Point(CENTER_X, hiscoretext1y), yellowtexture);
+	shine.Draw(canvas, hiscoretext1, 1, Point(CENTER_X, hiscoretext1y));
+	gametypetext1.DrawOutlineMask(canvas, Point(CENTER_X, gametypetext1y), 1, BLACK);
+	gametypetext1.DrawTexturedMask(canvas, Point(CENTER_X, gametypetext1y), yellowtexture);
+	shine.Draw(canvas, gametypetext1, 1, Point(CENTER_X, gametypetext1y));
+	hiscoretext2.DrawOutlineMask(canvas, Point(CENTER_X, hiscoretext2y), 1, BLACK);
+	hiscoretext2.DrawTexturedMask(canvas, Point(CENTER_X, hiscoretext2y), graytexture);
+	shine.Draw(canvas, hiscoretext2, 1, Point(CENTER_X, hiscoretext2y));
+	gametypetext2.DrawOutlineMask(canvas, Point(CENTER_X, gametypetext2y), 1, BLACK);
+	gametypetext2.DrawTexturedMask(canvas, Point(CENTER_X, gametypetext2y), graytexture);
+	shine.Draw(canvas, gametypetext2, 1, Point(CENTER_X, gametypetext2y));
 	for(size_t i = 0; i < postexts.size(); i++)
 	{
 		int offset;
-		if(i < numhiscores)
+		if(i < numhiscores1)
 			offset = FIRST_ITEM_Y + (ITEM_SPACING * static_cast<int>(i));
 		else
-			offset = FIRST_ITEM_Y + (ITEM_SPACING * static_cast<int>(i - numhiscores)) + hipagesize;
+			offset = FIRST_ITEM_Y + (ITEM_SPACING * static_cast<int>(i - numhiscores1)) + pagesize1;
 		int posy = CalculateY(offset, scrollpos);
 
 		postexts[i]->DrawOutlineMask(canvas, Point(POS_X, posy), 1, BLACK);
@@ -108,69 +108,60 @@ void HighscoreRenderer::Render(Canvas& canvas)
 	}
 }
 
-void HighscoreRenderer::Setup(const ScoresTable& hightable, const ScoresTable& daytable, GameType type, ScoresPeriod interval)
+void HighscoreRenderer::Setup(const ScoresTable& casualtable, const ScoresTable& protable)
 {
 	Cleanup();
 
 	// Describe the game type
-	const GameDesc& gamedesc = GameDesc::Find(type);
-	higametext.SetText(gamedesc.name);
-	periodgametext.SetText(gamedesc.name);
+	gametypetext1.SetText(GameDesc::Find(GameType::Casual).name);
+	gametypetext2.SetText(GameDesc::Find(GameType::Pro).name);
 
-	switch(interval)
-	{
-		case ScoresPeriod::Daily: periodscoretext.SetText("DAILY HIGHSCORE"); break;
-		case ScoresPeriod::Monthly: periodscoretext.SetText("MONTHLY HIGHSCORE"); break;
-		case ScoresPeriod::Annually: periodscoretext.SetText("ANNUAL HIGHSCORE"); break;
-		default: NOT_IMPLEMENTED;
-	}
-
-	// List the alltime highscores
-	if(hightable.size() > 0)
+	// List the casual highscores
+	if(casualtable.size() > 0)
 	{
 		int pos = 1;
-		for(const ScoreRecord& record : hightable)
+		for(const ScoreRecord& record : casualtable)
 			MakeTextFromRecord(record, pos++);
-		numhiscores = hightable.size();
+		numhiscores1 = casualtable.size();
 	}
 	else
 	{
 		MakeText(EMPTY_LIST_TEXT, "", "", "");
-		numhiscores = 1;
+		numhiscores1 = 1;
 	}
 
 	// I want at least 2 items per page, pad with empty item...
-	if(numhiscores == 1)
+	if(numhiscores1 == 1)
 	{
 		MakeText("", "", "", "");
-		numhiscores++;
+		numhiscores1++;
 	}
 
-	// List the daily highscores
-	if(daytable.size() > 0)
+	// List the pro highscores
+	if(protable.size() > 0)
 	{
 		int pos = 1;
-		for(const ScoreRecord& record : daytable)
+		for(const ScoreRecord& record : protable)
 			MakeTextFromRecord(record, pos++);
-		numdayscores = daytable.size();
+		numhiscores2 = protable.size();
 	}
 	else
 	{
 		MakeText(EMPTY_LIST_TEXT, "", "", "");
-		numdayscores = 1;
+		numhiscores2 = 1;
 	}
 
 	// I want at least 2 items per page, pad with empty item...
-	if(numdayscores == 1)
+	if(numhiscores2 == 1)
 	{
 		MakeText("", "", "", "");
-		numdayscores++;
+		numhiscores2++;
 	}
 
 	// Determine page sizes.
 	// A page is a single table with headings included and the size is in pixels.
-	hipagesize = FIRST_ITEM_Y + (numhiscores * ITEM_SPACING);
-	daypagesize = FIRST_ITEM_Y + (numdayscores * ITEM_SPACING);
+	pagesize1 = FIRST_ITEM_Y + (numhiscores1 * ITEM_SPACING);
+	pagesize2 = FIRST_ITEM_Y + (numhiscores2 * ITEM_SPACING);
 	begintime = Clock::now();
 	scrollstarttime = Clock::now() + ch::milliseconds(SCROLL_DELAY);
 	nextshinetime = Clock::now() + SHINE_INTERVAL;
@@ -182,7 +173,7 @@ bool HighscoreRenderer::IsFinished()
 		return false;
 
 	int scrollpos = static_cast<int>(ch::ToMilliseconds(Clock::now() - scrollstarttime) / SCROLL_SPEED);
-	return (scrollpos > (hipagesize + daypagesize));
+	return (scrollpos > (pagesize1 + pagesize2));
 }
 
 void HighscoreRenderer::Cleanup()
@@ -211,7 +202,7 @@ String HighscoreRenderer::FormatDate(TimePoint tp)
 
 int HighscoreRenderer::CalculateY(int firsty, int scrollpos)
 {
-	int twopagesize = hipagesize + daypagesize;
+	int twopagesize = pagesize1 + pagesize2;
 	int twopageindex = (scrollpos - firsty + (twopagesize / 2)) / twopagesize;
 	return firsty + (twopageindex * twopagesize) - scrollpos;
 }

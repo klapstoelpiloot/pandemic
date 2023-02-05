@@ -97,11 +97,10 @@ bool EnterNameState::HandleMessage(const IOModule_IOMessage& msg)
 			{
 				ScoreRecord result = gd.GetResult();
 				result.name = finalname;
-				Main::GetScores().Insert(result);
+				Main::GetScores().Insert(gd.GetType(), result);
 			}
 
 			statemachine->AllowTitleMusicRestart();
-			statemachine->GetHighscoreState()->SetGameType(gd.GetType());
 			statemachine->ChangeState(statemachine->GetHighscoreState());
 			return true;
 		}

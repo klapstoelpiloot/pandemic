@@ -52,6 +52,7 @@ void PlayingState::Enter()
 	slidetimeout = Main::GetConfig().GetInt("Game.SlideTimeoutMs", 2000);
 	roundtimeout = Main::GetConfig().GetInt("Game.RoundTimeoutMs", 2000);
 	easycombos = Main::GetConfig().GetBool("Game.EasyCombos", false);
+	hud.Reset();
 	hud.Show();
 
 	// Setup rendering
@@ -128,7 +129,7 @@ void PlayingState::Update()
 	}
 
 	// Finishing a round?
-	if(ch::IsTimeSet(roundfinishtime) && (now >= roundfinishtime))
+	if(!showinganimations && ch::IsTimeSet(roundfinishtime) && (now >= roundfinishtime))
 	{
 		// Round is finished
 		GameData& gd = statemachine->GetData();
@@ -318,7 +319,19 @@ void PlayingState::CheckComboAchievement()
 		else
 			aniqueue.push(comboanimations.back());
 
+		// Count the combo
+		GameData& gd = statemachine->GetData();
+		RoundData& rd = gd.CurrentRound();
+		rd.combos++;
+
+		// Show combo
+		if(gd.GetType() == GameType::Casual)
+		{
+			hud.ScoreCombo();
+		}
 		if(!showinganimations)
+		{
 			anistarttime = Clock::now() + ANI_START_DELAY;
+		}
 	}
 }

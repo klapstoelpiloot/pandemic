@@ -111,8 +111,8 @@ void TopMenuState::ChooseItem()
 			break;
 
 		case TopMenuItems::Highscores:
-			statemachine->GetSelectGameState()->SetCallback(std::bind(&TopMenuState::ShowHighscores, this, _1));
-			statemachine->ChangeState(statemachine->GetSelectGameState());
+			statemachine->Hide();
+			Main::GetGame().ChangeState(Main::GetGame().GetHighscoreState());
 			break;
 
 		case TopMenuItems::Instructions:
@@ -160,11 +160,4 @@ void TopMenuState::StartGame(GameType selectedtype)
 	statemachine->Hide();
 	Main::GetResources().GetMusic("title.mp3").Stop();
 	Main::GetGame().CreateNewGame(selectedtype);
-}
-
-void TopMenuState::ShowHighscores(GameType selectedtype)
-{
-	statemachine->Hide();
-	Main::GetGame().GetHighscoreState()->SetGameType(selectedtype);
-	Main::GetGame().ChangeState(Main::GetGame().GetHighscoreState());
 }

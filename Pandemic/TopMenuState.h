@@ -51,5 +51,4 @@ public:
 
 	void SetBeginPosition(bool newgameposition);
 	void StartGame(GameType selectedtype);
-	void ShowHighscores(GameType selectedtype);
 };

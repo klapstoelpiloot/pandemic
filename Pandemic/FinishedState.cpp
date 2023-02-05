@@ -39,16 +39,14 @@ void FinishedState::Enter()
 	nextsteptime = Clock::now() + ch::milliseconds(GAME_OVER_TIME);
 
 	// (Re)load the highscores to make sure we have the right data for today
-	Main::GetScores().Load(gd.GetType());
+	Main::GetScores().Load();
 
 	// Complete the game data, making the result available
 	gd.Finish();
 
 	// Is this score highscore worthy?
 	ScoreRecord result = gd.GetResult();
-	ishighscore = (Main::GetScores().IsWorthyHighscore(result.score) ||
-	               Main::GetScores().IsWorthyPeriodscore(result.score)) &&
-	              !gd.IsCheated();
+	ishighscore = Main::GetScores().IsWorthy(gd.GetType(), result.score) && !gd.IsCheated();
 
 	// Play music that matches with the result
 	if(ishighscore)
@@ -87,9 +85,7 @@ void FinishedState::Update()
 			// When the music finishes, continue to the highscores
 			if(!Main::GetResources().GetMusic("inter_short.mp3").IsPlaying())
 			{
-				GameData& gd = statemachine->GetData();
 				statemachine->AllowTitleMusicRestart();
-				statemachine->GetHighscoreState()->SetGameType(gd.GetType());
 				statemachine->ChangeState(statemachine->GetHighscoreState());
 			}
 			break;
@@ -122,16 +118,10 @@ void FinishedState::BeginHighScoreTextIfWorthy()
 	ScoreRecord result = gd.GetResult();
 	if(!gd.IsCheated())
 	{
-		if(Main::GetScores().IsWorthyHighscore(result.score))
+		if(Main::GetScores().IsWorthy(gd.GetType(), result.score))
 		{
 			step = FinishedStep::HighscoreText;
-			renderer.ShowHighscore(false);
-			nextsteptime = Clock::now() + ch::milliseconds(HIGHSCORE_TIME);
-		}
-		else if(Main::GetScores().IsWorthyPeriodscore(result.score))
-		{
-			step = FinishedStep::HighscoreText;
-			renderer.ShowHighscore(true);
+			renderer.ShowHighscore();
 			nextsteptime = Clock::now() + ch::milliseconds(HIGHSCORE_TIME);
 		}
 		else
