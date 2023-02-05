@@ -102,7 +102,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <TargetName>pandemic</TargetName>
     <TargetExt />
-    <MultiProcNumber>6</MultiProcNumber>
+    <MultiProcNumber>4</MultiProcNumber>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
