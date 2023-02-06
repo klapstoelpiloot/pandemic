@@ -30,7 +30,7 @@
 #define COUNTERS_OUTLINE	BLACK
 #define NUM_SPARK_IMAGES	3
 #define FADE_OUT_DURATION	ch::milliseconds(200)
-#define FLOAT_DURATION		2000
+#define FLOAT_DURATION		2500
 #define SCORE_SET_DELAY		1000
 #define SCORE_COMBO_DELAY	1500
 
@@ -44,6 +44,9 @@ ClassicHUDRenderer::ClassicHUDRenderer(ParticleOverlayRenderer& particlesoverlay
 	scorelabel(Main::GetResources().Smallest(), HorizontalAlign::Right, VerticalAlign::Top),
 	puckslabel(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Top),
 	pointtext {
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
+		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
 		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
 		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
 		Text(Main::GetResources().Smallest(), HorizontalAlign::Center, VerticalAlign::Bottom),
@@ -249,7 +252,7 @@ int ClassicHUDRenderer::GetOffGateFloatPositionX()
 	if(lastoffgatescore != 0) positionoptions.push_back(0);
 	if(lastoffgatescore != 1) positionoptions.push_back(1);
 	if(lastoffgatescore != 2) positionoptions.push_back(2);
-	lastoffgatescore = Random(0, positionoptions.size() - 1);
+	lastoffgatescore = positionoptions[Random(0, positionoptions.size() - 1)];
 	int x = 0;
 	switch(lastoffgatescore)
 	{
