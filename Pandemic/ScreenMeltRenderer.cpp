@@ -2,8 +2,9 @@
 #include "ScreenMeltRenderer.h"
 #include "Main.h"
 
-#define MAX_OFFSET_MS	400
-#define MELT_SPEED		20		// Milliseconds per pixel
+#define MAX_OFFSET_MS			400
+#define MAX_DELTA_OFFSET_MS		100
+#define MELT_SPEED				30		// Milliseconds per pixel
 
 ScreenMeltRenderer::ScreenMeltRenderer()
 {
@@ -15,8 +16,13 @@ void ScreenMeltRenderer::Begin()
 	Main::GetGraphics().GetCanvas().CopyTo(meltcanvas);
 
 	// Make a random offset for each column
+	int off = Random(0, MAX_OFFSET_MS);
 	for(int i = 0; i < DISPLAY_WIDTH; i++)
-		offsets[i] = Random(0, MAX_OFFSET_MS);
+	{
+		int d = Random(0, MAX_DELTA_OFFSET_MS * 2) - MAX_DELTA_OFFSET_MS;
+		off = std::clamp(off + d, 0, MAX_OFFSET_MS);
+		offsets[i] = off;
+	}
 
 	// Go
 	starttime = Clock::now();
