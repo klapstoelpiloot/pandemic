@@ -66,7 +66,8 @@ X11Graphics::~X11Graphics()
 void X11Graphics::Present(Canvas& sourcecanvas)
 {
 	XEvent event;
-	bool event_received = XCheckMaskEvent(display, -1, &event);
+	XCheckMaskEvent(display, -1, &event);
+
 	const Color* p = sourcecanvas.GetBuffer();
 	for(int y = 0; y < DISPLAY_HEIGHT; y++)
 	{
@@ -108,6 +109,7 @@ void X11Graphics::Present(Canvas& sourcecanvas)
 			p++;
 		}
 	}
+
 	XPutImage(display, window, gc, img, 0, 0, WINDOW_BORDER, WINDOW_BORDER, DISPLAY_WIDTH * DOT_SIZE, DISPLAY_HEIGHT * DOT_SIZE);
 }
 

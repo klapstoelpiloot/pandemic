@@ -223,7 +223,7 @@ bool IOModuleLink::SendMessage(const IOModule_PiMessage& msg)
 
 bool IOModuleLink::SendKeepAlive()
 {
-	char txbuffer[MINIMUM_MESSAGE_LENGTH] = { STARTBYTE1, STARTBYTE2, MINIMUM_MESSAGE_LENGTH };
+	byte txbuffer[MINIMUM_MESSAGE_LENGTH] = { STARTBYTE1, STARTBYTE2, MINIMUM_MESSAGE_LENGTH };
 
 	// Send the data
 	ssize_t byteswritten = write(streamhandle, txbuffer, MINIMUM_MESSAGE_LENGTH);

@@ -25,10 +25,9 @@ float Voronoi(glm::vec3 p)
 	{
 		for(int i = -1; i <= 1; i++)
 		{
-			glm::vec3 gb, h, ph, r;
 			glm::vec3 b = glm::vec3(static_cast<float>(i), static_cast<float>(j), -1.0f);
 
-			r = b - p + Hash33(g + b);
+			glm::vec3 r = b - p + Hash33(g + b);
 			d = glm::min(d, glm::dot(r, r));
 
 			b.z = 0.0f;
