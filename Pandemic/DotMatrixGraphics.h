@@ -24,4 +24,5 @@ public:
 	// Methods
 	virtual void Present(Canvas& sourcecanvas) override final;
 	virtual void SetBrightness(int b) override final;
+	virtual int GetBrightness() const override final;
 };

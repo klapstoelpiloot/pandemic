@@ -15,7 +15,6 @@
 
 Graphics::Graphics(const Configuration& cfg, bool showfps) :
 	hal(nullptr),
-	brightness(cfg.GetInt("Graphics.Brightness", 100)),
 	showfps(showfps),
 	nextfpstime(Clock::now() + ch::seconds(10)),
 	framescounted(0),
@@ -23,22 +22,18 @@ Graphics::Graphics(const Configuration& cfg, bool showfps) :
 {
 	recordinterval = ch::microseconds(static_cast<int64_t>(std::roundl(1000000.0 / cfg.GetDouble("Graphics.RecordRate", 30))));
 
-#ifdef RPI
-	hal = new DotMatrixGraphics(cfg);
-#endif
-#ifdef X86
-	hal = new X11Graphics(cfg);
-#endif
+	// Choose the graphics implementation depending on the hardware it was built for.
+	#ifdef RPI
+		hal = new DotMatrixGraphics(cfg);
+	#endif
+	#ifdef X86
+		hal = new X11Graphics(cfg);
+	#endif
 }
 
 Graphics::~Graphics()
 {
 	SAFE_DELETE(hal);
-}
-
-void Graphics::SetBrightness(int b)
-{
-	hal->SetBrightness(b);
 }
 
 void Graphics::Record(String path)

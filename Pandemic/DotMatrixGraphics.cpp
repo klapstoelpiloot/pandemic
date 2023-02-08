@@ -78,3 +78,8 @@ void DotMatrixGraphics::SetBrightness(int b)
 	brightness = std::clamp(b, 50, 100);
 	display->SetBrightness(static_cast<uint8_t>(brightness));
 }
+
+int DotMatrixGraphics::GetBrightness() const
+{
+	return brightness;
+}

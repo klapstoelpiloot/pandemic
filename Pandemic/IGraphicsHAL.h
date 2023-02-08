@@ -15,4 +15,5 @@ public:
 	// Methods
 	virtual void Present(Canvas& sourcecanvas) = 0;
 	virtual void SetBrightness(int b) = 0;
+	virtual int GetBrightness() const = 0;
 };

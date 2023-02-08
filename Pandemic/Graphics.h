@@ -20,9 +20,6 @@ private:
 	// Multiple renderers can modify the canvas in the order they were added.
 	vector<IRenderer*> renderers;
 
-	// Brightness (0-100)
-	int brightness;
-
 	// FPS measuring
 	bool showfps;
 	TimePoint nextfpstime;
@@ -50,8 +47,8 @@ public:
 	void ClearRenderers();
 	void AddRenderer(IRenderer* r);
 	void RemoveRenderer(IRenderer* r);
-	int GetBrightness() const { return brightness; }
-	void SetBrightness(int b);
+	int GetBrightness() const { return hal->GetBrightness(); }
+	void SetBrightness(int b) { hal->SetBrightness(b); }
 	void Record(String path);
 
 	// This renders the canvas and displays it

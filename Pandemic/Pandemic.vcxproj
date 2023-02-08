@@ -70,7 +70,7 @@
     </IncludePath>
     <LibraryPath>
     </LibraryPath>
-    <MultiProcNumber>6</MultiProcNumber>
+    <MultiProcNumber>4</MultiProcNumber>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>pandemic</TargetName>
@@ -92,7 +92,7 @@
     <TargetName>pandemic</TargetName>
     <TargetExt>
     </TargetExt>
-    <MultiProcNumber>6</MultiProcNumber>
+    <MultiProcNumber>4</MultiProcNumber>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>pandemic</TargetName>

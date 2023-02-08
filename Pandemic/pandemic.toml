@@ -13,7 +13,7 @@ PWM_Bits = 11
 PWM_Dither_Bits = 0
 GPIO_Slowdown = 4
 Luminance_Correct = true
-Brightness = 80
+Brightness = 100
 RecordRate = 60
 
 [Audio]
@@ -25,7 +25,7 @@ MaxChannels = 256
 Volume = 80
 
 [IO]
-SerialPort = "/dev/ttyS0"		# Set to "/dev/ttyACM0" on RPI and "/dev/ttyS0" for COM1 on Raspberry Pi Desktop OS.
+SerialPort = "/dev/ttyACM0"		# Set to "/dev/ttyACM0" on RPI and "/dev/ttyS0" for COM1 on Raspberry Pi Desktop OS.
 ButtonDebounceTimeout = 80
 ButtonRepeatTimeout = 500
 ButtonRepeatInterval = 100

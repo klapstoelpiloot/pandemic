@@ -115,3 +115,8 @@ void X11Graphics::SetBrightness(int b)
 {
 	// Not supported
 }
+
+int X11Graphics::GetBrightness() const
+{
+	return 100;
+}
