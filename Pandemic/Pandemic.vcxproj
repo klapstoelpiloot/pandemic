@@ -769,7 +769,7 @@
     <ClCompile>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>-pthread -Wno-psabi %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>.;../../rpi-rgb-led-matrix/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../rpi-rgb-led-matrix/include;../fmodstudioapi20211linux/api/core/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG;RPI</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -821,7 +821,7 @@
     <ClCompile>
       <CppLanguageStandard>c++17</CppLanguageStandard>
       <AdditionalOptions>-pthread -Wno-psabi %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>.;../../rpi-rgb-led-matrix/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;../../rpi-rgb-led-matrix/include;../fmodstudioapi20211linux/api/core/inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;RPI;GLM_FORCE_INTRINSICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
