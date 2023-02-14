@@ -13,9 +13,9 @@ Visual Studio automatically copies the changed files to the Raspberry Pi and rem
 
 There is a post-build action which should copy the required librgbmatrix.so library to the same output directory. This was previously built from Henner Zeller's [rpi-rgb-led-matrix library](https://github.com/hzeller/rpi-rgb-led-matrix). Follow his instructions to build that library.
 
-I don't remember how I installed fmod, but I do have a directory named 'fmodstudioapi20106linux' and you can probably get it from the offical [fmod website](https://www.fmod.com).
+To install fmod, download the [fmod engine](https://www.fmod.com/download#fmodengine) version 2.02.11 to the Raspberry Pi and unzip it in the ~/projects directory. This will create a subdirectory named `fmodstudioapi20211linux` which contains headers and dynamic link libraries. You may also choose to get a newer version or unzip it in any other location, but then don't forget to update the include paths in the project file before building. In the file `/etc/ld.so.conf` add a line to the directory containing the .so files: `/home/pi/projects/fmodstudioapi20211linux/api/core/lib/arm64`. Then run `sudo ldconfig` to apply the changes. You should now be able to compile and link fmod.
 
-Also the `pandemic.toml` file is copied to the output directory as this must be read by the software on startup.
+The file `pandemic.toml` is copied to the output directory on build. This file is read by the software on startup. You may want to make changes to this file depending on platform (RPI or VM) and personal preferences.
 
 The data files must be in the directory /usr/local/games/data/, however, this is configurable in `pandemic.toml`. There is a handy batch file named `Deploy_Data.bat` to copy the data.
 
