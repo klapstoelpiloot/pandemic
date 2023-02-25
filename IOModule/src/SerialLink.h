@@ -47,4 +47,8 @@ public:
 	bool SendPuckInGate(uint32_t gateindex);
 	bool SendSensorState(uint32_t sensorindex, bool ishigh);
 	bool SendGateStates(bool gate1blocked, bool gate2blocked, bool gate3blocked, bool gate4blocked);
+	bool SendLeftButtonRelease();
+	bool SendRightButtonRelease();
+	bool SendAcceptButtonRelease();
+	bool SendCancelButtonRelease();
 };

@@ -227,3 +227,31 @@ bool SerialLink::SendGateStates(bool gate1blocked, bool gate2blocked, bool gate3
 	msg.Content.GateStates.Gate4Blocked = gate4blocked;
 	return SendMessage(msg);
 }
+
+bool SerialLink::SendLeftButtonRelease()
+{
+	IOModule_IOMessage msg;
+	msg.which_Content = IOModule_IOMessage_LeftButtonReleased_tag;
+	return SendMessage(msg);
+}
+
+bool SerialLink::SendRightButtonRelease()
+{
+	IOModule_IOMessage msg;
+	msg.which_Content = IOModule_IOMessage_RightButtonReleased_tag;
+	return SendMessage(msg);
+}
+
+bool SerialLink::SendAcceptButtonRelease()
+{
+	IOModule_IOMessage msg;
+	msg.which_Content = IOModule_IOMessage_AcceptButtonReleased_tag;
+	return SendMessage(msg);
+}
+
+bool SerialLink::SendCancelButtonRelease()
+{
+	IOModule_IOMessage msg;
+	msg.which_Content = IOModule_IOMessage_CancelButtonReleased_tag;
+	return SendMessage(msg);
+}

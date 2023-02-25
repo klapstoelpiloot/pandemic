@@ -40,6 +40,10 @@ message IOMessage
 		SensorBlockedMsg SensorBlocked = 109;
 		SensorClearedMsg SensorCleared = 110;
 		GateStatesMsg GateStates = 111;
+		LeftButtonReleasedMsg LeftButtonReleased = 112;
+		RightButtonReleasedMsg RightButtonReleased = 113;
+		AcceptButtonReleasedMsg AcceptButtonReleased = 114;
+		CancelButtonReleasedMsg CancelButtonReleased = 115;
 	}
 }
 
@@ -121,6 +125,26 @@ message AcceptButtonPressedMsg
 
 // The Cancel button on the front panel is pressed
 message CancelButtonPressedMsg
+{
+}
+
+// The Left button on the front panel is released
+message LeftButtonReleasedMsg
+{
+}
+
+// The Right button on the front panel is released
+message RightButtonReleasedMsg
+{
+}
+
+// The Accept button on the front panel is released
+message AcceptButtonReleasedMsg
+{
+}
+
+// The Cancel button on the front panel is released
+message CancelButtonReleasedMsg
 {
 }
 

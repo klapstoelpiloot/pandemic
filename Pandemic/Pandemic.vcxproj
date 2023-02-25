@@ -127,6 +127,7 @@
     <ClCompile Include="LoadingScreen.cpp" />
     <ClCompile Include="MegaShotAnimation.cpp" />
     <ClCompile Include="ParticleOverlayRenderer.cpp" />
+    <ClCompile Include="SemiRandom.cpp" />
     <ClCompile Include="SetAnimation.cpp" />
     <ClCompile Include="CRC32.cpp" />
     <ClCompile Include="EnterNameRenderer.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="LoadingScreen.h" />
     <ClInclude Include="MegaShotAnimation.h" />
     <ClInclude Include="ParticleOverlayRenderer.h" />
+    <ClInclude Include="SemiRandom.h" />
     <ClInclude Include="SetAnimation.h" />
     <ClInclude Include="CRC32.h" />
     <ClInclude Include="cxxopts.hpp" />

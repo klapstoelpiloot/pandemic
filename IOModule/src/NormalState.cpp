@@ -157,15 +157,23 @@ void NormalState::HandleButtonPresses()
 {
 	if(buttonleft.IsPressed())
 		mode->GetLink().SendLeftButtonPress();
+	else if(buttonleft.IsReleased())
+		mode->GetLink().SendLeftButtonRelease();
 
 	if(buttonright.IsPressed())
 		mode->GetLink().SendRightButtonPress();
+	else if(buttonright.IsReleased())
+		mode->GetLink().SendRightButtonRelease();
 
 	if(buttonaccept.IsPressed())
 		mode->GetLink().SendAcceptButtonPress();
+	else if(buttonaccept.IsReleased())
+		mode->GetLink().SendAcceptButtonRelease();
 
 	if(buttoncancel.IsPressed())
 		mode->GetLink().SendCancelButtonPress();
+	else if(buttoncancel.IsReleased())
+		mode->GetLink().SendCancelButtonRelease();
 }
 
 void NormalState::HandleMessage(const IOModule_PiMessage& msg)

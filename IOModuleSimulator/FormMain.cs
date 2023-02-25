@@ -357,7 +357,7 @@ namespace IOModuleSimulator
 		private void LoseFocus(object sender, MouseEventArgs e)
 		{
 			focusbox.Focus();
-		}
+        }
 
 		private void FormMain_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -388,6 +388,8 @@ namespace IOModuleSimulator
 				buttonleftdown = false;
 				if(calibrationmode)
 					link.SendMessage(new SensorStateMsg() { High = true, Sensor = Sensor.LeftButton });
+				else
+					link.SendMessage(new LeftButtonReleasedMsg());
 			}
 			LoseFocus(sender, e);
 		}
@@ -399,6 +401,8 @@ namespace IOModuleSimulator
 				buttonrightdown = false;
 				if(calibrationmode)
 					link.SendMessage(new SensorStateMsg() { High = true, Sensor = Sensor.RightButton });
+				else
+					link.SendMessage(new RightButtonReleasedMsg());
 			}
 			LoseFocus(sender, e);
 		}
@@ -410,6 +414,8 @@ namespace IOModuleSimulator
 				buttonacceptdown = false;
 				if(calibrationmode)
 					link.SendMessage(new SensorStateMsg() { High = true, Sensor = Sensor.AcceptButton });
+				else
+					link.SendMessage(new AcceptButtonReleasedMsg());
 			}
 			LoseFocus(sender, e);
 		}
@@ -421,6 +427,8 @@ namespace IOModuleSimulator
 				buttoncanceldown = false;
 				if(calibrationmode)
 					link.SendMessage(new SensorStateMsg() { High = true, Sensor = Sensor.CancelButton });
+				else
+					link.SendMessage(new CancelButtonReleasedMsg());
 			}
 			LoseFocus(sender, e);
 		}

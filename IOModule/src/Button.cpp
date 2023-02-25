@@ -71,6 +71,23 @@ bool Button::IsPressed()
 	return false;
 }
 
+bool Button::IsReleased()
+{
+	if(starttime > 0)
+	{
+		return false;
+	}
+	else if(wasreleased)
+	{
+		return false;
+	}
+	else
+	{
+		wasreleased = true;
+		return true;
+	}
+}
+
 void Button::SetTiming(unsigned long debounce, unsigned long timeout, unsigned long interval)
 {
 	debouncetimeout = debounce;

@@ -32,6 +32,10 @@ typedef struct _IOModule_AcceptButtonPressedMsg {
     char dummy_field;
 } IOModule_AcceptButtonPressedMsg;
 
+typedef struct _IOModule_AcceptButtonReleasedMsg {
+    char dummy_field;
+} IOModule_AcceptButtonReleasedMsg;
+
 typedef struct _IOModule_CalibrateModeMsg {
     char dummy_field;
 } IOModule_CalibrateModeMsg;
@@ -40,6 +44,10 @@ typedef struct _IOModule_CancelButtonPressedMsg {
     char dummy_field;
 } IOModule_CancelButtonPressedMsg;
 
+typedef struct _IOModule_CancelButtonReleasedMsg {
+    char dummy_field;
+} IOModule_CancelButtonReleasedMsg;
+
 typedef struct _IOModule_IndicateErrorMsg {
     char dummy_field;
 } IOModule_IndicateErrorMsg;
@@ -47,6 +55,10 @@ typedef struct _IOModule_IndicateErrorMsg {
 typedef struct _IOModule_LeftButtonPressedMsg {
     char dummy_field;
 } IOModule_LeftButtonPressedMsg;
+
+typedef struct _IOModule_LeftButtonReleasedMsg {
+    char dummy_field;
+} IOModule_LeftButtonReleasedMsg;
 
 typedef struct _IOModule_NormalModeMsg {
     char dummy_field;
@@ -63,6 +75,10 @@ typedef struct _IOModule_RequestGateStatesMsg {
 typedef struct _IOModule_RightButtonPressedMsg {
     char dummy_field;
 } IOModule_RightButtonPressedMsg;
+
+typedef struct _IOModule_RightButtonReleasedMsg {
+    char dummy_field;
+} IOModule_RightButtonReleasedMsg;
 
 typedef struct _IOModule_RoundResetMsg {
     char dummy_field;
@@ -135,6 +151,10 @@ typedef struct _IOModule_IOMessage {
         IOModule_SensorBlockedMsg SensorBlocked;
         IOModule_SensorClearedMsg SensorCleared;
         IOModule_GateStatesMsg GateStates;
+        IOModule_LeftButtonReleasedMsg LeftButtonReleased;
+        IOModule_RightButtonReleasedMsg RightButtonReleased;
+        IOModule_AcceptButtonReleasedMsg AcceptButtonReleased;
+        IOModule_CancelButtonReleasedMsg CancelButtonReleased;
     } Content;
 } IOModule_IOMessage;
 
@@ -180,6 +200,10 @@ extern "C" {
 #define IOModule_RightButtonPressedMsg_init_default {0}
 #define IOModule_AcceptButtonPressedMsg_init_default {0}
 #define IOModule_CancelButtonPressedMsg_init_default {0}
+#define IOModule_LeftButtonReleasedMsg_init_default {0}
+#define IOModule_RightButtonReleasedMsg_init_default {0}
+#define IOModule_AcceptButtonReleasedMsg_init_default {0}
+#define IOModule_CancelButtonReleasedMsg_init_default {0}
 #define IOModule_GateScoreMsg_init_default       {0}
 #define IOModule_PuckInGateMsg_init_default      {0}
 #define IOModule_RequestGateStatesMsg_init_default {0}
@@ -202,6 +226,10 @@ extern "C" {
 #define IOModule_RightButtonPressedMsg_init_zero {0}
 #define IOModule_AcceptButtonPressedMsg_init_zero {0}
 #define IOModule_CancelButtonPressedMsg_init_zero {0}
+#define IOModule_LeftButtonReleasedMsg_init_zero {0}
+#define IOModule_RightButtonReleasedMsg_init_zero {0}
+#define IOModule_AcceptButtonReleasedMsg_init_zero {0}
+#define IOModule_CancelButtonReleasedMsg_init_zero {0}
 #define IOModule_GateScoreMsg_init_zero          {0}
 #define IOModule_PuckInGateMsg_init_zero         {0}
 #define IOModule_RequestGateStatesMsg_init_zero  {0}
@@ -242,6 +270,10 @@ extern "C" {
 #define IOModule_IOMessage_SensorBlocked_tag     109
 #define IOModule_IOMessage_SensorCleared_tag     110
 #define IOModule_IOMessage_GateStates_tag        111
+#define IOModule_IOMessage_LeftButtonReleased_tag 112
+#define IOModule_IOMessage_RightButtonReleased_tag 113
+#define IOModule_IOMessage_AcceptButtonReleased_tag 114
+#define IOModule_IOMessage_CancelButtonReleased_tag 115
 #define IOModule_PiMessage_NormalMode_tag        100
 #define IOModule_PiMessage_CalibrateMode_tag     101
 #define IOModule_PiMessage_IndicateError_tag     102
@@ -284,7 +316,11 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (Content,CancelButtonPressed,Content.CancelBu
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,RemovePuck,Content.RemovePuck), 108) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SensorBlocked,Content.SensorBlocked), 109) \
 X(a, STATIC,   ONEOF,    MESSAGE,  (Content,SensorCleared,Content.SensorCleared), 110) \
-X(a, STATIC,   ONEOF,    MESSAGE,  (Content,GateStates,Content.GateStates), 111)
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,GateStates,Content.GateStates), 111) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,LeftButtonReleased,Content.LeftButtonReleased), 112) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,RightButtonReleased,Content.RightButtonReleased), 113) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,AcceptButtonReleased,Content.AcceptButtonReleased), 114) \
+X(a, STATIC,   ONEOF,    MESSAGE,  (Content,CancelButtonReleased,Content.CancelButtonReleased), 115)
 #define IOModule_IOMessage_CALLBACK NULL
 #define IOModule_IOMessage_DEFAULT NULL
 #define IOModule_IOMessage_Content_StartSlide_MSGTYPE IOModule_StartSlideMsg
@@ -299,6 +335,10 @@ X(a, STATIC,   ONEOF,    MESSAGE,  (Content,GateStates,Content.GateStates), 111)
 #define IOModule_IOMessage_Content_SensorBlocked_MSGTYPE IOModule_SensorBlockedMsg
 #define IOModule_IOMessage_Content_SensorCleared_MSGTYPE IOModule_SensorClearedMsg
 #define IOModule_IOMessage_Content_GateStates_MSGTYPE IOModule_GateStatesMsg
+#define IOModule_IOMessage_Content_LeftButtonReleased_MSGTYPE IOModule_LeftButtonReleasedMsg
+#define IOModule_IOMessage_Content_RightButtonReleased_MSGTYPE IOModule_RightButtonReleasedMsg
+#define IOModule_IOMessage_Content_AcceptButtonReleased_MSGTYPE IOModule_AcceptButtonReleasedMsg
+#define IOModule_IOMessage_Content_CancelButtonReleased_MSGTYPE IOModule_CancelButtonReleasedMsg
 
 #define IOModule_RoundResetMsg_FIELDLIST(X, a) \
 
@@ -378,6 +418,26 @@ X(a, STATIC,   SINGULAR, UINT32,   Speed,             1)
 #define IOModule_CancelButtonPressedMsg_CALLBACK NULL
 #define IOModule_CancelButtonPressedMsg_DEFAULT NULL
 
+#define IOModule_LeftButtonReleasedMsg_FIELDLIST(X, a) \
+
+#define IOModule_LeftButtonReleasedMsg_CALLBACK NULL
+#define IOModule_LeftButtonReleasedMsg_DEFAULT NULL
+
+#define IOModule_RightButtonReleasedMsg_FIELDLIST(X, a) \
+
+#define IOModule_RightButtonReleasedMsg_CALLBACK NULL
+#define IOModule_RightButtonReleasedMsg_DEFAULT NULL
+
+#define IOModule_AcceptButtonReleasedMsg_FIELDLIST(X, a) \
+
+#define IOModule_AcceptButtonReleasedMsg_CALLBACK NULL
+#define IOModule_AcceptButtonReleasedMsg_DEFAULT NULL
+
+#define IOModule_CancelButtonReleasedMsg_FIELDLIST(X, a) \
+
+#define IOModule_CancelButtonReleasedMsg_CALLBACK NULL
+#define IOModule_CancelButtonReleasedMsg_DEFAULT NULL
+
 #define IOModule_GateScoreMsg_FIELDLIST(X, a) \
 X(a, STATIC,   SINGULAR, UINT32,   Gate,              1)
 #define IOModule_GateScoreMsg_CALLBACK NULL
@@ -428,6 +488,10 @@ extern const pb_msgdesc_t IOModule_LeftButtonPressedMsg_msg;
 extern const pb_msgdesc_t IOModule_RightButtonPressedMsg_msg;
 extern const pb_msgdesc_t IOModule_AcceptButtonPressedMsg_msg;
 extern const pb_msgdesc_t IOModule_CancelButtonPressedMsg_msg;
+extern const pb_msgdesc_t IOModule_LeftButtonReleasedMsg_msg;
+extern const pb_msgdesc_t IOModule_RightButtonReleasedMsg_msg;
+extern const pb_msgdesc_t IOModule_AcceptButtonReleasedMsg_msg;
+extern const pb_msgdesc_t IOModule_CancelButtonReleasedMsg_msg;
 extern const pb_msgdesc_t IOModule_GateScoreMsg_msg;
 extern const pb_msgdesc_t IOModule_PuckInGateMsg_msg;
 extern const pb_msgdesc_t IOModule_RequestGateStatesMsg_msg;
@@ -452,6 +516,10 @@ extern const pb_msgdesc_t IOModule_SetButtonRepeatMsg_msg;
 #define IOModule_RightButtonPressedMsg_fields &IOModule_RightButtonPressedMsg_msg
 #define IOModule_AcceptButtonPressedMsg_fields &IOModule_AcceptButtonPressedMsg_msg
 #define IOModule_CancelButtonPressedMsg_fields &IOModule_CancelButtonPressedMsg_msg
+#define IOModule_LeftButtonReleasedMsg_fields &IOModule_LeftButtonReleasedMsg_msg
+#define IOModule_RightButtonReleasedMsg_fields &IOModule_RightButtonReleasedMsg_msg
+#define IOModule_AcceptButtonReleasedMsg_fields &IOModule_AcceptButtonReleasedMsg_msg
+#define IOModule_CancelButtonReleasedMsg_fields &IOModule_CancelButtonReleasedMsg_msg
 #define IOModule_GateScoreMsg_fields &IOModule_GateScoreMsg_msg
 #define IOModule_PuckInGateMsg_fields &IOModule_PuckInGateMsg_msg
 #define IOModule_RequestGateStatesMsg_fields &IOModule_RequestGateStatesMsg_msg
@@ -476,6 +544,10 @@ extern const pb_msgdesc_t IOModule_SetButtonRepeatMsg_msg;
 #define IOModule_RightButtonPressedMsg_size      0
 #define IOModule_AcceptButtonPressedMsg_size     0
 #define IOModule_CancelButtonPressedMsg_size     0
+#define IOModule_LeftButtonReleasedMsg_size      0
+#define IOModule_RightButtonReleasedMsg_size     0
+#define IOModule_AcceptButtonReleasedMsg_size    0
+#define IOModule_CancelButtonReleasedMsg_size    0
 #define IOModule_GateScoreMsg_size               6
 #define IOModule_PuckInGateMsg_size              6
 #define IOModule_RequestGateStatesMsg_size       0

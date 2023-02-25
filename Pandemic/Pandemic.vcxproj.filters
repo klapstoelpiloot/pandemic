@@ -309,6 +309,9 @@
     <ClCompile Include="X11Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="SemiRandom.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1498,6 +1501,9 @@
     </ClInclude>
     <ClInclude Include="X11Graphics.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SemiRandom.h">
+      <Filter>Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

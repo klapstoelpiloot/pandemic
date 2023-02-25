@@ -34,7 +34,7 @@ namespace IOModule {
             "ZHVsZS5TZXRCdXR0b25MaWdodHNNc2dIABI3Cg9TZXRCdXR0b25SZXBlYXQY",
             "aiABKAsyHC5JT01vZHVsZS5TZXRCdXR0b25SZXBlYXRNc2dIABI7ChFSZXF1",
             "ZXN0R2F0ZVN0YXRlcxhrIAEoCzIeLklPTW9kdWxlLlJlcXVlc3RHYXRlU3Rh",
-            "dGVzTXNnSABCCQoHQ29udGVudCKYBQoJSU9NZXNzYWdlEi0KClN0YXJ0U2xp",
+            "dGVzTXNnSABCCQoHQ29udGVudCKeBwoJSU9NZXNzYWdlEi0KClN0YXJ0U2xp",
             "ZGUYZCABKAsyFy5JT01vZHVsZS5TdGFydFNsaWRlTXNnSAASKwoJR2F0ZVNj",
             "b3JlGGUgASgLMhYuSU9Nb2R1bGUuR2F0ZVNjb3JlTXNnSAASLQoKUHVja0lu",
             "R2F0ZRhmIAEoCzIXLklPTW9kdWxlLlB1Y2tJbkdhdGVNc2dIABIvCgtTZW5z",
@@ -49,36 +49,44 @@ namespace IOModule {
             "bSABKAsyGi5JT01vZHVsZS5TZW5zb3JCbG9ja2VkTXNnSAASMwoNU2Vuc29y",
             "Q2xlYXJlZBhuIAEoCzIaLklPTW9kdWxlLlNlbnNvckNsZWFyZWRNc2dIABIt",
             "CgpHYXRlU3RhdGVzGG8gASgLMhcuSU9Nb2R1bGUuR2F0ZVN0YXRlc01zZ0gA",
-            "QgkKB0NvbnRlbnQiDwoNUm91bmRSZXNldE1zZyJpChJTZXRCdXR0b25MaWdo",
-            "dHNNc2cSEgoKTGVmdEJ1dHRvbhgBIAEoCBITCgtSaWdodEJ1dHRvbhgCIAEo",
-            "CBIUCgxBY2NlcHRCdXR0b24YAyABKAgSFAoMQ2FuY2VsQnV0dG9uGAQgASgI",
-            "IqQBCgtTZXR0aW5nc01zZxIWCg5TbGlkZVRpbWVvdXRNcxgBIAEoDRIQCghI",
-            "YXJkTW9kZRgCIAEoCBIbChNCdXR0b25SZXBlYXRUaW1lb3V0GAMgASgNEhwK",
-            "FEJ1dHRvblJlcGVhdEludGVydmFsGAQgASgNEhcKD1B1Y2tMb3N0VGltZW91",
-            "dBgFIAEoDRIXCg9EZWJvdW5jZVRpbWVvdXQYBiABKA0iDwoNTm9ybWFsTW9k",
-            "ZU1zZyISChBDYWxpYnJhdGVNb2RlTXNnIhIKEEluZGljYXRlRXJyb3JNc2ci",
-            "HgoNU3RhcnRTbGlkZU1zZxINCgVTcGVlZBgBIAEoDSIPCg1SZW1vdmVQdWNr",
-            "TXNnIhIKEFNlbnNvckJsb2NrZWRNc2ciEgoQU2Vuc29yQ2xlYXJlZE1zZyIW",
-            "ChRMZWZ0QnV0dG9uUHJlc3NlZE1zZyIXChVSaWdodEJ1dHRvblByZXNzZWRN",
-            "c2ciGAoWQWNjZXB0QnV0dG9uUHJlc3NlZE1zZyIYChZDYW5jZWxCdXR0b25Q",
-            "cmVzc2VkTXNnIhwKDEdhdGVTY29yZU1zZxIMCgRHYXRlGAEgASgNIh0KDVB1",
-            "Y2tJbkdhdGVNc2cSDAoER2F0ZRgBIAEoDSIWChRSZXF1ZXN0R2F0ZVN0YXRl",
-            "c01zZyJnCg1HYXRlU3RhdGVzTXNnEhQKDEdhdGUxQmxvY2tlZBgBIAEoCBIU",
-            "CgxHYXRlMkJsb2NrZWQYAiABKAgSFAoMR2F0ZTNCbG9ja2VkGAMgASgIEhQK",
-            "DEdhdGU0QmxvY2tlZBgEIAEoCCJACg5TZW5zb3JTdGF0ZU1zZxIgCgZTZW5z",
-            "b3IYASABKA4yEC5JT01vZHVsZS5TZW5zb3ISDAoESGlnaBgCIAEoCCIkChJT",
-            "ZXRCdXR0b25SZXBlYXRNc2cSDgoGRW5hYmxlGAEgASgIKu8BCgZTZW5zb3IS",
-            "DgoKR2F0ZTFGcm9udBAAEg4KCkdhdGUyRnJvbnQQARIOCgpHYXRlM0Zyb250",
-            "EAISDgoKR2F0ZTRGcm9udBADEg0KCUdhdGUxQmFjaxAEEg0KCUdhdGUyQmFj",
-            "axAFEg0KCUdhdGUzQmFjaxAGEg0KCUdhdGU0QmFjaxAHEg4KCkxlZnRCdXR0",
-            "b24QCBIPCgtSaWdodEJ1dHRvbhAJEhAKDEFjY2VwdEJ1dHRvbhAKEhAKDENh",
-            "bmNlbEJ1dHRvbhALEhEKDUJyaWRnZTFTZW5zb3IQDBIRCg1CcmlkZ2UyU2Vu",
-            "c29yEA1iBnByb3RvMw=="));
+            "Ej0KEkxlZnRCdXR0b25SZWxlYXNlZBhwIAEoCzIfLklPTW9kdWxlLkxlZnRC",
+            "dXR0b25SZWxlYXNlZE1zZ0gAEj8KE1JpZ2h0QnV0dG9uUmVsZWFzZWQYcSAB",
+            "KAsyIC5JT01vZHVsZS5SaWdodEJ1dHRvblJlbGVhc2VkTXNnSAASQQoUQWNj",
+            "ZXB0QnV0dG9uUmVsZWFzZWQYciABKAsyIS5JT01vZHVsZS5BY2NlcHRCdXR0",
+            "b25SZWxlYXNlZE1zZ0gAEkEKFENhbmNlbEJ1dHRvblJlbGVhc2VkGHMgASgL",
+            "MiEuSU9Nb2R1bGUuQ2FuY2VsQnV0dG9uUmVsZWFzZWRNc2dIAEIJCgdDb250",
+            "ZW50Ig8KDVJvdW5kUmVzZXRNc2ciaQoSU2V0QnV0dG9uTGlnaHRzTXNnEhIK",
+            "CkxlZnRCdXR0b24YASABKAgSEwoLUmlnaHRCdXR0b24YAiABKAgSFAoMQWNj",
+            "ZXB0QnV0dG9uGAMgASgIEhQKDENhbmNlbEJ1dHRvbhgEIAEoCCKkAQoLU2V0",
+            "dGluZ3NNc2cSFgoOU2xpZGVUaW1lb3V0TXMYASABKA0SEAoISGFyZE1vZGUY",
+            "AiABKAgSGwoTQnV0dG9uUmVwZWF0VGltZW91dBgDIAEoDRIcChRCdXR0b25S",
+            "ZXBlYXRJbnRlcnZhbBgEIAEoDRIXCg9QdWNrTG9zdFRpbWVvdXQYBSABKA0S",
+            "FwoPRGVib3VuY2VUaW1lb3V0GAYgASgNIg8KDU5vcm1hbE1vZGVNc2ciEgoQ",
+            "Q2FsaWJyYXRlTW9kZU1zZyISChBJbmRpY2F0ZUVycm9yTXNnIh4KDVN0YXJ0",
+            "U2xpZGVNc2cSDQoFU3BlZWQYASABKA0iDwoNUmVtb3ZlUHVja01zZyISChBT",
+            "ZW5zb3JCbG9ja2VkTXNnIhIKEFNlbnNvckNsZWFyZWRNc2ciFgoUTGVmdEJ1",
+            "dHRvblByZXNzZWRNc2ciFwoVUmlnaHRCdXR0b25QcmVzc2VkTXNnIhgKFkFj",
+            "Y2VwdEJ1dHRvblByZXNzZWRNc2ciGAoWQ2FuY2VsQnV0dG9uUHJlc3NlZE1z",
+            "ZyIXChVMZWZ0QnV0dG9uUmVsZWFzZWRNc2ciGAoWUmlnaHRCdXR0b25SZWxl",
+            "YXNlZE1zZyIZChdBY2NlcHRCdXR0b25SZWxlYXNlZE1zZyIZChdDYW5jZWxC",
+            "dXR0b25SZWxlYXNlZE1zZyIcCgxHYXRlU2NvcmVNc2cSDAoER2F0ZRgBIAEo",
+            "DSIdCg1QdWNrSW5HYXRlTXNnEgwKBEdhdGUYASABKA0iFgoUUmVxdWVzdEdh",
+            "dGVTdGF0ZXNNc2ciZwoNR2F0ZVN0YXRlc01zZxIUCgxHYXRlMUJsb2NrZWQY",
+            "ASABKAgSFAoMR2F0ZTJCbG9ja2VkGAIgASgIEhQKDEdhdGUzQmxvY2tlZBgD",
+            "IAEoCBIUCgxHYXRlNEJsb2NrZWQYBCABKAgiQAoOU2Vuc29yU3RhdGVNc2cS",
+            "IAoGU2Vuc29yGAEgASgOMhAuSU9Nb2R1bGUuU2Vuc29yEgwKBEhpZ2gYAiAB",
+            "KAgiJAoSU2V0QnV0dG9uUmVwZWF0TXNnEg4KBkVuYWJsZRgBIAEoCCrvAQoG",
+            "U2Vuc29yEg4KCkdhdGUxRnJvbnQQABIOCgpHYXRlMkZyb250EAESDgoKR2F0",
+            "ZTNGcm9udBACEg4KCkdhdGU0RnJvbnQQAxINCglHYXRlMUJhY2sQBBINCglH",
+            "YXRlMkJhY2sQBRINCglHYXRlM0JhY2sQBhINCglHYXRlNEJhY2sQBxIOCgpM",
+            "ZWZ0QnV0dG9uEAgSDwoLUmlnaHRCdXR0b24QCRIQCgxBY2NlcHRCdXR0b24Q",
+            "ChIQCgxDYW5jZWxCdXR0b24QCxIRCg1CcmlkZ2UxU2Vuc29yEAwSEQoNQnJp",
+            "ZGdlMlNlbnNvchANYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::IOModule.Sensor), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.PiMessage), global::IOModule.PiMessage.Parser, new[]{ "NormalMode", "CalibrateMode", "IndicateError", "Settings", "RoundReset", "SetButtonLights", "SetButtonRepeat", "RequestGateStates" }, new[]{ "Content" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.IOMessage), global::IOModule.IOMessage.Parser, new[]{ "StartSlide", "GateScore", "PuckInGate", "SensorState", "LeftButtonPressed", "RightButtonPressed", "AcceptButtonPressed", "CancelButtonPressed", "RemovePuck", "SensorBlocked", "SensorCleared", "GateStates" }, new[]{ "Content" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.IOMessage), global::IOModule.IOMessage.Parser, new[]{ "StartSlide", "GateScore", "PuckInGate", "SensorState", "LeftButtonPressed", "RightButtonPressed", "AcceptButtonPressed", "CancelButtonPressed", "RemovePuck", "SensorBlocked", "SensorCleared", "GateStates", "LeftButtonReleased", "RightButtonReleased", "AcceptButtonReleased", "CancelButtonReleased" }, new[]{ "Content" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.RoundResetMsg), global::IOModule.RoundResetMsg.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.SetButtonLightsMsg), global::IOModule.SetButtonLightsMsg.Parser, new[]{ "LeftButton", "RightButton", "AcceptButton", "CancelButton" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.SettingsMsg), global::IOModule.SettingsMsg.Parser, new[]{ "SlideTimeoutMs", "HardMode", "ButtonRepeatTimeout", "ButtonRepeatInterval", "PuckLostTimeout", "DebounceTimeout" }, null, null, null, null),
@@ -93,6 +101,10 @@ namespace IOModule {
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.RightButtonPressedMsg), global::IOModule.RightButtonPressedMsg.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.AcceptButtonPressedMsg), global::IOModule.AcceptButtonPressedMsg.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.CancelButtonPressedMsg), global::IOModule.CancelButtonPressedMsg.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.LeftButtonReleasedMsg), global::IOModule.LeftButtonReleasedMsg.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.RightButtonReleasedMsg), global::IOModule.RightButtonReleasedMsg.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.AcceptButtonReleasedMsg), global::IOModule.AcceptButtonReleasedMsg.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.CancelButtonReleasedMsg), global::IOModule.CancelButtonReleasedMsg.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.GateScoreMsg), global::IOModule.GateScoreMsg.Parser, new[]{ "Gate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.PuckInGateMsg), global::IOModule.PuckInGateMsg.Parser, new[]{ "Gate" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::IOModule.RequestGateStatesMsg), global::IOModule.RequestGateStatesMsg.Parser, null, null, null, null, null),
@@ -809,6 +821,18 @@ namespace IOModule {
         case ContentOneofCase.GateStates:
           GateStates = other.GateStates.Clone();
           break;
+        case ContentOneofCase.LeftButtonReleased:
+          LeftButtonReleased = other.LeftButtonReleased.Clone();
+          break;
+        case ContentOneofCase.RightButtonReleased:
+          RightButtonReleased = other.RightButtonReleased.Clone();
+          break;
+        case ContentOneofCase.AcceptButtonReleased:
+          AcceptButtonReleased = other.AcceptButtonReleased.Clone();
+          break;
+        case ContentOneofCase.CancelButtonReleased:
+          CancelButtonReleased = other.CancelButtonReleased.Clone();
+          break;
       }
 
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -964,6 +988,54 @@ namespace IOModule {
       }
     }
 
+    /// <summary>Field number for the "LeftButtonReleased" field.</summary>
+    public const int LeftButtonReleasedFieldNumber = 112;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::IOModule.LeftButtonReleasedMsg LeftButtonReleased {
+      get { return contentCase_ == ContentOneofCase.LeftButtonReleased ? (global::IOModule.LeftButtonReleasedMsg) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.LeftButtonReleased;
+      }
+    }
+
+    /// <summary>Field number for the "RightButtonReleased" field.</summary>
+    public const int RightButtonReleasedFieldNumber = 113;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::IOModule.RightButtonReleasedMsg RightButtonReleased {
+      get { return contentCase_ == ContentOneofCase.RightButtonReleased ? (global::IOModule.RightButtonReleasedMsg) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.RightButtonReleased;
+      }
+    }
+
+    /// <summary>Field number for the "AcceptButtonReleased" field.</summary>
+    public const int AcceptButtonReleasedFieldNumber = 114;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::IOModule.AcceptButtonReleasedMsg AcceptButtonReleased {
+      get { return contentCase_ == ContentOneofCase.AcceptButtonReleased ? (global::IOModule.AcceptButtonReleasedMsg) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.AcceptButtonReleased;
+      }
+    }
+
+    /// <summary>Field number for the "CancelButtonReleased" field.</summary>
+    public const int CancelButtonReleasedFieldNumber = 115;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::IOModule.CancelButtonReleasedMsg CancelButtonReleased {
+      get { return contentCase_ == ContentOneofCase.CancelButtonReleased ? (global::IOModule.CancelButtonReleasedMsg) content_ : null; }
+      set {
+        content_ = value;
+        contentCase_ = value == null ? ContentOneofCase.None : ContentOneofCase.CancelButtonReleased;
+      }
+    }
+
     private object content_;
     /// <summary>Enum of possible cases for the "Content" oneof.</summary>
     public enum ContentOneofCase {
@@ -980,6 +1052,10 @@ namespace IOModule {
       SensorBlocked = 109,
       SensorCleared = 110,
       GateStates = 111,
+      LeftButtonReleased = 112,
+      RightButtonReleased = 113,
+      AcceptButtonReleased = 114,
+      CancelButtonReleased = 115,
     }
     private ContentOneofCase contentCase_ = ContentOneofCase.None;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1022,6 +1098,10 @@ namespace IOModule {
       if (!object.Equals(SensorBlocked, other.SensorBlocked)) return false;
       if (!object.Equals(SensorCleared, other.SensorCleared)) return false;
       if (!object.Equals(GateStates, other.GateStates)) return false;
+      if (!object.Equals(LeftButtonReleased, other.LeftButtonReleased)) return false;
+      if (!object.Equals(RightButtonReleased, other.RightButtonReleased)) return false;
+      if (!object.Equals(AcceptButtonReleased, other.AcceptButtonReleased)) return false;
+      if (!object.Equals(CancelButtonReleased, other.CancelButtonReleased)) return false;
       if (ContentCase != other.ContentCase) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1042,6 +1122,10 @@ namespace IOModule {
       if (contentCase_ == ContentOneofCase.SensorBlocked) hash ^= SensorBlocked.GetHashCode();
       if (contentCase_ == ContentOneofCase.SensorCleared) hash ^= SensorCleared.GetHashCode();
       if (contentCase_ == ContentOneofCase.GateStates) hash ^= GateStates.GetHashCode();
+      if (contentCase_ == ContentOneofCase.LeftButtonReleased) hash ^= LeftButtonReleased.GetHashCode();
+      if (contentCase_ == ContentOneofCase.RightButtonReleased) hash ^= RightButtonReleased.GetHashCode();
+      if (contentCase_ == ContentOneofCase.AcceptButtonReleased) hash ^= AcceptButtonReleased.GetHashCode();
+      if (contentCase_ == ContentOneofCase.CancelButtonReleased) hash ^= CancelButtonReleased.GetHashCode();
       hash ^= (int) contentCase_;
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1109,6 +1193,22 @@ namespace IOModule {
         output.WriteRawTag(250, 6);
         output.WriteMessage(GateStates);
       }
+      if (contentCase_ == ContentOneofCase.LeftButtonReleased) {
+        output.WriteRawTag(130, 7);
+        output.WriteMessage(LeftButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.RightButtonReleased) {
+        output.WriteRawTag(138, 7);
+        output.WriteMessage(RightButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.AcceptButtonReleased) {
+        output.WriteRawTag(146, 7);
+        output.WriteMessage(AcceptButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.CancelButtonReleased) {
+        output.WriteRawTag(154, 7);
+        output.WriteMessage(CancelButtonReleased);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1167,6 +1267,22 @@ namespace IOModule {
         output.WriteRawTag(250, 6);
         output.WriteMessage(GateStates);
       }
+      if (contentCase_ == ContentOneofCase.LeftButtonReleased) {
+        output.WriteRawTag(130, 7);
+        output.WriteMessage(LeftButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.RightButtonReleased) {
+        output.WriteRawTag(138, 7);
+        output.WriteMessage(RightButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.AcceptButtonReleased) {
+        output.WriteRawTag(146, 7);
+        output.WriteMessage(AcceptButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.CancelButtonReleased) {
+        output.WriteRawTag(154, 7);
+        output.WriteMessage(CancelButtonReleased);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1212,6 +1328,18 @@ namespace IOModule {
       }
       if (contentCase_ == ContentOneofCase.GateStates) {
         size += 2 + pb::CodedOutputStream.ComputeMessageSize(GateStates);
+      }
+      if (contentCase_ == ContentOneofCase.LeftButtonReleased) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(LeftButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.RightButtonReleased) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(RightButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.AcceptButtonReleased) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(AcceptButtonReleased);
+      }
+      if (contentCase_ == ContentOneofCase.CancelButtonReleased) {
+        size += 2 + pb::CodedOutputStream.ComputeMessageSize(CancelButtonReleased);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1297,6 +1425,30 @@ namespace IOModule {
             GateStates = new global::IOModule.GateStatesMsg();
           }
           GateStates.MergeFrom(other.GateStates);
+          break;
+        case ContentOneofCase.LeftButtonReleased:
+          if (LeftButtonReleased == null) {
+            LeftButtonReleased = new global::IOModule.LeftButtonReleasedMsg();
+          }
+          LeftButtonReleased.MergeFrom(other.LeftButtonReleased);
+          break;
+        case ContentOneofCase.RightButtonReleased:
+          if (RightButtonReleased == null) {
+            RightButtonReleased = new global::IOModule.RightButtonReleasedMsg();
+          }
+          RightButtonReleased.MergeFrom(other.RightButtonReleased);
+          break;
+        case ContentOneofCase.AcceptButtonReleased:
+          if (AcceptButtonReleased == null) {
+            AcceptButtonReleased = new global::IOModule.AcceptButtonReleasedMsg();
+          }
+          AcceptButtonReleased.MergeFrom(other.AcceptButtonReleased);
+          break;
+        case ContentOneofCase.CancelButtonReleased:
+          if (CancelButtonReleased == null) {
+            CancelButtonReleased = new global::IOModule.CancelButtonReleasedMsg();
+          }
+          CancelButtonReleased.MergeFrom(other.CancelButtonReleased);
           break;
       }
 
@@ -1423,6 +1575,42 @@ namespace IOModule {
             GateStates = subBuilder;
             break;
           }
+          case 898: {
+            global::IOModule.LeftButtonReleasedMsg subBuilder = new global::IOModule.LeftButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.LeftButtonReleased) {
+              subBuilder.MergeFrom(LeftButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            LeftButtonReleased = subBuilder;
+            break;
+          }
+          case 906: {
+            global::IOModule.RightButtonReleasedMsg subBuilder = new global::IOModule.RightButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.RightButtonReleased) {
+              subBuilder.MergeFrom(RightButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            RightButtonReleased = subBuilder;
+            break;
+          }
+          case 914: {
+            global::IOModule.AcceptButtonReleasedMsg subBuilder = new global::IOModule.AcceptButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.AcceptButtonReleased) {
+              subBuilder.MergeFrom(AcceptButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            AcceptButtonReleased = subBuilder;
+            break;
+          }
+          case 922: {
+            global::IOModule.CancelButtonReleasedMsg subBuilder = new global::IOModule.CancelButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.CancelButtonReleased) {
+              subBuilder.MergeFrom(CancelButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            CancelButtonReleased = subBuilder;
+            break;
+          }
         }
       }
     #endif
@@ -1544,6 +1732,42 @@ namespace IOModule {
             }
             input.ReadMessage(subBuilder);
             GateStates = subBuilder;
+            break;
+          }
+          case 898: {
+            global::IOModule.LeftButtonReleasedMsg subBuilder = new global::IOModule.LeftButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.LeftButtonReleased) {
+              subBuilder.MergeFrom(LeftButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            LeftButtonReleased = subBuilder;
+            break;
+          }
+          case 906: {
+            global::IOModule.RightButtonReleasedMsg subBuilder = new global::IOModule.RightButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.RightButtonReleased) {
+              subBuilder.MergeFrom(RightButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            RightButtonReleased = subBuilder;
+            break;
+          }
+          case 914: {
+            global::IOModule.AcceptButtonReleasedMsg subBuilder = new global::IOModule.AcceptButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.AcceptButtonReleased) {
+              subBuilder.MergeFrom(AcceptButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            AcceptButtonReleased = subBuilder;
+            break;
+          }
+          case 922: {
+            global::IOModule.CancelButtonReleasedMsg subBuilder = new global::IOModule.CancelButtonReleasedMsg();
+            if (contentCase_ == ContentOneofCase.CancelButtonReleased) {
+              subBuilder.MergeFrom(CancelButtonReleased);
+            }
+            input.ReadMessage(subBuilder);
+            CancelButtonReleased = subBuilder;
             break;
           }
         }
@@ -4131,6 +4355,626 @@ namespace IOModule {
   }
 
   /// <summary>
+  /// The Left button on the front panel is released
+  /// </summary>
+  public sealed partial class LeftButtonReleasedMsg : pb::IMessage<LeftButtonReleasedMsg>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<LeftButtonReleasedMsg> _parser = new pb::MessageParser<LeftButtonReleasedMsg>(() => new LeftButtonReleasedMsg());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<LeftButtonReleasedMsg> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[16]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeftButtonReleasedMsg() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeftButtonReleasedMsg(LeftButtonReleasedMsg other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public LeftButtonReleasedMsg Clone() {
+      return new LeftButtonReleasedMsg(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as LeftButtonReleasedMsg);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(LeftButtonReleasedMsg other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(LeftButtonReleasedMsg other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// The Right button on the front panel is released
+  /// </summary>
+  public sealed partial class RightButtonReleasedMsg : pb::IMessage<RightButtonReleasedMsg>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<RightButtonReleasedMsg> _parser = new pb::MessageParser<RightButtonReleasedMsg>(() => new RightButtonReleasedMsg());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<RightButtonReleasedMsg> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[17]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RightButtonReleasedMsg() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RightButtonReleasedMsg(RightButtonReleasedMsg other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RightButtonReleasedMsg Clone() {
+      return new RightButtonReleasedMsg(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as RightButtonReleasedMsg);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(RightButtonReleasedMsg other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(RightButtonReleasedMsg other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// The Accept button on the front panel is released
+  /// </summary>
+  public sealed partial class AcceptButtonReleasedMsg : pb::IMessage<AcceptButtonReleasedMsg>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<AcceptButtonReleasedMsg> _parser = new pb::MessageParser<AcceptButtonReleasedMsg>(() => new AcceptButtonReleasedMsg());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<AcceptButtonReleasedMsg> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[18]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AcceptButtonReleasedMsg() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AcceptButtonReleasedMsg(AcceptButtonReleasedMsg other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public AcceptButtonReleasedMsg Clone() {
+      return new AcceptButtonReleasedMsg(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as AcceptButtonReleasedMsg);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(AcceptButtonReleasedMsg other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(AcceptButtonReleasedMsg other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
+  /// The Cancel button on the front panel is released
+  /// </summary>
+  public sealed partial class CancelButtonReleasedMsg : pb::IMessage<CancelButtonReleasedMsg>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<CancelButtonReleasedMsg> _parser = new pb::MessageParser<CancelButtonReleasedMsg>(() => new CancelButtonReleasedMsg());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<CancelButtonReleasedMsg> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[19]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CancelButtonReleasedMsg() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CancelButtonReleasedMsg(CancelButtonReleasedMsg other) : this() {
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public CancelButtonReleasedMsg Clone() {
+      return new CancelButtonReleasedMsg(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as CancelButtonReleasedMsg);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(CancelButtonReleasedMsg other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(CancelButtonReleasedMsg other) {
+      if (other == null) {
+        return;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+        }
+      }
+    }
+    #endif
+
+  }
+
+  /// <summary>
   /// A puck went into a gate
   /// </summary>
   public sealed partial class GateScoreMsg : pb::IMessage<GateScoreMsg>
@@ -4147,7 +4991,7 @@ namespace IOModule {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[16]; }
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[20]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4339,7 +5183,7 @@ namespace IOModule {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[17]; }
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4531,7 +5375,7 @@ namespace IOModule {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[18]; }
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4686,7 +5530,7 @@ namespace IOModule {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[19]; }
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4989,7 +5833,7 @@ namespace IOModule {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[20]; }
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5215,7 +6059,7 @@ namespace IOModule {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[21]; }
+      get { return global::IOModule.IOModuleReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

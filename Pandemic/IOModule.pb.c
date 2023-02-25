@@ -54,6 +54,18 @@ PB_BIND(IOModule_AcceptButtonPressedMsg, IOModule_AcceptButtonPressedMsg, AUTO)
 PB_BIND(IOModule_CancelButtonPressedMsg, IOModule_CancelButtonPressedMsg, AUTO)
 
 
+PB_BIND(IOModule_LeftButtonReleasedMsg, IOModule_LeftButtonReleasedMsg, AUTO)
+
+
+PB_BIND(IOModule_RightButtonReleasedMsg, IOModule_RightButtonReleasedMsg, AUTO)
+
+
+PB_BIND(IOModule_AcceptButtonReleasedMsg, IOModule_AcceptButtonReleasedMsg, AUTO)
+
+
+PB_BIND(IOModule_CancelButtonReleasedMsg, IOModule_CancelButtonReleasedMsg, AUTO)
+
+
 PB_BIND(IOModule_GateScoreMsg, IOModule_GateScoreMsg, AUTO)
 
 

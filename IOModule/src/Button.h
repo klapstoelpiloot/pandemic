@@ -22,6 +22,9 @@ private:
 	// Last time we checked if the button was pressed.
 	unsigned long checktime;
 
+	// Release only once after being pressed
+	bool wasreleased;
+
 public:
 
 	Button();
@@ -33,4 +36,5 @@ public:
 	void Init(int buttonpin);
 
 	bool IsPressed();
+	bool IsReleased();
 };
