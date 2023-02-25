@@ -61,6 +61,12 @@
     <Filter Include="Tweeny">
       <UniqueIdentifier>{40ae7a16-369a-483d-a689-f61c317c9426}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Minis">
+      <UniqueIdentifier>{343e5742-5f3f-4695-be40-e631d97e6a6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Minis">
+      <UniqueIdentifier>{b7204779-0f36-4092-8cce-6564d9efaea4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cpp">
@@ -311,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="SemiRandom.cpp">
       <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="SlotMachineState.cpp">
+      <Filter>Game\Minis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1504,6 +1513,9 @@
     </ClInclude>
     <ClInclude Include="SemiRandom.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="SlotMachineState.h">
+      <Filter>Game\Minis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
