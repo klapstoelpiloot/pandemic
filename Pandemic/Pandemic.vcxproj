@@ -156,6 +156,7 @@
     <ClCompile Include="ScoresTable.cpp" />
     <ClCompile Include="ScreenDissolveRenderer.cpp" />
     <ClCompile Include="ScreenMeltRenderer.cpp" />
+    <ClCompile Include="SlotMachineRenderer.cpp" />
     <ClCompile Include="SlotMachineState.cpp" />
     <ClCompile Include="SystemTestState.cpp" />
     <ClCompile Include="SystemTestRenderer.cpp" />
@@ -543,6 +544,7 @@
     <ClInclude Include="ScoresTable.h" />
     <ClInclude Include="ScreenDissolveRenderer.h" />
     <ClInclude Include="ScreenMeltRenderer.h" />
+    <ClInclude Include="SlotMachineRenderer.h" />
     <ClInclude Include="SlotMachineState.h" />
     <ClInclude Include="SystemTestState.h" />
     <ClInclude Include="SystemTestRenderer.h" />

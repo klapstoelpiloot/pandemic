@@ -12,6 +12,7 @@
 #include "ScreenMeltRenderer.h"
 #include "EnterNameState.h"
 #include "HighscoreState.h"
+#include "SlotMachineState.h"
 #include "GameBackgroundRenderer.h"
 #include "Sound.h"
 
@@ -31,6 +32,9 @@ private:
 	RemovePuckState removepuckstate;
 	EnterNameState enternamestate;
 	HighscoreState highscorestate;
+
+	// Mini games
+	SlotMachineState slotmachinestate;
 
 	// Stuff that transcends some states
 	GameBackgroundRenderer background;
@@ -55,6 +59,9 @@ public:
 	EnterNameState* GetEnterNameState() { return &enternamestate; }
 	HighscoreState* GetHighscoreState() { return &highscorestate; }
 
+	// Mini games
+	SlotMachineState* GetSlotMachineState() { return &slotmachinestate; }
+	
 	// Methods
 	virtual bool HandleMessage(const IOModule_IOMessage& msg) override;
 	inline bool HasData() const { return (data != nullptr); }

@@ -42,6 +42,7 @@ private:
 	bool throwcomboscored;
 	bool easycombos;
 	int combocount;
+	bool dominigame;
 
 	// Timing
 	int slidetimeout;

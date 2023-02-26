@@ -321,6 +321,9 @@
     <ClCompile Include="SlotMachineState.cpp">
       <Filter>Game\Minis</Filter>
     </ClCompile>
+    <ClCompile Include="SlotMachineRenderer.cpp">
+      <Filter>Renderers\Minis</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -1516,6 +1519,9 @@
     </ClInclude>
     <ClInclude Include="SlotMachineState.h">
       <Filter>Game\Minis</Filter>
+    </ClInclude>
+    <ClInclude Include="SlotMachineRenderer.h">
+      <Filter>Renderers\Minis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

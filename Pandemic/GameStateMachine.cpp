@@ -11,6 +11,7 @@ GameStateMachine::GameStateMachine() :
 	removepuckstate(this),
 	enternamestate(this),
 	highscorestate(this),
+	slotmachinestate(this),
 	titlemusic(Main::GetResources().GetMusic("title.mp3")),
 	titlemusicchecked(false),
 	titlemusicrepeat(Main::GetConfig().GetBool("General.RepeatTitleMusic", true))

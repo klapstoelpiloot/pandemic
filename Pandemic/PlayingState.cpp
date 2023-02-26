@@ -104,7 +104,17 @@ void PlayingState::Update()
 		{
 			// Done with the animations
 			showinganimations = false;
-			hud.Show();
+
+			if(dominigame)
+			{
+				// Go play a mini game now
+				statemachine->ChangeState(statemachine->GetSlotMachineState());
+				return;
+			}
+			else
+			{
+				hud.Show();
+			}
 		}
 	}
 
@@ -248,6 +258,7 @@ bool PlayingState::HandleMessage(const IOModule_IOMessage& msg)
 					hud.ScoreSet();
 					setanimation.SetIndex(newsets);
 					aniqueue.push(&setanimation);
+					dominigame = true;
 
 					if(!showinganimations)
 						anistarttime = Clock::now() + ANI_START_DELAY;

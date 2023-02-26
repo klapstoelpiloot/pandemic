@@ -1,6 +1,8 @@
 #pragma once
 #include "IState.h"
 #include "IMessageHandler.h"
+#include "SlotMachineRenderer.h"
+#include "SemiRandom.h"
 
 class GameStateMachine;
 
@@ -11,8 +13,14 @@ private:
 
 	// Members
 	GameStateMachine* statemachine;
+	SlotMachineRenderer renderer;
 	bool isrolling;
+	SemiRandom random;
+	TweenFloat wheelroll[NUM_WHEELS];
+	float wheelposition[NUM_WHEELS];
+	TimePoint laststeptime;
 
+	void StartRoll();
 
 public:
 
