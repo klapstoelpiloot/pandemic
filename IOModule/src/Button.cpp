@@ -51,6 +51,7 @@ bool Button::IsPressed()
 	if(starttime > 0)
 	{
 		unsigned long t = millis();
+		wasreleased = false;
 
 		// First time we check since this button was pressed?
 		if(checktime == 0)
