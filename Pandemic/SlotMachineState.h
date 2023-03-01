@@ -18,7 +18,10 @@ private:
 	SemiRandom random;
 	TweenFloat wheelroll[NUM_WHEELS];
 	float wheelposition[NUM_WHEELS];
+	bool wheelhold[NUM_WHEELS];
 	TimePoint laststeptime;
+	SlotMachineSelection selection;
+	TimePoint selectionstarttime;
 
 	void StartRoll();
 
