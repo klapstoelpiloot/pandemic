@@ -3,11 +3,13 @@
 #include "Main.h"
 #include "MenuStateMachine.h"
 
+#define SPINS_PER_GAME				5
 #define ROLL_START_DISTANCE			5
-#define ROLL_DISTANCE_TIME			100
+#define ROLL_DISTANCE_TIME			80
 #define ROLL_MIN_DISTANCE			6
 #define ROLL_STEP_DISTANCE			5
 #define SELECTION_SHOW_DELAY		ch::milliseconds(500)
+#define GAME_OVER_DELAY				ch::milliseconds(1000)
 
 SlotMachineState::SlotMachineState(GameStateMachine* _statemachine) :
 	statemachine(_statemachine),
@@ -16,7 +18,8 @@ SlotMachineState::SlotMachineState(GameStateMachine* _statemachine) :
 	random(),
 	wheelposition { 0.0f, 0.0f, 0.0f },
 	wheelhold { false, false, false },
-	selection(SlotMachineSelection::Spin)
+	selection(SlotMachineSelection::None),
+	spins(0)
 {
 }
 
@@ -33,14 +36,22 @@ void SlotMachineState::Enter()
 	Main::GetGraphics().AddRenderer(&statemachine->GetScreenMelt());
 	renderer.Start();
 
+	spins = SPINS_PER_GAME;
+	renderer.SetSpins(spins);
+
 	// Start with a random setup. Choose from 3 seeds.
 	int seed = Random(0, 2);
 	random.Reset(seed);
 	for(int i = 0; i < NUM_WHEELS; i++)
 	{
+		wheelhold[i] = false;
 		wheelposition[i] = random.GetByte();
 		renderer.SetWheelPosition(i, wheelposition[i], false);
 	}
+
+	selection = SlotMachineSelection::None;
+	isrolling = false;
+	selectionstarttime = Clock::now() + SELECTION_SHOW_DELAY;
 	renderer.SetSelection(selection);
 
 	Main::GetButtons().SetAllGameLEDs(false, false, true, true);
@@ -85,15 +96,53 @@ void SlotMachineState::Update()
 		if(allstopped)
 		{
 			isrolling = false;
-			selectionstarttime = t + SELECTION_SHOW_DELAY;
+
+			// Check for score
+			int scoreicon = CheckScoreIcon();
+			if(scoreicon == 0)
+			{
+				// 3 times 7 scores very high!
+				Main::GetResources().GetSound("set.wav").Play();
+
+			}
+			else if(scoreicon > 0)
+			{
+				// Score 3 in a row!
+				Main::GetResources().GetSound("set.wav").Play();
+
+			}
+
+			if(spins == 0)
+			{
+				// End of game
+				selectionstarttime = t + GAME_OVER_DELAY;
+			}
+			else
+			{
+				// On to the next spin!
+				selectionstarttime = t + SELECTION_SHOW_DELAY;
+			}
 		}
 	}
 
 	// Time to make a selection?
 	if(ch::IsTimeSet(selectionstarttime) && (selectionstarttime < t) && (selection == SlotMachineSelection::None))
 	{
-		selection = SlotMachineSelection::Spin;
-		renderer.SetSelection(selection);
+		if(spins == SPINS_PER_GAME)
+		{
+			// Spin directly
+			StartRoll();
+		}
+		else if(spins == 0)
+		{
+			// Game over
+			statemachine->ChangeState(statemachine->GetPlayingState());
+		}
+		else
+		{
+			selection = SlotMachineSelection::Spin;
+			renderer.SetSelection(selection);
+		}
 	}
 }
 
@@ -142,28 +191,63 @@ bool SlotMachineState::HandleMessage(const IOModule_IOMessage& msg)
 
 void SlotMachineState::StartRoll()
 {
-	// Minimum distance each wheel rolls
-	float distance = ROLL_START_DISTANCE + static_cast<float>((ROLL_MIN_DISTANCE * 100 + random.GetByte()) / 100);
+	if(spins > 0)
+	{
+		spins--;
+		renderer.SetSpins(spins);
 
+		// Minimum distance each wheel rolls
+		float distance = ROLL_START_DISTANCE + static_cast<float>((ROLL_MIN_DISTANCE * 100 + random.GetByte()) / 100);
+
+		for(int i = 0; i < NUM_WHEELS; i++)
+		{
+			if(!wheelhold[i])
+			{
+				// For every wheel, cumulatively add some distance. We want them to stop from
+				// left to right in sequence, so the right wheel makes the longest distance.
+				distance += static_cast<float>((ROLL_STEP_DISTANCE * 100 + random.GetByte() * 4) / 100);
+
+				// Setup the wheel movement
+				float endpoint = roundf(wheelposition[i] + distance);
+				wheelroll[i] = tweeny::from(wheelposition[i])
+					.to(wheelposition[i] + ROLL_START_DISTANCE).during(ROLL_START_DISTANCE * ROLL_DISTANCE_TIME).via(easing::sinusoidalIn)
+					.to(endpoint + 0.05f).during(static_cast<int>((distance - ROLL_START_DISTANCE) * ROLL_DISTANCE_TIME)).via(easing::sinusoidalOut)
+					.to(endpoint).during(100).via(easing::linear);
+			}
+			else
+			{
+				// Because we do not call random.GetByte() for holding wheels, this allows the player to
+				// create a new situation when holding another combination of wheels.
+				distance += ROLL_STEP_DISTANCE;
+			}
+		}
+
+		selectionstarttime = TimePoint();
+		selection = SlotMachineSelection::None;
+		renderer.SetSelection(selection);
+		isrolling = true;
+	}
+}
+
+// Returns -1 when no score
+int SlotMachineState::CheckScoreIcon()
+{
+	// Check for score
+	int wheelicons[NUM_WHEELS];
 	for(int i = 0; i < NUM_WHEELS; i++)
 	{
-		// For every wheel, cumulatively add some distance. We want them to stop from
-		// left to right in sequence, so the right wheel makes the longest distance.
-		distance += static_cast<float>((ROLL_STEP_DISTANCE * 100 + random.GetByte() * 4) / 100);
-
-		if(!wheelhold[i])
-		{
-			// Setup the wheel movement
-			float endpoint = roundf(wheelposition[i] + distance);
-			wheelroll[i] = tweeny::from(wheelposition[i])
-				.to(wheelposition[i] + ROLL_START_DISTANCE).during(ROLL_START_DISTANCE * ROLL_DISTANCE_TIME).via(easing::sinusoidalIn)
-				.to(endpoint + 0.05f).during(static_cast<int>((distance - ROLL_START_DISTANCE) * ROLL_DISTANCE_TIME)).via(easing::sinusoidalOut)
-				.to(endpoint).during(100).via(easing::linear);
-		}
+		wheelicons[i] = Modulo(static_cast<int>(roundf(wheelposition[i])), NUM_ICONS);
 	}
 
-	selectionstarttime = TimePoint();
-	selection = SlotMachineSelection::None;
-	renderer.SetSelection(selection);
-	isrolling = true;
+	bool allsame = true;
+	for(int i = 1; i < NUM_WHEELS; i++)
+	{
+		if(wheelicons[i] != wheelicons[0])
+			allsame = false;
+	}
+
+	if(allsame)
+		return wheelicons[0];
+	else
+		return -1;
 }

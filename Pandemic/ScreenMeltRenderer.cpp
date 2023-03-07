@@ -4,7 +4,7 @@
 
 #define MAX_OFFSET_MS			400
 #define MAX_DELTA_OFFSET_MS		100
-#define MELT_SPEED				30		// Milliseconds per pixel
+#define MELT_SPEED				28		// Milliseconds per pixel
 
 ScreenMeltRenderer::ScreenMeltRenderer()
 {

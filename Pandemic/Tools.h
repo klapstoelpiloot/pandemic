@@ -82,3 +82,6 @@ TargetT checked_cast(SourceT v)
 // Generates a random integer number in the given range (inclusive)
 int Random(int min, int max);
 float Random(float min, float max);
+
+// Modulo that returns a positive result with negative value
+int Modulo(int value, int m);

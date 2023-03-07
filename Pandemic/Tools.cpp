@@ -15,3 +15,11 @@ float Random(float min, float max)
 	std::uniform_real_distribution<float> distr(min, max);
 	return distr(gen);
 }
+
+int Modulo(int value, int m)
+{
+    int mod = value % m;
+    if(mod < 0)
+		mod += m;
+    return mod;
+}

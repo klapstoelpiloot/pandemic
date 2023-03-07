@@ -22,8 +22,10 @@ private:
 	TimePoint laststeptime;
 	SlotMachineSelection selection;
 	TimePoint selectionstarttime;
+	int spins;
 
 	void StartRoll();
+	int CheckScoreIcon();
 
 public:
 

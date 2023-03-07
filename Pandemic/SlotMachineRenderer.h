@@ -32,6 +32,8 @@ private:
 	bool wheelhold[NUM_WHEELS];
 	Text holdtext[NUM_WHEELS];
 	Text spintext;
+	Text spinslefttext;
+	const Image& spinslefttexture;
 	TimePoint selectionchangetime;
 	TimePoint wheelstoptime[NUM_WHEELS];
 
@@ -45,4 +47,5 @@ public:
 	void SetWheelPosition(int wheel, float pos, bool rolling);
 	void SetSelection(SlotMachineSelection s);
 	void SetHolds(bool hold[NUM_WHEELS]);
+	void SetSpins(int sp);
 };
